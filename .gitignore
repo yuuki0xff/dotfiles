@@ -3,6 +3,4 @@ files/.zsh/history
 files/.zsh/chpwd-recent-dirs
 
 files/.vim/.netrwhist
-files/.vim/pathogen-bundle
-files/.vim/pathogen
 files/.vim/vandle-bundle

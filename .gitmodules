@@ -1,3 +1,15 @@
 [submodule "files/.i3"]
 	path = files/.i3
 	url = https://github.com/yuuki0xff/i3-wm-config
+[submodule "files/.vim/pathogen"]
+	path = files/.vim/pathogen
+	url = https://github.com/tpope/vim-pathogen
+[submodule "files/.vim/pathogen-bundle/vimproc"]
+	path = files/.vim/pathogen-bundle/vimproc
+	url = https://github.com/Shougo/vimproc
+[submodule "files/.vim/pathogen-bundle/neobundle.vim"]
+	path = files/.vim/pathogen-bundle/neobundle.vim
+	url = https://github.com/Shougo/neobundle.vim
+[submodule "files/.vim/pathogen-bundle/neobundle"]
+	path = files/.vim/pathogen-bundle/neobundle
+	url = https://github.com/Shougo/neobundle.vim
