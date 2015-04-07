@@ -1,0 +1,19 @@
+[user]
+	email = yuuki0xff@gmail.com
+	name = yuuki
+[core]
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
+	pager = less -x 1,5
+[color]
+	ui = auto
+	status = auto
+	diff = auto
+	branch = auto
+	interactive = auto
+	grep = auto
+[diff]
+	patience = true
+[push]
+	default = matching
+
