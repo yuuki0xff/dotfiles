@@ -1,0 +1,65 @@
+
+trim_spaceline_head_and_tail(){
+	awk '
+		BEGIN{ seeking="head"; };
+		/^[ \t]*$/{
+			if(seeking!="head"){ queue[length(queue)+1]=$0; }
+		}
+		/[^ \t]/{
+			if(seeking=="head"){ seeking="tail"; };
+			for(i in queue){ print queue[i]; delete queue[i]; };
+			print $0;
+		}'
+}
+headmore()(
+	local tmp f
+	local files=() len=10
+	local silent=
+	# 引数の処理
+	while [ "$#" != 0 ]; do
+		case "$1"; in
+			-n)
+				shift
+				len="$1"
+				;;
+			-s)
+				silent=1
+				;;
+			--)
+				shift
+				files=( "${files[@]}" "$@" )
+				break
+				;;
+			*)
+				files=( "${files[@]}" "$1" )
+				;;
+		esac
+		shift
+	done
+	if [ "${#files}" = 0 ]; then
+		files='/dev/stdin'
+	fi
+	for f in $files; do
+		if [ ! -f "$f" -o "$f" = '-' ]; then
+			if [ -z "$tmp" ]; then
+				tmp="$(mktemp)"
+			fi
+			cat "$f" >"$tmp"
+			f="$tmp"
+		fi
+		cat "$f" |
+			head -n "$len" |
+			trim_spaceline_head_and_tail | (
+				if [ "$(wc -l <"$f")" -gt "$len" ]; then
+					head -n "$len"
+					[ -z "$silent" ] && echo '[More...]'
+				else
+					cat
+				fi
+			)
+
+	done
+	[ -n "$tmp" ] && rm -f "$tmp"
+)
+
+# vim: ft=zsh

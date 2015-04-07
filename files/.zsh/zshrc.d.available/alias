@@ -1,0 +1,40 @@
+
+alias :q=exit
+alias println='printf "%s\n"'
+type xclip >/dev/null && alias xclip='xclip -sel c'
+
+# file operation
+alias less='less -RFX'
+alias LS='ls --color=always --dereference-command-line-symlink-to-dir -h'
+alias ll='LS -l -I "*.pyc" -I "*.swp" -I "*~"'
+alias l=ll
+alias lla='LS -lA'
+alias la='LS -A'
+which perl-rename >/dev/null && alias rename='perl-rename'
+alias grep='grep --color=auto'
+type pigz >/dev/null && alias pigz='pigz -b 1024'
+
+# nice
+type low >/dev/null || alias low='nice -n10'
+type lowlow >/dev/null || alias lowlow='nice -n19'
+
+# system management
+alias df='df -h'
+alias du='du -h'
+alias free='free -h'
+
+
+# package manager
+for cmd in \
+	pacman yaourt yaourt-gui \
+	apt apt-get apt-cache aptitude \
+	zypper
+do
+	if (( $UID )); then
+		alias cmd="lowlow sudo '$cmd'"
+	else
+		alias cmd="lowlow '$cmd'"
+	fi
+done
+
+# vim: ft=zsh
