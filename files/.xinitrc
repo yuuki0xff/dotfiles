@@ -4,11 +4,9 @@ xrdb -merge $HOME/.Xdefault
 
 # モニタの設定
 # 外部ディスプレイ接続時は、外部ディスプレイをプライマリにする
-if xrandr|grep -w connected|grep -vq LVDS1; then
-	xrandr|grep -w connected|grep -v LVDS1|awk '{print $1}'|(
-		read INP
-		xrandr --output "$INP" --primary
-	)
+if xrandr|grep -w connected|grep -q HDMI1; then
+	xrandr --output HDMI1 --left-of LVDS1
+	xrandr --output HDMI1 --primary
 fi
 
 # 回転スクロールを有効化
