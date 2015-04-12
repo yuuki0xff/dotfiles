@@ -28,7 +28,7 @@ execute pathogen#infect('~/.vim/my-config/{}')
 call neobundle#begin('~/.vim/vandle-bundle/')
 
 NeoBundle 'leafgarland/typescript-vim.git'
-NeoBundle 'clausreinke/typescript-tools.git'
+NeoBundle 'clausreinke/typescript-tools.vim'
 
 "source code formatter
 " astyle, autopen8, js-beautifyを必要とする
