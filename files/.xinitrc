@@ -22,6 +22,7 @@ nvpy &
 firefox &
 thunderbird &
 xterm &
+VBoxClient-all &
 
 exec i3
 
