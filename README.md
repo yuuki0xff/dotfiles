@@ -1,3 +1,3 @@
 # dotfiles
-OpenSUSE 13.2 configuration files and utilities.
+Ubuntu 14.04 LTS configuration files and utilities.
 

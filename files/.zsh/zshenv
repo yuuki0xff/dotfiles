@@ -15,6 +15,7 @@ fi
 fpath=( "$HOME/.zsh/func" "${fpath[@]}" )
 typeset -U path fpath
 
+export LANG=en_US.UTF-8
 export LC_COLLATE=C
 export EDITOR=vim
 export TERMINAL=term
