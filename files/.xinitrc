@@ -3,14 +3,7 @@
 xrdb -merge $HOME/.Xdefault
 
 # モニタの設定
-# 外部ディスプレイ接続時は、外部ディスプレイをプライマリにする
-if xrandr|grep -w connected|grep -q HDMI1; then
-	xrandr --output HDMI1 --left-of LVDS1
-	xrandr --output HDMI1 --primary
-fi
-
-# 回転スクロールを有効化
-synclient CircularScrolling=1 CircScrollTrigger=1
+xrandr --output HDMI1 --right-of HDMI2 --output HDMI2 --primary
 
 # ログイン時にボリュームを下げておく
 if which pulseaudio >/dev/null; then
