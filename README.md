@@ -1,3 +1,3 @@
 # dotfiles
-OpenSUSE 13.2 configuration files and utilities.
+Debian 8  (jessie) configuration files and utilities.
 
