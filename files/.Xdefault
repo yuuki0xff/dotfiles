@@ -115,7 +115,7 @@
 ! XTerm*faceName: monospace
 ! XTerm*faceNameDoublesize: monospace
 ! TODO
- XTerm*faceSize: 11
+ XTerm*faceSize: 15
 ! XTerm*false: 
 ! XTerm*fastScroll: 
 ! XTerm*font:  
