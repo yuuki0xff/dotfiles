@@ -31,9 +31,9 @@ for cmd in \
 	zypper
 do
 	if (( $UID )); then
-		alias cmd="lowlow sudo '$cmd'"
+		alias $cmd="lowlow sudo '$cmd'"
 	else
-		alias cmd="lowlow '$cmd'"
+		alias $cmd="lowlow '$cmd'"
 	fi
 done
 
