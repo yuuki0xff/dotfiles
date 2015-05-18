@@ -120,6 +120,9 @@ let g:previm_open_cmd = 'xdg-open'
 
 NeoBundle 'PotatoesMaster/i3-vim-syntax'
 
+"大学の'プログラミング実験'で使用する
+NeoBundle 'sophacles/vim-processing'
+
 NeoBundleCheck
 call neobundle#end()
 "install pyflakes from pip"
