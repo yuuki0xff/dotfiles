@@ -5,7 +5,7 @@ type xclip >/dev/null && alias xclip='xclip -sel c'
 
 # file operation
 alias less='less -RFX'
-alias LS='ls --color=always --dereference-command-line-symlink-to-dir -h'
+alias LS='ls --color=always --dereference-command-line-symlink-to-dir -hF'
 alias ll='LS -l -I "*.pyc" -I "*.swp" -I "*~"'
 alias l=ll
 alias lla='LS -lA'
