@@ -19,7 +19,7 @@ bind main V !?git revert %(commit)
 bind main C !?git checkout %(commit)
 # 軽量タグ、注釈付きタグをつける
 bind main T !git tag %(prompt) %(commit)
-bind main <Ctrl-T> !git -a tag %(prompt) %(commit)
+# bind main <Ctrl-T> !git -a tag %(prompt) %(commit)
 bind main B !git rebase -i '%(commit)^'
 
 
@@ -28,15 +28,15 @@ bind main B !git rebase -i '%(commit)^'
 ########
 
 # リモートブランチをtrackしつつチェックアウト
-bind refs T !git checkout -t %(ref)
+bind branch T !git checkout -t %(ref)
 # カーソル行のブランチを親にして入力した名前のブランチを作成
-bind refs n !git checkout -b %(prompt) %(ref)
+bind branch n !git checkout -b %(prompt) %(ref)
 # 不要になったブランチを削除（squash mergeや別リポジトリへのmergeをするワークフロー用）
-bind refs D !?git branch -D %(ref)
+bind branch D !?git branch -D %(ref)
 # 不要になったブランチを削除
-bind refs d !?git branch -d %(ref)
+bind branch d !?git branch -d %(ref)
 # originへのpush
-bind refs P !git push -u origin %(ref)
+bind branch P !git push -u origin %(ref)
 
 
 ########
