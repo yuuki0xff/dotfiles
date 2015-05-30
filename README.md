@@ -1,3 +1,3 @@
 # dotfiles
-Debian 8  (jessie) configuration files and utilities.
+Debian 7 (wheezy) configuration files and utilities.
 
