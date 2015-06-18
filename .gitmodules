@@ -1,0 +1,9 @@
+[submodule "files/.vim/pathogen"]
+	path = files/.vim/pathogen
+	url = https://github.com/tpope/vim-pathogen
+[submodule "files/.vim/pathogen-bundle/vimproc"]
+	path = files/.vim/pathogen-bundle/vimproc
+	url = https://github.com/Shougo/vimproc
+[submodule "files/.vim/pathogen-bundle/neobundle"]
+	path = files/.vim/pathogen-bundle/neobundle
+	url = https://github.com/Shougo/neobundle.vim
