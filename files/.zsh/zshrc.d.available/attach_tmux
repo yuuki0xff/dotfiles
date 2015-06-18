@@ -5,7 +5,7 @@ attach_tmux(){
 		# tmuxを使用するか未指定だったときのデフォルト値
 		if [ -z "$isUseTmux" ]; then
 			case "$TERM";in
-				linux*|vt100*|xterm*|rxvt*)
+				linux*|vt100*|xterm*|rxvt*|screen*)
 					isUseTmux=1
 					;;
 			esac
