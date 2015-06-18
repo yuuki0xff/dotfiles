@@ -1,0 +1,23 @@
+
+setopt auto_cd
+setopt auto_pushd
+
+autoload -U compinit
+compinit
+setopt complete_aliases
+setopt correct
+setopt list_packed	#補完候補を詰めて表示
+setopt nolistbeep	#ビープ音を鳴らさない
+setopt noautoremoveslash	#最後のスラッシュを勝手に消さない
+
+setopt extendedglob #グロブを拡張
+
+setopt brace_ccl
+setopt null_glob
+unsetopt nomatch
+setopt promptvars
+CHPWD_MAX_LINE=5
+
+ulimit -c unlimited
+
+# vim: ft=zsh

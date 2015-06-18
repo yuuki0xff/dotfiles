@@ -1,0 +1,49 @@
+
+attach_tmux(){
+	[ $# -gt 0 ] && no_message=1
+	if which tmux >/dev/null 2>&1; then
+		# tmuxを使用するか未指定だったときのデフォルト値
+		if [ -z "$isUseTmux" ]; then
+			case "$TERM";in
+				linux*|vt100*|xterm*|rxvt*)
+					isUseTmux=1
+					;;
+			esac
+		fi
+
+		if [ -z "$TMUX" -a "${isUseTmux:-0}" != 0 ];then
+			# tmuxのセッション数を確認
+			local slist=$(mktemp)
+			local slistcount=$(mktemp)
+
+			tmux ls 2>/dev/null |tee $slist | wc -l >$slistcount
+			if [ $(cat $slistcount;) -eq 0 ]; then
+				tmux
+			else
+				#セッションがあるとき
+				[ $(cat $slistcount;) -gt 0 ] && cat $slist
+				echo '\nif empty ,to create a new.'
+				echo -n 'session name : '
+				read sname && case "$sname" in
+					"-")
+						#何もしない
+						[ -z "$no_message" ] && echo "do nothing."
+						;;
+					"")
+						#新規
+						[ -z "$no_message" ] && echo "create new session."
+						tmux
+						;;
+					*)
+						#アタッチ
+						[ -z "$no_message" ] && echo "attach to \"$sname\"."
+						tmux a -t "$sname"
+						;;
+				esac
+			fi
+			rm -f $slist $slistcount
+		fi
+	fi
+}
+
+# vim: ft=zsh
