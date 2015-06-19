@@ -7,3 +7,6 @@
 [submodule "files/.vim/pathogen-bundle/neobundle"]
 	path = files/.vim/pathogen-bundle/neobundle
 	url = https://github.com/Shougo/neobundle.vim
+[submodule "files/.i3"]
+	path = files/.i3
+	url = https://github.com/yuuki0xff/i3-wm-config
