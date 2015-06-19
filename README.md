@@ -1,3 +1,3 @@
 # dotfiles
-Basic configuration files and utilities.
+My desktop configuration files and utilities.
 
