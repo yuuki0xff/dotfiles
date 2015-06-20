@@ -119,6 +119,7 @@ let g:previm_open_cmd = 'xdg-open'
 "NeoBundle 'grep.vim'
 
 NeoBundle 'PotatoesMaster/i3-vim-syntax'
+NeoBundle 'superbrothers/vim-vimperator'
 
 NeoBundleCheck
 call neobundle#end()
