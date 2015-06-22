@@ -11,6 +11,7 @@ if [ -d "$HOME/.gem/ruby" ]; then
 	done
 fi
 [ -d "$HOME/bin" ] && path=( "$HOME/bin" "${path[@]}" )
+[ -d "$HOME/.local/bin" ] && path=( "$HOME/.local/bin" "${path[@]}" )
 
 fpath=( "$HOME/.zsh/func" "${fpath[@]}" )
 typeset -U path fpath
