@@ -120,6 +120,9 @@ let g:previm_open_cmd = 'xdg-open'
 
 NeoBundle 'PotatoesMaster/i3-vim-syntax'
 NeoBundle 'superbrothers/vim-vimperator'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'JulesWang/css.vim'
+NeoBundle 'groenewege/vim-less'
 
 NeoBundleCheck
 call neobundle#end()
