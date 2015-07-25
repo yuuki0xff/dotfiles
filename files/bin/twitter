@@ -1,0 +1,4 @@
+#!/bin/sh
+exec mikutter
+exec x-www-browser "http://tweetdeck.twitter.com"
+
