@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+redirect='/dev/stdout'
+if [ $# -eq 2 ]; then
+	eval "wait_func(){ echo -n .; sleep \"$1\"; }"
+	redirect='/dev/null'
+else
+	wait_func(){ echo -n 'scrot> '; read; }
+fi
+while wait_func; do quickscrot >$redirect; done

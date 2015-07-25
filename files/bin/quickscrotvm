@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+
+if [ 2 -lt $# ]; then
+	echo "引数が多すぎですよ" >&2
+	return 1
+fi
+
+if [ $# -eq 2 ]; then
+	save_path="$2"
+else
+	saved_dir=~/pic/screenshot
+	[ -d "$saved_dir" ] || mkdir -p "$saved_dir"
+	save_path_prefix="$saved_dir/$(datetimestr)-vm-$1"
+	save_path="${save_path_prefix}.png"
+	if [ -e "${save_path}" ]; then
+		i=0
+		while [ -e "$save_path" ]; do
+			save_path="${save_path_prefix}-${i}.png"
+			i=$(($i+1))
+		done
+	fi
+fi
+
+vboxmanage controlvm "$1" screenshotpng "$save_path"
+echo "$save_path"
+
