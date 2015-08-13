@@ -23,18 +23,4 @@ alias df='df -h'
 alias du='du -h'
 alias free='free -h'
 
-
-# package manager
-for cmd in \
-	pacman yaourt yaourt-gui \
-	apt apt-get apt-cache aptitude \
-	zypper
-do
-	if (( $UID )); then
-		alias $cmd="lowlow sudo '$cmd'"
-	else
-		alias $cmd="lowlow '$cmd'"
-	fi
-done
-
 # vim: ft=zsh
