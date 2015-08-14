@@ -43,12 +43,13 @@ __prompt_zgit()(
 
 		;
 		if [ "$(git status|sed -ne '3{/  (use "git/p}')" ]; then
-			local __msg
-			__msg="%K{022}push%k"
-			if [ "$(git status|sed -ne '3{/pull/p}')" ]; then
-				__msg="%K{022}pull%k"
+			if [ "$(git status|sed -ne '3{/push/p}')" ]; then
+				msg+=( "%K{022}push%k" )
+			else
+				if [ "$(git status|sed -ne '3{/pull/p}')" ]; then
+					msg+=( "%K{022}pull%k" )
+				fi
 			fi
-			msg+=("$__msg")
 		fi
 		echo "git:%B${branch_color_s}${branch}${branch_color_e}%b ${msg}"
 	fi
