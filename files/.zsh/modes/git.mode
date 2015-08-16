@@ -1,0 +1,31 @@
+
+__mode_init(){
+	__git_mode__aliases=( add branch checkout cherry-pick clone commit diff grep init pull push stash )
+	local a
+	for a in "${__git_mode__aliases[@]}"; do
+		alias $a="git $a"
+	done
+	__git_mode__custom_aliases=( checkm diffh log logd merge status )
+	alias checkm="git checkout master"
+	alias diffh="git diff HEAD"
+	alias log="git log --graph --oneline --decorate"
+	alias logd="git log --pretty --date=short --decorate"
+	alias merge="git merge --no-ff"
+	alias status="git status -s"
+
+	__mode_unload(){
+		for a in "${__git_mode__aliases[@]}" "${__git_mode__custom_aliases[@]}"; do
+			unalias $a
+		done
+		unset __git_mode__aliases
+		unset __git_mode_custom_aliases
+
+		unset __mode_init
+		unset __mode_unload
+	}
+}
+__mode_unload(){
+	unset __mode_init
+}
+
+# vim: ft=zsh
