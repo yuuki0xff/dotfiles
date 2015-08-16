@@ -13,7 +13,7 @@ if [ -d "$HOME/.gem/ruby" ]; then
 fi
 # 先頭に追加
 path=( "$HOME/bin" "$HOME/.local/bin" "$HOME/.local/sbin" "${path[@]}" )
-fpath=( "$HOME/.zsh/func" "${fpath[@]}}")
+fpath=( "$HOME/.zsh/func" "$HOME/.zsh/zsh-completions/src" "${fpath[@]}}")
 cdpath=( "$HOME/work" "$HOME/repository" "$HOME/archive" "$HOME/Dropbox" "${cdpath[@]}" )
 typeset -U path fpath cdpath
 
