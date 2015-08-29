@@ -1,6 +1,11 @@
 
 __prompt_app(){
-	[ -n "$VIMRUNTIME" ] && echo -n 'VIM'
+	local APP
+	APP=()
+	[ -n "$VIMRUNTIME" ] && APP+=("VIM")
+	if [ "$APP" ]; then
+		echo "[$APP]"
+	fi
 }
 __prompt_time()(
 	h=$(date +%H)
@@ -10,25 +15,51 @@ __prompt_time()(
 			4|5|6) echo -n '%K{red}'; ;;
 			*) echo -n '%K{blue}'; ;;
 		esac
-		echo -n '<<< '
-	else
-		echo -n '    '
 	fi
+	echo -n "[ "
 	date "+%02m/%02d %02H:%02M:%02S" |tr -d "\n\r"
-	[ 2 -le $h -a $h -le 6 ] && echo -n ' >>>%k' || echo '    '
+	echo -n " ]"
+	[ 2 -le $h -a $h -le 6 ] && echo -n '%k' || :
 )
 __prompt_zgit()(
-	branch="$(zgit_branch)"
-	if [ -n "$branch" ]; then
-		echo "(git: $branch)"
+	if zgit_isgit; then
+		# ブランチの表示色を決定
+		branch="$(zgit_branch)"
+		if zgit_isindexclean;then
+			if zgit_isworktreeclean; then
+				# clean
+			else
+				# working tree is dirty
+				# 黄緑色で表示
+				branch_color_s="%F{190}"
+				branch_color_e="%f"
+			fi
+		else
+			# index is dirty
+			# ピンク色で表示
+			branch_color_s="%F{207}"
+			branch_color_e="%f"
+		fi
+
+		;
+		if [ "$(git status|sed -ne '3{/  (use "git/p}')" ]; then
+			if [ "$(git status|sed -ne '3{/push/p}')" ]; then
+				msg+=( "%K{022}push%k" )
+			else
+				if [ "$(git status|sed -ne '3{/pull/p}')" ]; then
+					msg+=( "%K{022}pull%k" )
+				fi
+			fi
+		fi
+		echo "git:%B${branch_color_s}${branch}${branch_color_e}%b ${msg}"
 	fi
 )
 
-PROMPT='%n%F{cyan}@%f%B%M%b%F{cyan}:%f%d $(__prompt_zgit)
-%B%F{yellow}[$(__prompt_app)]%f%b %(?,,%B%F{red})%#%(?,,%F{default}%b) '
-RPROMPT='  [$(__prompt_time)]'
-SPROMPT="correct: %R -->> %r ? "
-PROMPT2="%_ > "
+PROMPT='%n%F{cyan}@%f%B%M%b%F{cyan}:%f%~ $(__prompt_zgit) %B%F{yellow}$(__prompt_app)%f%b
+%B%(?,,%K{red})%# %(?,,%k)%b'
+RPROMPT='  $(__prompt_time)'
+SPROMPT="Correct: %B%R %F{red}-%f%F{yellow}-%f%F{green}->%f %r%b (y/N) "
+PROMPT2="%_ %(!,#,)> "
 
 
 # vim: ft=zsh

@@ -9,20 +9,19 @@ if [ -d "$HOME/.gem/ruby" ]; then
 	for rubybin in $(ls --directory $HOME/.gem/ruby/*.*/bin|tail -n1); do
 		path=( "$rubybin" "${path[@]}" )
 	done
+	unset rubybin
 fi
-[ -d "$HOME/bin" ] && path=( "$HOME/bin" "${path[@]}" )
-[ -d "$HOME/.local/bin" ] && path=( "$HOME/.local/bin" "${path[@]}" )
-
-fpath=( "$HOME/.zsh/func" "${fpath[@]}" )
-typeset -U path fpath
+# 先頭に追加
+path=( "$HOME/bin" "$HOME/.local/bin" "$HOME/.local/sbin" "${path[@]}" )
+fpath=( "$HOME/.zsh/func" "${fpath[@]}}")
+cdpath=( "$HOME/work" "$HOME/repository" "$HOME/archive" "$HOME/Dropbox" "${cdpath[@]}" )
+typeset -U path fpath cdpath
 
 export LC_COLLATE=C
 export EDITOR=vim
 export TERMINAL=term
 export WWW_HOME=~/.w3m-home.html
 export PAGER=less
-export MANPATH=~/man:${MANPATH:-}
-export PYTHONPATH=~/lib/python
 
 ZSHRC_D_DIR=(~/.zsh/zshrc.d)
 
