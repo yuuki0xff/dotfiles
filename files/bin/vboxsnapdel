@@ -1,0 +1,40 @@
+#!/bin/zsh
+set -e
+{
+	which tempfile || alias tempfile=mktemp
+	which editor ||
+		alias editor=$(
+			[ -n "$EDITOR" ] && echo "$EDITOR" ||
+			which vim && alias editor=vim ||
+			which vi && alias editor=vi ||
+			which nano && alias editor=nano
+		)
+} &>/dev/null
+# vboxmanage snapshot $1 list --machinereadable の形式で入力されるスナップショットの一覧を一気に削除する。
+# 実行にはかなりの時間がかかります。
+
+if tty &>/dev/null
+then
+	# defaultのエディタで削除したいスナップショットの行を削除する
+	# その削除された行だけを出力する。
+	fname_original=$(tempfile)
+	fname_edited=$(tempfile)
+	vboxsnaplist -C $1 >$fname_original >$fname_edited
+	editor $fname_edited >/dev/tty
+	comm -23 <(sort $fname_original) <(sort $fname_edited)
+	rm -f $fname_original $fname_edited
+else
+	# 削除される行が入力されるので、それをそのまま流す
+	cat
+fi | trim | sort | (
+	fname=$(tempfile)
+	tee $fname | grep '^SnapshotName' >/dev/tty
+	(
+		echo -n 'Do you want to continue ? (y/N): '
+		read a || return 1
+		[ "$a" = 'y' -o "$a" = 'yes' ] || return 1
+	)</dev/tty &>/dev/tty &&
+		<$fname grep '^SnapshotUUID\(-[0-9]\+\)*=' | sed -s 's/^[^=]\+=//g' | xargs -n 1 vboxmanage snapshot $1 delete
+	rm -f $fname
+)
+

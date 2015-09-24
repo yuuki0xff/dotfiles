@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+saved_dir=~/pic/screenshot
+[ -d "$saved_dir" ] || mkdir -p "$saved_dir"
+save_path_prefix="$saved_dir/$(datetimestr)"
+save_path="${save_path_prefix}.png"
+if [ -e "${save_path}" ]; then
+	i=0
+	while [ -e "$save_path" ]; do
+		save_path="${save_path_prefix}-${i}.png"
+		i=$(($i+1))
+	done
+fi
+
+scrot "$@" "$save_path"
+echo "$save_path"
+

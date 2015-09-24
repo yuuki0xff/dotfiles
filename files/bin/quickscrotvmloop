@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+if [ $# -lt 1 ]; then
+	echo "スクリーンショットを取る一つのVMの名前を引数に渡してね" >&2
+	exit 1
+fi
+
+redirect='/dev/stdout'
+if [ $# -eq 2 ]; then
+	eval "wait_func(){ echo -n .; sleep \"$2\"; }"
+	redirect='/dev/null'
+else
+	wait_func(){ echo -n "$1"' scrot> '; read; }
+fi
+
+while wait_func; do quickscrotvm "$1" >$redirect; done

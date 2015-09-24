@@ -1,0 +1,76 @@
+#!/usr/bin/env zsh
+set -u
+prog_name="$0"
+
+watch_xs_status()(
+	set_mouse_status()(
+		while read t;do
+			ids=( $( xinput list|grep 'pointer'|grep -v 'Virtual'|sed 's@.*[ \t]id=\([0-9]\+\)[ \t].*@\1@' ) )
+			for id in $ids;do
+				case "$t" in
+					LOCK)
+						echo disable
+						xinput --disable $id
+						;;
+					BLANK)
+						echo disable
+						xinput --disable $id
+						;;
+					UNBLANK)
+						echo enable
+						xinput --enable $id
+						;;
+				esac
+			done
+			[ "$t" != "UNBLANK" ]
+		done
+	)
+	stdbuf -oL xscreensaver-command -watch |
+		stdbuf -oL awk '{print $1}' |
+			"$1"
+)
+
+run_daemon(){
+	"$prog_name" --daemon &
+	sleep 2
+}
+xs_command(){
+	xscreensaver-command "$@" || {
+		run_daemon
+		xscreensaver-command "$@"
+	}
+}
+
+if [ $# = 0 ];then
+	xs_command -activate
+else
+	case "$1" in
+		-D|--daemon|daemon|DAEMON)
+			xscreensaver -no-splash &
+			sleep 1
+			watch_xs_status set_mouse_status &
+			if [ $# = 2 ]; then
+				wait
+			fi
+			;;
+		-l|--lock|lock|LOCK|-a|--active|active|ACTIVE)
+			xs_command -activate
+			[ $# = 2 ] && (
+				watch_xs_status cat | while read s; do
+					case "$s" in
+						UNBLANK)
+							exit
+							;;
+					esac
+				done
+			)
+			;;
+		-d|--deactive|deactive|DEACTIVE)
+			# パスワードによる認証が無い場合のみ有効
+			xs_command -deactivate
+			;;
+		-x|--exit|exit|EXIT)
+			xs_command -exit
+			;;
+	esac
+fi
