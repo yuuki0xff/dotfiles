@@ -54,9 +54,14 @@ __prompt_zgit()(
 		echo "git:%B${branch_color_s}${branch}${branch_color_e}%b ${msg}"
 	fi
 )
+__prompt_mode(){
+	if [ "$__mode" ]; then
+		echo "%B%F{yellow}$__mode%f%b "
+	fi
+}
 
 PROMPT='%n%F{cyan}@%f%B%M%b%F{cyan}:%f%~ $(__prompt_zgit) %B%F{yellow}$(__prompt_app)%f%b
-%B%(?,,%K{red})%# %(?,,%k)%b'
+$(__prompt_mode)%B%(?,,%K{red})%# %(?,,%k)%b'
 RPROMPT='  $(__prompt_time)'
 SPROMPT="Correct: %B%R %F{red}-%f%F{yellow}-%f%F{green}->%f %r%b (y/N) "
 PROMPT2="%_ %(!,#,)> "
