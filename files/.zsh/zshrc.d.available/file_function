@@ -40,7 +40,7 @@ search_file()(
 				if [ -z "$use_re" ]; then
 					[ -f "$p/$f" ] && echo "$p/$f" && return
 				else
-					match_name="$(find "$p" -maxdepth 1 ! -type d |grep "${grep_option[@]}" "$f" | head -n1)"
+					match_name="$(find "$p" -maxdepth 1 ! -type d ! -name '.*'  ! -name '*~' |grep "${grep_option[@]}" "$f" | head -n1)"
 					[ -n "$match_name" ] && echo "$match_name" && return
 				fi
 			done
