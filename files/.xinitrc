@@ -18,9 +18,9 @@ if which pulseaudio >/dev/null; then
 fi
 
 # よく利用するプログラムの起動
-nvpy &
-firefox &
-thunderbird &
+#nvpy &
+#firefox &
+#thunderbird &
 xterm &
 VBoxClient-all &
 
