@@ -1,6 +1,6 @@
 
 __mode_init(){
-	__git_mode__aliases=( add branch checkout cherry-pick clone commit diff init pull push stash )
+	__git_mode__aliases=( add branch checkout cherry-pick clone commit init pull push stash )
 	local a
 	for a in "${__git_mode__aliases[@]}"; do
 		alias $a="git $a"
@@ -13,6 +13,7 @@ __mode_init(){
 	alias merge="git merge --no-ff"
 	alias status="git status -s"
 	alias ggrep="git grep"
+	alias gdiff="git diff"
 
 	__mode_unload(){
 		for a in "${__git_mode__aliases[@]}" "${__git_mode__custom_aliases[@]}"; do
