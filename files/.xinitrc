@@ -3,7 +3,7 @@
 xrdb -merge $HOME/.Xdefault
 
 # モニタの設定
-xrandr --output HDMI1 --right-of HDMI2 --output HDMI2 --primary
+xrandr --output HDMI1 --left-of HDMI2 --output HDMI1 --primary
 
 # ログイン時にボリュームを下げておく
 if which pulseaudio >/dev/null; then
