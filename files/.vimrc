@@ -157,6 +157,10 @@ NeoBundle 'Shougo/vimshell.vim'
 
 "syntax"
 NeoBundle 'scrooloose/syntastic'
+"{{{
+let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_typescript_checkers = ['tslint']
+"}}}
 
 "NERDTree
 NeoBundle 'scrooloose/nerdtree'
