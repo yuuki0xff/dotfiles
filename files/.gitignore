@@ -17,4 +17,5 @@ tags
 .git/
 
 __pycache__
+*.pyc
 
