@@ -47,6 +47,7 @@ autocmd LocationChange (|.*\\.)srad\\.jp/.*                :js modes.passAllKeys
 autocmd LocationChange (|.*\\.)srashdort\\.org/.*          :js modes.passAllKeys = true;
 autocmd LocationChange feedly\\.com(|/.*)                  :js modes.passAllKeys = true;
 autocmd LocationChange tweetdeck.twitter.com(|/.*))        :js modes.passAllKeys = true;
+autocmd LocationChange www\.pixiv\.net/member_illust\.php\?.*   :js modes.passAllKeys = true;
 autocmd LocationChange .*\.impress\\.co\\.jp/img/.*        :nnoremap e :js content.location = content.document.getElementsByClassName('next')[0].href;<CR>
 
 
