@@ -6,9 +6,11 @@ case "$TERM" in
 esac
 
 if [ -d "$HOME/.gem/ruby" ]; then
-	for rubybin in $(ls --directory $HOME/.gem/ruby/*.*/bin|tail -n1); do
-		path=( "$rubybin" "${path[@]}" )
+	setopt nonomatch
+	for rubybin in $HOME/.gem/ruby/*.*; do
+		path=( "$rubybin/bin" "${path[@]}" )
 	done
+	unsetopt nonomatch
 	unset rubybin
 fi
 # 先頭に追加
@@ -26,4 +28,4 @@ export PAGER=less
 
 ZSHRC_D_DIR=(~/.zsh/zshrc.d)
 
-# vim: filetype=sh
+# vim: filetype=zsh
