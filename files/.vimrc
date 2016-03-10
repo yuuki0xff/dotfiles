@@ -195,6 +195,7 @@ NeoBundle 'superbrothers/vim-vimperator'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'JulesWang/css.vim'
 NeoBundle 'groenewege/vim-less'
+NeoBundle 'evanmiller/nginx-vim-syntax'
 
 NeoBundleCheck
 call neobundle#end()
