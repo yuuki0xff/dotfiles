@@ -187,6 +187,9 @@ NeoBundleLazy 'hynek/vim-python-pep8-indent'
 NeoBundle 'kannokanno/previm'
 let g:previm_open_cmd = 'xdg-open'
 
+"テキスト整形
+NeoBundle 'godlygeek/tabular'
+
 "grep.vim
 "NeoBundle 'grep.vim'
 
