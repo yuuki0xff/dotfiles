@@ -11,6 +11,7 @@ alias l=ll
 alias lt='ll --time-style=long-iso'
 alias lla='LS -lA'
 alias la='LS -A'
+alias cp='cp --reflink=auto --sparse=auto'
 which perl-rename >/dev/null && alias rename='perl-rename'
 alias grep='grep --color=auto'
 type pigz >/dev/null && alias pigz='pigz -b 1024'
