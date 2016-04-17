@@ -1,6 +1,9 @@
 [user]
 	email = yuuki0xff@gmail.com
 	name = yuuki
+	signingkey = BE0E83F1
+[gpg]
+	program = gpg2
 [core]
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
@@ -14,6 +17,8 @@
 	grep = auto
 [diff]
 	patience = true
+[commit]
+	gpgSign = true
 [push]
 	default = matching
 [alias]
