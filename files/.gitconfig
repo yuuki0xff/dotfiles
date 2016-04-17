@@ -25,8 +25,8 @@
 	alias = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | sort
 
 	# status関連
-    s  = status
-    ss = status -s
+	s  = status
+	ss = status -s
 
 	# log関連
 	gl = log --graph --branches --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
@@ -35,15 +35,17 @@
 
 	# commit関連
 	a = add
-    aa = !git add .  && git add -u && git status
-    cam = commit --amend
-    wip = commit -m 'wip'
+	aa = !git add .  && git add -u && git status
+	cm = commit -m
+	amend = commit --amend
+	fixup = commit --fixup
+	wip = commit -m 'wip'
 	cancel = reset --soft HEAD^
 
 	# 直近のコミットとの差分を確認
-    d  = diff --word-diff --ignore-all-space
-    d1 = d HEAD~
-    d2 = d HEAD~2
-    d3 = d HEAD~3
-	ds = diff --cached
+	d  = diff --ignore-space-change
+	d1 = diff --ignore-space-change HEAD~
+	d2 = diff --ignore-space-change HEAD~2
+	d3 = diff --ignore-space-change HEAD~3
+	ds = diff --ignore-space-change --cached
 
