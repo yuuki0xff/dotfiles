@@ -36,6 +36,7 @@
 	# commit関連
 	a = add
 	aa = !git add .  && git add -u && git status
+	ai = !git add -i && git diff --cached && git status -s
 	cm = commit -m
 	amend = commit --amend
 	fixup = commit --fixup
