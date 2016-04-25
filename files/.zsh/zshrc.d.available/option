@@ -4,18 +4,33 @@ setopt auto_pushd
 
 autoload -U compinit
 compinit
-setopt complete_aliases
 setopt correct
-setopt list_packed	#補完候補を詰めて表示
-setopt nolistbeep	#ビープ音を鳴らさない
-setopt noautoremoveslash	#最後のスラッシュを勝手に消さない
+setopt list_packed          # 補完候補を詰めて表示
+setopt no_list_beep         # ビープ音を鳴らさない
+setopt no_auto_remove_slash # 最後のスラッシュを勝手に消さない
+setopt extended_glob        # グロブを拡張
+setopt mark_dirs
+setopt list_types
 
-setopt extendedglob #グロブを拡張
+
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' completer _expand _complete _match _prefix _approximate _list _history
+zstyle ':completion:*:messages' format "%F{yellow}%d$f"
+zstyle ':completion:*:warnings' format "%F{red}No matches for:%F{red} %d%f"
+zstyle ':completion:*:descriptions' format "%F{yellow}Completing %B%d%b%f"
+zstyle ':completion:*:corrections' format "%F{yellow}%B%d %F{red}(errors: %e)%b%f"
+zstyle ':completion:*:options' description 'yes'
+# マッチ種別を別々に表示
+zstyle ':completion:*' group-name ''
+
+zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+zstyle ':completion:*:default' menu select=2
+
+
+setopt interactive_comments
 
 setopt brace_ccl
-setopt null_glob
-unsetopt nomatch
-setopt promptvars
+setopt prompt_vars
 CHPWD_MAX_LINE=5
 
 ulimit -c unlimited
