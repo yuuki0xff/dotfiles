@@ -19,6 +19,7 @@
 	patience = true
 [commit]
 	gpgSign = true
+	verbose = true
 [push]
 	default = matching
 [alias]
@@ -50,3 +51,5 @@
 	d3 = diff --ignore-space-change HEAD~3
 	ds = diff --ignore-space-change --cached
 
+[rebase]
+	autosquash = true
