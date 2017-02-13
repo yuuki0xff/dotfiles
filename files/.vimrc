@@ -20,7 +20,6 @@ set runtimepath+=~/.vim/pathogen/
 "vandle
 execute pathogen#infect('~/.vim/pathogen-bundle/{}')
 execute pathogen#infect('~/.vim/pathogen-bundle/neobundle/{}')
-execute pathogen#infect('~/.vim/pathogen-bundle/vimproc/{}')
 execute pathogen#infect('~/.vim/my-config/{}')
 "}}}
 "{{{ neovandle
@@ -91,7 +90,6 @@ let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions'
         \ }
 
@@ -151,9 +149,6 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 "}}}
 "pythonの自動補完
 NeoBundle 'vim-scripts/Pydiction'
-
-"VimShell
-NeoBundle 'Shougo/vimshell.vim'
 
 "syntax"
 NeoBundle 'scrooloose/syntastic'
