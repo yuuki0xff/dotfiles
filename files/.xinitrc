@@ -17,11 +17,9 @@ fi
 
 # 常駐するプログラムの起動
 dropbox start &
-xlock -D &
 pasystray &
 
 # よく利用するプログラムの起動
-nvpy &
 firefox &
 thunderbird &
 xterm &
