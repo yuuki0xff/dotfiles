@@ -25,6 +25,8 @@ export EDITOR=vim
 export TERMINAL=term
 export WWW_HOME=~/.w3m-home.html
 export PAGER=less
+export GOPATH=~/.go
+export GOBIN=~/.go/bin
 
 ZSHRC_D_DIR=(~/.zsh/zshrc.d)
 
