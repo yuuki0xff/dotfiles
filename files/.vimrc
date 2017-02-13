@@ -29,6 +29,8 @@ call neobundle#begin('~/.vim/vandle-bundle/')
 NeoBundle 'leafgarland/typescript-vim.git'
 NeoBundle 'clausreinke/typescript-tools.vim'
 
+NeoBundle 'JesseKPhillips/d.vim'
+
 "source code formatter
 " astyle, autopen8, js-beautifyを必要とする
 NeoBundle "Chiel92/vim-autoformat"
@@ -182,6 +184,8 @@ NeoBundleLazy 'hynek/vim-python-pep8-indent'
 NeoBundle 'kannokanno/previm'
 let g:previm_open_cmd = 'xdg-open'
 
+NeoBundle 'plasticboy/vim-markdown'
+
 "テキスト整形
 NeoBundle 'godlygeek/tabular'
 
@@ -194,6 +198,7 @@ NeoBundle 'othree/html5.vim'
 NeoBundle 'JulesWang/css.vim'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'evanmiller/nginx-vim-syntax'
+NeoBundle 'yoppi/fluentd.vim'
 
 NeoBundleCheck
 call neobundle#end()
