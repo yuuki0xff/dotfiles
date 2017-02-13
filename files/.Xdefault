@@ -117,7 +117,7 @@
 ! TODO
  XTerm*faceSize: 11
 ! XTerm*false: 
-! XTerm*fastScroll: 
+XTerm*fastScroll: true
 ! XTerm*font:  
 ! XTerm*fontDoublesize: 
 ! XTerm*fontLarge: 
