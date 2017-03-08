@@ -6,6 +6,10 @@
 bind generic g move-first-line
 bind generic G move-last-line
 
+# 選択したコミットをブラウザで開く
+# github/bitbucketで動作確認。
+bind generic o @bash -c 'xdg-open $(git remote get-url origin | awk \'/^https?:\\/\\// { sub("://.*@", "://"); } /^(https?|git):\\/\\// { sub("^(https?|git)://", "https://"); print $0; } /^[^/]+:[^/]{2}/ { sub(":", "/"); sub("^(.+@)?", "https://"); print $0 }\')/commits/%(commit)'
+
 
 ########
 # main view
