@@ -10,21 +10,17 @@ bind generic G move-last-line
 # github/bitbucketで動作確認。
 bind generic o @bash -c 'xdg-open $(git remote get-url origin | awk \'/^https?:\\/\\// { sub("://.*@", "://"); } /^(https?|git):\\/\\// { sub("^(https?|git)://", "https://"); print $0; } /^[^/]+:[^/]{2}/ { sub(":", "/"); sub("^(.+@)?", "https://"); print $0 }\')/commits/%(commit)'
 
+# カーソル行のブランチを親にして入力した名前のブランチを作成
+bind generic n @git checkout -b %(prompt) %(commit)
 
-########
-# main view
-########
+bind generic <Ctrl-R> !git pull
+bind generic <Ctrl-P> !git push
 
-# チーム開発しているとよくremoteで更新が入るため手元に同期
-#bind main ^r !git pull --rebase
-# revert作業は手早く行う必要があるためバインドして効率化
-bind main V !?git revert %(commit)
-# 任意のリビジョンを再現するためにcheckoutすることが多いためバインド
-bind main C !?git checkout %(commit)
-# 軽量タグ、注釈付きタグをつける
-bind main T !git tag %(prompt) %(commit)
-bind main <Ctrl-T> !git -a tag %(prompt) %(commit)
-bind main B !git rebase -i '%(commit)^'
+bind generic V @?git revert %(commit)
+bind generic C @?git checkout %(commit)
+bind generic T @git tag %(prompt) %(commit)
+bind generic <Ctrl-T> !git -a tag %(prompt) %(commit)
+bind generic B !git rebase -i '%(commit)^'
 
 
 ########
@@ -32,15 +28,23 @@ bind main B !git rebase -i '%(commit)^'
 ########
 
 # リモートブランチをtrackしつつチェックアウト
-bind refs T !git checkout -t %(ref)
-# カーソル行のブランチを親にして入力した名前のブランチを作成
-bind refs n !git checkout -b %(prompt) %(ref)
-# 不要になったブランチを削除（squash mergeや別リポジトリへのmergeをするワークフロー用）
-bind refs D !?git branch -D %(ref)
-# 不要になったブランチを削除
-bind refs d !?git branch -d %(ref)
-# originへのpush
-bind refs P !git push -u origin %(ref)
+bind refs T @git checkout -t %(ref)
+
+bind refs D @?git branch -D %(ref)
+bind refs d @?git branch -d %(ref)
+
+# 指定したブランチをpush
+bind refs p @git push -u origin %(ref)
+
+
+########
+# Status view
+########
+
+# git commit --ammend の代わり
+bind status A !git fixup HEAD
+
+bind status F !git fixup %(commit)
 
 
 ########
