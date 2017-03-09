@@ -19,7 +19,7 @@ bind generic <Ctrl-P> !git push
 bind generic V @?git revert %(commit)
 bind generic C @?git checkout %(commit)
 bind generic T @git tag %(prompt) %(commit)
-bind generic <Ctrl-T> !git -a tag %(prompt) %(commit)
+bind generic <Ctrl-T> !git tag -a %(prompt) %(commit)
 bind generic B !git rebase -i '%(commit)^'
 
 
