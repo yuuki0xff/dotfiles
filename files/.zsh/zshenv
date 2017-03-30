@@ -15,7 +15,7 @@ if [ -d "$HOME/.gem/ruby" ]; then
 fi
 # 先頭に追加
 path=( "$HOME/bin" "$HOME/.local/bin" "$HOME/.local/sbin" "$HOME/.local/lib/node_modules/.bin" "${path[@]}" )
-fpath=( "$HOME/.zsh/func" "$HOME/.zsh/zsh-completions/src" "${fpath[@]}}")
+fpath=( "$HOME/.zsh/func" "$HOME/.zsh/zsh-completions/src" "${fpath[@]}")
 cdpath=( "$HOME/work" "$HOME/repository" "$HOME/archive" "$HOME/Dropbox" "${cdpath[@]}" )
 modepath=( "$HOME/.zsh/modes" "${modepath[@]}" )
 typeset -U path fpath cdpath modepath
