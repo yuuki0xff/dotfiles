@@ -199,6 +199,7 @@ NeoBundle 'JulesWang/css.vim'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'evanmiller/nginx-vim-syntax'
 NeoBundle 'yoppi/fluentd.vim'
+NeoBundle 'moon-musick/vim-logrotate'
 
 NeoBundleCheck
 call neobundle#end()
