@@ -1,8 +1,11 @@
 
 __chpwd_msg()(
 	local ret=$?
+	test -t 0 -a -t 1 -a -t 2
+	local is_piped=$?
 
-	if (( ${_nohook:-0} )); then
+	if (( ${_nohook:-0} || $is_piped )); then
+		# MUST NOT output anything
 		return $ret
 	fi
 
