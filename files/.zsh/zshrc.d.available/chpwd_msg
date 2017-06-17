@@ -20,18 +20,16 @@ __chpwd_msg()(
 		echo -n $reset_color
 		echo -n $fg[green]
 		if [ ${#matchfile} = 1 ]; then
-			headmore -n "$CHPWD_MAX_LINE" -- "${matchfile[@]}"
+			headmore -t '...' -n "$CHPWD_MAX_LINE" -- "${matchfile[@]}"
 		else
-			headmore -s -n 1 -- "${matchfile[@]}"
+			headmore -t '' -n 1 -- "${matchfile[@]}"
 		fi
 		echo -n $reset_color
 	fi
 
 	# show File LIST
-	headmore -n "$CHPWD_MAX_LINE" <(
-		echo $bg[blue]---------- FILES ----------$reset_color
-		LS -C
-	) || true
+	echo $bg[blue]---------- FILES ----------$reset_color
+	headmore -t '...' -n "$CHPWD_MAX_LINE" <(LS -C)
 
 	# show TODO
 	matchfile=()
@@ -44,9 +42,9 @@ __chpwd_msg()(
 		echo -n $reset_color
 		echo -n $fg[green]
 		if [ ${#matchfile} = 1 ]; then
-			headmore -n "$CHPWD_MAX_LINE" -- "${matchfile[@]}"
+			headmore -t '...' -n "$CHPWD_MAX_LINE" -- "${matchfile[@]}"
 		else
-			headmore -s -n 1 -- "${matchfile[@]}"
+			headmore -t '' -n 1 -- "${matchfile[@]}"
 		fi
 		echo -n $reset_color
 	fi
