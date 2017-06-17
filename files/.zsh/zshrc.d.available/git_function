@@ -1,0 +1,43 @@
+
+function git-autoclone(){
+	local args
+	local repopath
+	args=("$@")
+	repopath=
+
+	if ! (( $# )); then
+		echo 'ERROR: クローンするリポジトリのURL を指定してください' >&2
+		return 1
+	fi
+
+	while (( $# )); do
+		case "$1" in
+			-*)
+				;;
+			https://*/*)
+				echo https
+				repopath=${1#https://}
+				;;
+			http://*/*)
+				echo http
+				repopath=${1#http://}
+				;;
+			*@*:*)
+				echo ssh with user name
+				repopath=${1#*@}
+				repopath=${repopath/:/\/}
+				;;
+			*:*)
+				echo ssh
+				repopath=${1/:/\/}
+		esac
+		shift
+	done
+
+	cd ~/repo
+	mkdir -p "$repopath"
+	cd "$repopath"
+	git clone "${args[@]}" .
+}
+
+# vim: ft=zsh
