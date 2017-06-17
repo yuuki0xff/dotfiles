@@ -56,7 +56,7 @@ function git-autoclone(){
 			cd "$repopath"
 			git clone "${args[@]}" .
 		fi
-	) && cd "$repopath"
+	) && cd ~/repo/"$repopath"
 }
 
 # vim: ft=zsh
