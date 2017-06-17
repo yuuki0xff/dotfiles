@@ -14,21 +14,44 @@ trim_spaceline_head_and_tail(){
 headmore()(
 	local tmp f
 	local files=() len=10
-	local silent=
+	local silent=0
+	local truncated_msg='[More...]'
 	# 引数の処理
 	while [ "$#" != 0 ]; do
 		case "$1"; in
-			-n)
+			-h|--help)
+				echo 'Usage: headmore [<options>] [--] <files...>'
+				echo
+				echo 'Options:'
+				echo '    -h, --help          - this message.'
+				echo '    -n NUM, --lines NUM - output the first NUM lines.'
+				echo '    -s, --silent        - suppress output of headers and truncated messages.'
+				echo "    -t MSG, --truncated MSG - if contents too long, show this message. default is '$truncated_msg'."
+				return 0
+				;;
+			-n|--lines)
 				shift
 				len="$1"
 				;;
-			-s)
+			-s|--silent)
 				silent=1
+				;;
+			-t|--truncated)
+				shift
+				truncated_msg="$1"
 				;;
 			--)
 				shift
 				files=( "${files[@]}" "$@" )
 				break
+				;;
+			-)
+				files=( "${files[@]}" "/dev/stdin" )
+				;;
+			-*)
+				echo "ERROR: $1 is invalid option." >&2
+				echo 'See "headmore --help" for more information.'
+				return 1
 				;;
 			*)
 				files=( "${files[@]}" "$1" )
@@ -40,26 +63,32 @@ headmore()(
 		files='/dev/stdin'
 	fi
 	for f in $files; do
-		if [ ! -f "$f" -o "$f" = '-' ]; then
+		# show header
+		if (( $#files > 1 )) && (( $silent == 0 )); then
+			echo "==> $f <=="
+		fi
+
+		if [ ! -f "$f" -o "$f" = '/dev/stdin' ]; then
+			# 行数をカウントするために、一時的に他のファイルへコピー
 			if [ -z "$tmp" ]; then
 				tmp="$(mktemp)"
 			fi
-			cat "$f" >"$tmp"
+			head -n "$len" <"$f" >"$tmp"
 			f="$tmp"
 		fi
-		cat "$f" |
-			head -n "$len" |
+		head -n "$len" <"$f" |
 			trim_spaceline_head_and_tail | (
-				if [ "$(wc -l <"$f")" -gt "$len" ]; then
-					head -n "$len"
-					[ -z "$silent" ] && echo '[More...]'
-				else
-					cat
+				cat
+				if [ "$(wc -l <"$f")" -gt "$len" ] && (( $silent == 0 )) && [[ -n "$truncated_msg" ]]; then
+					echo "$truncated_msg"
 				fi
 			)
 
 	done
-	[ -n "$tmp" ] && rm -f "$tmp"
+
+	if [ -n "$tmp" ]; then
+		rm -f "$tmp"
+	fi
 )
 
 # vim: ft=zsh
