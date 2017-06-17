@@ -73,13 +73,19 @@ headmore()(
 			if [ -z "$tmp" ]; then
 				tmp="$(mktemp)"
 			fi
-			head -n "$len" <"$f" >"$tmp"
+			head -n $(($len + 1)) <"$f" >"$tmp"
 			f="$tmp"
 		fi
+
+		local too_long=0
+		if (( $(head -n $(($len + 1)) <$f | wc -l) > $len )); then
+			too_long=1
+		fi
+
 		head -n "$len" <"$f" |
 			trim_spaceline_head_and_tail | (
 				cat
-				if [ "$(wc -l <"$f")" -gt "$len" ] && (( $silent == 0 )) && [[ -n "$truncated_msg" ]]; then
+				if (( $too_long && $silent == 0 )) && [[ -n "$truncated_msg" ]]; then
 					echo "$truncated_msg"
 				fi
 			)
