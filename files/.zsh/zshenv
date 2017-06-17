@@ -5,29 +5,43 @@ case "$TERM" in
 		;;
 esac
 
-if [ -d "$HOME/.gem/ruby" ]; then
-	setopt nonomatch
-	for rubybin in $HOME/.gem/ruby/*.*; do
-		path=( "$rubybin/bin" "${path[@]}" )
-	done
-	unsetopt nonomatch
-	unset rubybin
-fi
-# 先頭に追加
-path=( "$HOME/bin" "$HOME/.local/bin" "$HOME/.local/sbin" "$HOME/.local/lib/node_modules/.bin" "${path[@]}" )
-fpath=( "$HOME/.zsh/func" "$HOME/.zsh/zsh-completions/src" "${fpath[@]}")
-cdpath=( "$HOME/work" "$HOME/repository" "$HOME/archive" "$HOME/Dropbox" "${cdpath[@]}" )
-modepath=( "$HOME/.zsh/modes" "${modepath[@]}" )
-typeset -U path fpath cdpath modepath
-
 export LC_COLLATE=C
 export EDITOR=vim
 export TERMINAL=term
-export WWW_HOME=~/.w3m-home.html
 export PAGER=less
 export GOPATH=~/go
 export GOBIN=~/go/bin
-path=( "$GOBIN" "${path[@]}" )
+
+(){
+	setopt localoptions nullglob
+	path=(
+		~/bin
+		~/.local/bin
+		~/.local/sbin
+		~/.local/lib/node_modules/.bin
+		~/.gem/ruby/*.*/bin
+		a
+		"$GOBIN"
+		"${path[@]}"
+		)
+	fpath=(
+		~/.zsh/func
+		~/.zsh/zsh-completions/src
+		"${fpath[@]}"
+		)
+	cdpath=(
+		~/work
+		~/repo
+		~/archive
+		~/Dropbox
+		"${cdpath[@]}"
+		)
+	modepath=(
+		~/.zsh/modes
+		"${modepath[@]}"
+		)
+}
+typeset -U path fpath cdpath modepath
 
 ZSHRC_D_DIR=(~/.zsh/zshrc.d)
 
