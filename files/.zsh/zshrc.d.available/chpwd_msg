@@ -1,6 +1,11 @@
 
 __chpwd_msg()(
 	local ret=$?
+
+	if (( ${_nohook:-0} )); then
+		return $ret
+	fi
+
 	# shiw README
 	matchfile=()
 	f="$(search_file -g -i -c 'readme\(\..\+\)\?')"

@@ -2,6 +2,8 @@
 function git-autoclone(){
 	local args
 	local repopath
+	local show_help=0
+	local invalid_option=0
 	args=("$@")
 	repopath=
 
@@ -12,32 +14,49 @@ function git-autoclone(){
 
 	while (( $# )); do
 		case "$1" in
+			-h|--help)
+				show_help=1
+				;;
 			-*)
 				;;
 			https://*/*)
-				echo https
 				repopath=${1#https://}
 				;;
 			http://*/*)
-				echo http
 				repopath=${1#http://}
 				;;
 			*@*:*)
-				echo ssh with user name
 				repopath=${1#*@}
 				repopath=${repopath/:/\/}
 				;;
 			*:*)
-				echo ssh
 				repopath=${1/:/\/}
 		esac
 		shift
 	done
 
-	cd ~/repo
-	mkdir -p "$repopath"
-	cd "$repopath"
-	git clone "${args[@]}" .
+	if [[ -z "$repopath" ]]; then
+		echo 'You must specify a repo.' >&2
+		echo  >&2
+		invalid_option=1
+	fi
+	if (( $show_help )) || (( $invalid_option )); then
+		echo 'Usage: git-autoclone [<git-clone options>] <repo>' >&2
+		return $invalid_option
+	fi
+
+	()(
+		_nohook=1
+		cd ~/repo
+		if [[ -d "$repopath" ]]; then
+			echo "$repopath is already cloned." >&2
+			echo >&2
+		else
+			mkdir -p "$repopath"
+			cd "$repopath"
+			git clone "${args[@]}" .
+		fi
+	) && cd "$repopath"
 }
 
 # vim: ft=zsh
