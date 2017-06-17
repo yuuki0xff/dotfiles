@@ -37,7 +37,7 @@ swap()(
 )
 unlink(){
 	while [ "$#" -ne 0 ]; do
-		command unlink "$1"
+		command unlink "$1" || return $?
 		shift
 	done
 }
