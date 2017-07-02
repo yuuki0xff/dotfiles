@@ -241,7 +241,7 @@ XTerm*fastScroll: true
 ! XTerm*scrollkey: 
 ! XTerm*scrollttyoutput: 
 ! XTerm*securekbd: 
-! XTerm*selectToClipboard: 
+XTerm*selectToClipboard: true
 ! XTerm*sessionMgt: 
 ! XTerm*shiftFonts: 
 ! XTerm*showBlinkAsBold: 
