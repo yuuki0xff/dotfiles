@@ -3,7 +3,7 @@
 	name = yuuki
 	signingkey = BE0E83F1
 [gpg]
-	program = gpg2
+	program = gpg
 [core]
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
