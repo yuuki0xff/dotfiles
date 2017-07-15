@@ -80,8 +80,8 @@ NeoBundle 'hrp/EnhancedCommentify'
 "変更行を可視化
 NeoBundle 'airblade/vim-gitgutter'
 
-"マークアップ言語のタグを自動で閉じる
-NeoBundle 'closetag.vim'
+"HTMLのタグを自動で閉じる
+NeoBundle 'alvan/vim-closetag'
 
 "colorscheme
 "{{{
