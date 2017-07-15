@@ -173,6 +173,8 @@ NeoBundle 'scrooloose/syntastic'
 "{{{
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_typescript_checkers = ['tslint']
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = '-std=c++11'
 "}}}
 
 "NERDTree
@@ -219,11 +221,6 @@ NeoBundle 'moon-musick/vim-logrotate'
 
 NeoBundleCheck
 call neobundle#end()
-"install pyflakes from pip"
-"{{{ syntastic config
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = '-std=c++11'
-"}}}
 "
 
 "どのような昨日を提供するのか確認後、インストールしてみる
