@@ -83,6 +83,12 @@ NeoBundle 'airblade/vim-gitgutter'
 "HTMLのタグを自動で閉じる
 NeoBundle 'alvan/vim-closetag'
 
+"引用符やタグなど、テキストを囲うものの編集を支援する
+NeoBundle 'tpope/vim-surround'
+
+"%で対応するタグへ移動できるようにする
+NeoBundle 'vim-scripts/matchit.zip'
+
 "colorscheme
 "{{{
 "彩度が強い
@@ -223,10 +229,6 @@ NeoBundleCheck
 call neobundle#end()
 "
 
-"どのような昨日を提供するのか確認後、インストールしてみる
-"ZenCoding.vim
-"surround.vim
-"matchit.vim	HTMLタグの対応するカッコへの移動などに対応
 "}}}
 filetype on
 "}}}
