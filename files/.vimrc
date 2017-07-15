@@ -221,27 +221,15 @@ NeoBundleCheck
 call neobundle#end()
 "install pyflakes from pip"
 "{{{ syntastic config
-"                let g:syntastic_cpp_compiler='g++'
-"                let g:syntastic_cpp_compiler_option='-std=c++11'
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++11'
 "}}}
-"無効化しているやつ
-"mru.vim 最近開いたファイルへ素早くアクセスできる
-"NeoBundle 'vim-scripts/Conque-Shell'
-"正常に動作しないうえ、日本語に対応していないという情報まである
 "
+
 "どのような昨日を提供するのか確認後、インストールしてみる
-"AutoComplPop
 "ZenCoding.vim
-"rails.vim
-"snippetsEmu
 "surround.vim
-"vim-fugitive
 "matchit.vim	HTMLタグの対応するカッコへの移動などに対応
-"ChangeLog作成支援
-"spec.vim
-"changelog.vim
 "}}}
 filetype on
 "}}}
