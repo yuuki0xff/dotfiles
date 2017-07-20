@@ -80,8 +80,14 @@ NeoBundle 'hrp/EnhancedCommentify'
 "変更行を可視化
 NeoBundle 'airblade/vim-gitgutter'
 
-"マークアップ言語のタグを自動で閉じる
-NeoBundle 'closetag.vim'
+"HTMLのタグを自動で閉じる
+NeoBundle 'alvan/vim-closetag'
+
+"引用符やタグなど、テキストを囲うものの編集を支援する
+NeoBundle 'tpope/vim-surround'
+
+"%で対応するタグへ移動できるようにする
+NeoBundle 'vim-scripts/matchit.zip'
 
 "colorscheme
 "{{{
@@ -173,6 +179,8 @@ NeoBundle 'scrooloose/syntastic'
 "{{{
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_typescript_checkers = ['tslint']
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = '-std=c++11'
 "}}}
 
 "NERDTree
@@ -219,29 +227,8 @@ NeoBundle 'moon-musick/vim-logrotate'
 
 NeoBundleCheck
 call neobundle#end()
-"install pyflakes from pip"
-"{{{ syntastic config
-"                let g:syntastic_cpp_compiler='g++'
-"                let g:syntastic_cpp_compiler_option='-std=c++11'
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = '-std=c++11'
-"}}}
-"無効化しているやつ
-"mru.vim 最近開いたファイルへ素早くアクセスできる
-"NeoBundle 'vim-scripts/Conque-Shell'
-"正常に動作しないうえ、日本語に対応していないという情報まである
 "
-"どのような昨日を提供するのか確認後、インストールしてみる
-"AutoComplPop
-"ZenCoding.vim
-"rails.vim
-"snippetsEmu
-"surround.vim
-"vim-fugitive
-"matchit.vim	HTMLタグの対応するカッコへの移動などに対応
-"ChangeLog作成支援
-"spec.vim
-"changelog.vim
+
 "}}}
 filetype on
 "}}}
