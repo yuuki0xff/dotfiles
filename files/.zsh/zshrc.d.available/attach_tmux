@@ -14,7 +14,7 @@ attach_tmux(){
 		if [ -z "$TMUX" -a "${isUseTmux:-0}" != 0 ];then
 			# tmuxのセッション数を確認
 			local slist=$(tmux ls 2>/dev/null)
-			local slistcount=$(echo "$slist" |wc -l)
+			local slistcount=$(tmux ls 2>/dev/null |wc -l)
 
 			if [ "$slistcount" -eq 0 ]; then
 				tmux
