@@ -13,15 +13,14 @@ attach_tmux(){
 
 		if [ -z "$TMUX" -a "${isUseTmux:-0}" != 0 ];then
 			# tmuxのセッション数を確認
-			local slist=$(mktemp)
-			local slistcount=$(mktemp)
+			local slist=$(tmux ls 2>/dev/null)
+			local slistcount=$(echo -n "$slist" |wc -l)
 
-			tmux ls 2>/dev/null |tee $slist | wc -l >$slistcount
-			if [ $(cat $slistcount;) -eq 0 ]; then
+			if [ "$slistcount" -eq 0 ]; then
 				tmux
 			else
 				#セッションがあるとき
-				[ $(cat $slistcount;) -gt 0 ] && cat $slist
+				echo "$slist"
 				echo '\nif empty ,to create a new.'
 				echo -n 'session name : '
 				read sname && case "$sname" in
@@ -41,7 +40,6 @@ attach_tmux(){
 						;;
 				esac
 			fi
-			rm -f $slist $slistcount
 		fi
 	fi
 }
