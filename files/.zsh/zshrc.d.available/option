@@ -33,6 +33,4 @@ setopt brace_ccl
 setopt prompt_vars
 CHPWD_MAX_LINE=5
 
-ulimit -c unlimited
-
 # vim: ft=zsh
