@@ -5,23 +5,9 @@ scriptencoding utf8
 set fencs=utf8,eucjp,sjis
 "}}}
 
-"addon manager
-" vandleとpathogenとの併用
-" プラグインをインストールするディレクトリが衝突する可能性があるので、パスを変更している。
 "{{{ plugins
 filetype off
-"{{{ pathogen
-"手動インストールしたプラグインの管理を支援する
-set runtimepath+=~/.vim/pathogen/
-" MyFtpplugin 自分で作ったやつ。
-"対応していないカッコを強調
-"http://www.vim.org/scripts/script.php?script_id=350
 
-"vandle
-execute pathogen#infect('~/.vim/pathogen-bundle/{}')
-execute pathogen#infect('~/.vim/pathogen-bundle/neobundle/{}')
-execute pathogen#infect('~/.vim/my-config/{}')
-"}}}
 "{{{ neovandle
 "プラグインの管理を自動化
 call neobundle#begin('~/.vim/vandle-bundle/')
