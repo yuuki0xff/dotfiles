@@ -4,7 +4,8 @@ alias println='printf "%s\n"'
 type xclip >/dev/null && alias xclip='xclip -sel c'
 
 # file operation
-alias less='less -RFX'
+alias less='less -FX'
+export LESS='-Ri -x4'
 alias LS='ls --color=always --dereference-command-line-symlink-to-dir -hF'
 alias ll='LS -l -I "*.pyc" -I "*.swp" -I "*~"'
 alias l=ll
