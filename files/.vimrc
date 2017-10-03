@@ -5,56 +5,12 @@ scriptencoding utf8
 set fencs=utf8,eucjp,sjis
 "}}}
 
-"addon manager
-" vandleとpathogenとの併用
-" プラグインをインストールするディレクトリが衝突する可能性があるので、パスを変更している。
 "{{{ plugins
 filetype off
-"{{{ pathogen
-"手動インストールしたプラグインの管理を支援する
-set runtimepath+=~/.vim/pathogen/
-" MyFtpplugin 自分で作ったやつ。
-"対応していないカッコを強調
-"http://www.vim.org/scripts/script.php?script_id=350
 
-"vandle
-execute pathogen#infect('~/.vim/pathogen-bundle/{}')
-execute pathogen#infect('~/.vim/pathogen-bundle/neobundle/{}')
-execute pathogen#infect('~/.vim/my-config/{}')
-"}}}
-"{{{ neovandle
-"プラグインの管理を自動化
-call neobundle#begin('~/.vim/vandle-bundle/')
-
-NeoBundle 'leafgarland/typescript-vim.git'
-NeoBundle 'clausreinke/typescript-tools.vim'
-
-NeoBundle 'JesseKPhillips/d.vim'
-
-"source code formatter
-" astyle, autopen8, js-beautifyを必要とする
-NeoBundle "Chiel92/vim-autoformat"
-
-"ctags
-NeoBundle 'szw/vim-tags'
-NeoBundle 'vim-scripts/taglist.vim'
-
-"GNU global
-"NeoBundle '5t111111/alt-gtags.vim'
-
-"vim less
-"NeoBundle 'groenewege/vim-less'
-
-"ファイラ
-NeoBundle 'opsplorer'
-
-"テキストの置換をヴィジュアル化
-"OverCommandLine 
-NeoBundle 'osyo-manga/vim-over'
-
-"検索パターン入力中に、マッチした領域のハイライトを更新やカーソルの移動をする
-NeoBundle 'haya14busa/incsearch.vim'
+" haya14busa/incsearch.vim
 "{{{
+"検索パターン入力中に、マッチした領域のハイライトを更新やカーソルの移動をする
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
@@ -68,41 +24,8 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 "}}}
 
-"カッコを自動で閉じる／自動改行／インデントする
-NeoBundle 'Townk/vim-autoclose'
-NeoBundle 'kana/vim-smartinput'
-
-"選択範囲をコメントアウト
-"\xでコメントアウトの切り替え
-"INSERTモードでも動作してしまうのが気になる
-NeoBundle 'hrp/EnhancedCommentify'
-
-"変更行を可視化
-NeoBundle 'airblade/vim-gitgutter'
-
-"HTMLのタグを自動で閉じる
-NeoBundle 'alvan/vim-closetag'
-
-"引用符やタグなど、テキストを囲うものの編集を支援する
-NeoBundle 'tpope/vim-surround'
-
-"%で対応するタグへ移動できるようにする
-NeoBundle 'vim-scripts/matchit.zip'
-
-"colorscheme
+" Shougo/neocomplete
 "{{{
-"彩度が強い
-NeoBundle 'tomasr/molokai'
-"パステルカラーで明るめ
-NeoBundle 'jonathanfilip/vim-lucius'
-"低コントラスト
-NeoBundle 'w0ng/vim-hybrid'
-"}}}
-
-"自動補完
-NeoBundle 'Shougo/neocomplete'
-"{{{
-
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
@@ -143,15 +66,6 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -171,65 +85,20 @@ endif
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 "}}}
-"pythonの自動補完
-NeoBundle 'vim-scripts/Pydiction'
 
-"syntax"
-NeoBundle 'scrooloose/syntastic'
-"{{{
+" scrooloose/syntastic
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++11'
-"}}}
 
-"NERDTree
-NeoBundle 'scrooloose/nerdtree'
-
-"Emmet
-"短縮表記からhtmlやcssに展開する
-NeoBundle 'mattn/emmet-vim'
-
-"quickrun
-"ちょっとしたコード片をその場で実行して確認できる
-NeoBundle 'thinca/vim-quickrun'
-
-"vimdiffを単語単位で差分表示する
-NeoBundle 'vim-scripts/diffchar.vim'
-"{{{
-"編集中にハイライトをアップデートする
+" vim-scripts/diffchar.vim
+" 編集中にハイライトをアップデートする
 let g:DiffUpdate = 1
-"}}}
 
-"pythonのインデントをマドモに機能させる
-NeoBundleLazy 'hynek/vim-python-pep8-indent'
-
-" Realtime preview by Vim. (Markdown, reStructuredText, textile)
-NeoBundle 'kannokanno/previm'
+" kannokanno/previm
 let g:previm_open_cmd = 'xdg-open'
 
-NeoBundle 'plasticboy/vim-markdown'
-
-"テキスト整形
-NeoBundle 'godlygeek/tabular'
-
-"grep.vim
-"NeoBundle 'grep.vim'
-
-NeoBundle 'PotatoesMaster/i3-vim-syntax'
-NeoBundle 'superbrothers/vim-vimperator'
-NeoBundle 'othree/html5.vim'
-NeoBundle 'JulesWang/css.vim'
-NeoBundle 'groenewege/vim-less'
-NeoBundle 'evanmiller/nginx-vim-syntax'
-NeoBundle 'yoppi/fluentd.vim'
-NeoBundle 'moon-musick/vim-logrotate'
-
-NeoBundleCheck
-call neobundle#end()
-"
-
-"}}}
 filetype on
 "}}}
 
