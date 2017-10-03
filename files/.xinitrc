@@ -1,6 +1,7 @@
 
 . ~/.xinputrc
 xrdb -merge $HOME/.Xdefault
+xset -b
 
 # モニタの設定
 xrandr --output HDMI-1 --right-of HDMI-2 --output HDMI-1 --primary
