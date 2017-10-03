@@ -11,6 +11,7 @@ export TERMINAL=term
 export PAGER=less
 export GOPATH=~/go
 export GOBIN=~/go/bin
+export GOROOT=~/.local/lib/go
 
 (){
 	setopt localoptions nullglob
