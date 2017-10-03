@@ -55,3 +55,6 @@
 *.rtf  diff=astextplain
 *.RTF  diff=astextplain
 
+# Databases
+*.sqlite3 diff=sqlite3
+

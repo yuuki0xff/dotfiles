@@ -19,6 +19,8 @@
 	grep = auto
 [diff]
 	patience = true
+[diff "sqlite3"]
+	textconv = sqlite3-dump
 [commit]
 	gpgSign = true
 	verbose = true
