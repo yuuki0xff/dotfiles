@@ -8,3 +8,90 @@
 [submodule "files/.zsh/zsh-syntax-highlighting"]
 	path = files/.zsh/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule "files/.vim/pack/lang/start/typescript-tools.vim"]
+	path = files/.vim/pack/lang/start/typescript-tools.vim
+	url = https://github.com/clausreinke/typescript-tools.vim
+[submodule "files/.vim/pack/lang/start/d.vim"]
+	path = files/.vim/pack/lang/start/d.vim
+	url = https://github.com/JesseKPhillips/d.vim
+[submodule "files/.vim/pack/utils/start/vim-autoformat"]
+	path = files/.vim/pack/utils/start/vim-autoformat
+	url = https://github.com/Chiel92/vim-autoformat
+[submodule "files/.vim/pack/utils/start/vim-tags"]
+	path = files/.vim/pack/utils/start/vim-tags
+	url = https://github.com/szw/vim-tags
+[submodule "files/.vim/pack/utils/start/taglist.vim"]
+	path = files/.vim/pack/utils/start/taglist.vim
+	url = https://github.com/vim-scripts/taglist.vim
+[submodule "files/.vim/pack/utils/start/opsplorer"]
+	path = files/.vim/pack/utils/start/opsplorer
+	url = https://github.com/vim-scripts/opsplorer
+[submodule "files/.vim/pack/utils/start/incsearch.vim"]
+	path = files/.vim/pack/utils/start/incsearch.vim
+	url = https://github.com/haya14busa/incsearch.vim
+[submodule "files/.vim/pack/utils/start/vim-autoclose"]
+	path = files/.vim/pack/utils/start/vim-autoclose
+	url = https://github.com/Townk/vim-autoclose
+[submodule "files/.vim/pack/utils/start/vim-smartinput"]
+	path = files/.vim/pack/utils/start/vim-smartinput
+	url = https://github.com/kana/vim-smartinput
+[submodule "files/.vim/pack/utils/start/EnhancedCommentify"]
+	path = files/.vim/pack/utils/start/EnhancedCommentify
+	url = https://github.com/hrp/EnhancedCommentify
+[submodule "files/.vim/pack/utils/start/vim-gitgutter"]
+	path = files/.vim/pack/utils/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+[submodule "files/.vim/pack/utils/start/vim-closetag"]
+	path = files/.vim/pack/utils/start/vim-closetag
+	url = https://github.com/alvan/vim-closetag
+[submodule "files/.vim/pack/utils/start/vim-surround"]
+	path = files/.vim/pack/utils/start/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "files/.vim/pack/utils/start/matchit.zip"]
+	path = files/.vim/pack/utils/start/matchit.zip
+	url = https://github.com/vim-scripts/matchit.zip
+[submodule "files/.vim/pack/color/start/molokai"]
+	path = files/.vim/pack/color/start/molokai
+	url = https://github.com/tomasr/molokai
+[submodule "files/.vim/pack/complete/start/neocomplete"]
+	path = files/.vim/pack/complete/start/neocomplete
+	url = https://github.com/Shougo/neocomplete
+[submodule "files/.vim/pack/complete/start/Pydiction"]
+	path = files/.vim/pack/complete/start/Pydiction
+	url = https://github.com/vim-scripts/Pydiction
+[submodule "files/.vim/pack/lint/start/syntastic"]
+	path = files/.vim/pack/lint/start/syntastic
+	url = https://github.com/scrooloose/syntastic
+[submodule "files/.vim/pack/utils/start/nerdtree"]
+	path = files/.vim/pack/utils/start/nerdtree
+	url = https://github.com/scrooloose/nerdtree
+[submodule "files/.vim/pack/utils/start/emmet-vim"]
+	path = files/.vim/pack/utils/start/emmet-vim
+	url = https://github.com/mattn/emmet-vim
+[submodule "files/.vim/pack/diff/start/diffchar.vim"]
+	path = files/.vim/pack/diff/start/diffchar.vim
+	url = https://github.com/vim-scripts/diffchar.vim
+[submodule "files/.vim/pack/indent/start/vim-python-pep8-indent"]
+	path = files/.vim/pack/indent/start/vim-python-pep8-indent
+	url = https://github.com/hynek/vim-python-pep8-indent
+[submodule "files/.vim/pack/lang/start/previm"]
+	path = files/.vim/pack/lang/start/previm
+	url = https://github.com/kannokanno/previm
+[submodule "files/.vim/pack/utils/start/tabular"]
+	path = files/.vim/pack/utils/start/tabular
+	url = https://github.com/godlygeek/tabular
+[submodule "files/.vim/pack/lang/start/vim-markdown"]
+	path = files/.vim/pack/lang/start/vim-markdown
+	url = https://github.com/plasticboy/vim-markdown
+[submodule "files/.vim/pack/syntax/start/vim-polyglot"]
+	path = files/.vim/pack/syntax/start/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot
+[submodule "files/.vim/pack/syntax/start/vim-logrotate"]
+	path = files/.vim/pack/syntax/start/vim-logrotate
+	url = https://github.com/moon-musick/vim-logrotate
+[submodule "files/.vim/pack/syntax/start/fluentd.vim"]
+	path = files/.vim/pack/syntax/start/fluentd.vim
+	url = https://github.com/yoppi/fluentd.vim
+[submodule "files/.vim/pack/syntax/start/scss-syntax.vim"]
+	path = files/.vim/pack/syntax/start/scss-syntax.vim
+	url = https://github.com/cakebaker/scss-syntax.vim
