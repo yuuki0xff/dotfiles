@@ -4,6 +4,8 @@
 	signingkey = BE0E83F1
 [gpg]
 	program = gpg
+[tig]
+	tab-size = 4
 [core]
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
