@@ -21,9 +21,21 @@ function git-autoclone(){
 				;;
 			https://*/*)
 				repopath=${1#https://}
+				case "$repopath" in
+					*@*/*)
+						# ユーザ名部分を除去
+						repopath=${repopath#*@}
+						;;
+				esac
 				;;
 			http://*/*)
 				repopath=${1#http://}
+				case "$repopath" in
+					*@*/*)
+						# ユーザ名部分を除去
+						repopath=${repopath#*@}
+						;;
+				esac
 				;;
 			*@*:*)
 				repopath=${1#*@}
@@ -40,6 +52,10 @@ function git-autoclone(){
 		echo  >&2
 		invalid_option=1
 	fi
+
+	# strip .git suffix
+	repopath=${repopath%.git}
+
 	if (( $show_help )) || (( $invalid_option )); then
 		echo 'Usage: git-autoclone [<git-clone options>] <repo>' >&2
 		return $invalid_option
