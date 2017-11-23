@@ -1,3 +1,2 @@
 #!/bin/sh
-date +%04Y%02m%02d
-
+date "$@" +%04Y%02m%02d
