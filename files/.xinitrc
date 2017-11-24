@@ -5,7 +5,14 @@ xrdb -merge $HOME/.Xdefault
 xset -b
 
 # モニタの設定
-xrandr --output HDMI-1 --right-of HDMI-2 --output HDMI-1 --primary
+case `hostname` in
+	desktop1)
+		xrandr --output HDMI-1 --right-of HDMI-2 --output HDMI-1 --primary
+		;;
+	laptop2)
+		xrandr --output eDP-1 --primary
+		;;
+esac
 
 # ログイン時にボリュームを下げておく
 if which pulseaudio >/dev/null; then
