@@ -1,5 +1,6 @@
 
 . ~/.xinputrc
+setxkbmap -option ctrl:nocaps
 xrdb -merge $HOME/.Xdefault
 xset -b
 
