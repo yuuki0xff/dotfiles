@@ -10,7 +10,7 @@ case `hostname` in
 		xrandr --output HDMI-1 --right-of HDMI-2 --output HDMI-1 --primary
 		;;
 	laptop2)
-		xrandr --output eDP-1 --primary
+		xrandr --output eDP1 --primary
 		;;
 esac
 
