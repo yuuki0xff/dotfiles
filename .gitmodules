@@ -1,7 +1,6 @@
 [submodule "files/.i3"]
 	path = files/.i3
 	url = https://github.com/yuuki0xff/i3-wm-config
-	branch = desktop/1
 [submodule "files/.zsh/zsh-completions"]
 	path = files/.zsh/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions
