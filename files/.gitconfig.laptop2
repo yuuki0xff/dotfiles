@@ -1,0 +1,59 @@
+[user]
+	email = yuuki0xff@gmail.com
+	name = yuuki
+	signingkey = 862C8684C997ACA8
+[gpg]
+	program = gpg
+[tig]
+	tab-size = 4
+[core]
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
+	pager = less -x 4
+[color]
+	ui = auto
+	status = auto
+	diff = auto
+	branch = auto
+	interactive = auto
+	grep = auto
+[diff]
+	patience = true
+[diff "sqlite3"]
+	textconv = sqlite3-dump
+[commit]
+	gpgSign = true
+	verbose = true
+[push]
+	default = matching
+[alias]
+	alias = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | sort
+
+	# status関連
+	s  = status
+	ss = status -s
+
+	# log関連
+	gl = log --graph --branches --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
+	ll = log --pretty=format:'%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]' --decorate --numstat
+	today = log --oneline --since='12 hour ago'
+
+	# commit関連
+	a = add
+	aa = !git add .  && git add -u && git status
+	ai = !git add -i && git diff --cached && git status -s
+	cm = commit -m
+	amend = commit --amend
+	fixup = commit --fixup
+	wip = commit -m 'wip'
+	cancel = reset --soft HEAD^
+
+	# 直近のコミットとの差分を確認
+	d  = diff --ignore-space-change
+	d1 = diff --ignore-space-change HEAD~
+	d2 = diff --ignore-space-change HEAD~2
+	d3 = diff --ignore-space-change HEAD~3
+	ds = diff --ignore-space-change --cached
+
+[rebase]
+	autosquash = true
