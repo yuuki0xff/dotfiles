@@ -1,6 +1,8 @@
 
 . ~/.zshenv
 
+export GPG_TTY=$(tty)
+
 autoload -Uz chpwd_recent_dirs add-zsh-hook
 for d in ${ZSHRC_D_DIR[@]}; do
 	for f in "$d"/??-*; do
