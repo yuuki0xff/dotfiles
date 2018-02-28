@@ -21,6 +21,8 @@
 	patience = true
 [diff "sqlite3"]
 	textconv = sqlite3-dump
+[diff "docx"]
+	textconv = docx2plain
 [commit]
 	gpgSign = true
 	verbose = true

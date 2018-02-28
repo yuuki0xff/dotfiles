@@ -1,0 +1,2 @@
+#!/bin/sh
+pandoc -i "$1" -o - -t plain
