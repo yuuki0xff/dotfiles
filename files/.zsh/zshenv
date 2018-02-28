@@ -42,6 +42,9 @@ export GOROOT=~/.local/lib/go
 		"${modepath[@]}"
 		)
 }
+if [ -d ~/.local/lib/google-cloud-sdk/ ]; then
+	. ~/.local/lib/google-cloud-sdk/path.zsh.inc
+fi
 typeset -U path fpath cdpath modepath
 
 ZSHRC_D_DIR=(~/.zsh/zshrc.d)

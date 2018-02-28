@@ -26,6 +26,9 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 zstyle ':completion:*:default' menu select=2
 
+if [ -d ~/.local/lib/google-cloud-sdk/ ]; then
+	. ~/.local/lib/google-cloud-sdk/completion.zsh.inc
+fi
 
 setopt interactive_comments
 
