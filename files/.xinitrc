@@ -27,6 +27,7 @@ fi
 # 常駐するプログラムの起動
 dropbox start &
 pasystray &
+dunst &
 
 # よく利用するプログラムの起動
 firefox &
