@@ -12,6 +12,9 @@ case `hostname` in
 	laptop2)
 		xrandr --output eDP1 --primary
 		;;
+	tagoken-vm1)
+		xrandr --output VNC-0 --primary
+		;;
 esac
 
 # ログイン時にボリュームを下げておく
