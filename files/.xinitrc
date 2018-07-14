@@ -15,6 +15,10 @@ case `hostname` in
 	tagoken-vm1)
 		xrandr --output VNC-0 --primary
 		;;
+	tagoken-desktop1)
+		xrandr --output HDMI-2 --primary
+		xrandr --output HDMI-1 --left-of HDMI-2
+		;;
 esac
 
 # ログイン時にボリュームを下げておく
