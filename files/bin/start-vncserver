@@ -1,0 +1,9 @@
+#!/bin/bash
+# remove tmux session env
+unset TMUX
+unset TMUX_PANE
+# remove X11 session env
+unset DISPLAY
+
+cd
+vncserver :0 -localhost=yes -geometry 1920x1080
