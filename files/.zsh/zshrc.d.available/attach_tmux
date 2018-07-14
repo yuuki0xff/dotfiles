@@ -36,12 +36,23 @@ attach_tmux(){
 					"")
 						#新規
 						[ -z "$no_message" ] && echo "Create new session."
-						tmux
+						if tmux; then
+							# セッションが正常終了したため、zshも止める。
+							exit
+						fi
 						;;
 					*)
 						#アタッチ
 						[ -z "$no_message" ] && echo "Attach to \"$sname\"."
-						tmux a -t "$sname"
+						if tmux a -t "$sname"; then
+							# セッションが正常終了したため、zshも止める。
+							exit
+						else
+							# アタッチに失敗した。
+							# もう一度選択画面を表示する。
+							echo
+							attach_tmux
+						fi
 						;;
 				esac
 			fi
