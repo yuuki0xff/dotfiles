@@ -1,0 +1,36 @@
+#!/bin/zsh
+
+mpp(){
+	local currentpath="$(cd "$1" && pwd)" #ディレクトリの絶対パスを取得する
+	local fullpath=''
+	#echo $currentpath
+	while true; do
+		[ "$currentpath" = "/" ] && echo "/${fullpath%/}" && return 0
+		bindpath=$(
+			awk '\
+				$4~/bind/ && $3~/^none$/{\
+					print $1 " " $2\
+				}\
+			'</etc/mtab|grep " $currentpath\$"|awk '{print $1}'
+			)
+		#echo "curr\t$currentpath" >&2
+		if [ -n "$bindpath" ]; then
+			#bindされている
+			currentpath=$(echo "$bindpath")
+		else
+			#bindされていない
+			fullpath="$(echo "$currentpath"(:t))/$fullpath"
+			currentpath=$(echo "$currentpath"(:h))
+		fi
+		#echo "full\t$fullpath" >&2
+		#sleep 1
+	done
+}
+
+if [ -d "$1" ];then
+	mpp "$1"
+else
+	echo "$(mpp "$1"(:h))/$(echo $1(:t))"
+fi
+exit 0
+

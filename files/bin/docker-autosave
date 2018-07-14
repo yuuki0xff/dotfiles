@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ -z "$1" ]]; then
+	echo "docker autosave [image]"
+fi >&2
+image=$1
+tmpfile=~/vm/docker/."$image".tar.gz.tmp
+outfile=~/vm/docker/"$image".tar.gz
+
+docker save "$image" |pigz >"$tmpfile"
+mv "$tmpfile" "$outfile"
