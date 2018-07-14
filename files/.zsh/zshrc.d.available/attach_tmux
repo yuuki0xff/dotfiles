@@ -20,22 +20,27 @@ attach_tmux(){
 				tmux
 			else
 				#セッションがあるとき
+				echo '================================'
+				echo '     Tmux Session Chooser'
+				echo '================================'
 				echo "$slist"
-				echo '\nif empty ,to create a new.'
+				echo '-: Do nothing.'
+				echo '(empty): Create new session.'
+				echo
 				echo -n 'session name : '
 				read sname && case "$sname" in
 					"-")
 						#何もしない
-						[ -z "$no_message" ] && echo "do nothing."
+						[ -z "$no_message" ] && echo "Do nothing."
 						;;
 					"")
 						#新規
-						[ -z "$no_message" ] && echo "create new session."
+						[ -z "$no_message" ] && echo "Create new session."
 						tmux
 						;;
 					*)
 						#アタッチ
-						[ -z "$no_message" ] && echo "attach to \"$sname\"."
+						[ -z "$no_message" ] && echo "Attach to \"$sname\"."
 						tmux a -t "$sname"
 						;;
 				esac
