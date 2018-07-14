@@ -21,7 +21,7 @@ export GOROOT=~/.local/lib/go
 		~/.local/sbin
 		~/.local/lib/node_modules/.bin
 		~/.gem/ruby/*.*/bin
-		a
+		~/.cargo/bin
 		"$GOBIN"
 		"${path[@]}"
 		)
