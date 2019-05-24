@@ -10,4 +10,6 @@ for d in ${ZSHRC_D_DIR[@]}; do
 	done
 done
 
+[ -f ~/.zshrc_secret ] && source ~/.zshrc_secret
+
 # vim: ft=zsh
