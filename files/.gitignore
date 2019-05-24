@@ -18,6 +18,7 @@ tags
 
 __pycache__
 *.pyc
+.venv/
 
 .idea/
 .mypy_cache/
