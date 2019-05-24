@@ -33,7 +33,6 @@ if which pulseaudio >/dev/null; then
 fi
 
 # 常駐するプログラムの起動
-dropbox start &
 pasystray &
 dunst &
 
