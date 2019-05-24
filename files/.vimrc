@@ -7,6 +7,8 @@ set fencs=utf8,eucjp,sjis
 
 "{{{ plugins
 filetype off
+" vim-scripts/Pydiction
+let g:pydiction_location = $HOME + '.cache/vim-pydiction-dict'
 
 " haya14busa/incsearch.vim
 "{{{
