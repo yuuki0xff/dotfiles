@@ -1,3 +1,7 @@
+! Commands:
+! * Remove old contents and load new contents.
+!   $ xrdb -load ~/.Xdefault
+
 !{{{ XTerm
 ! XTerm*APC: 
 ! XTerm*DCS: 
