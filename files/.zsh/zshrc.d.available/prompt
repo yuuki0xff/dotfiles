@@ -2,6 +2,7 @@
 __prompt_app(){
 	local APP
 	APP=()
+	[ -n "$SSH_CONNECTION" ] && APP+=("SSH")
 	[ -n "$VIMRUNTIME" ] && APP+=("VIM")
 	if [ "$APP" ]; then
 		echo "[$APP]"
