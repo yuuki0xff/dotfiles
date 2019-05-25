@@ -6,4 +6,4 @@ unset TMUX_PANE
 unset DISPLAY
 
 cd
-vncserver :0 -localhost=yes -geometry 1920x1080
+vncserver :0 -localhost=yes -geometry 1920x1080 -autokill
