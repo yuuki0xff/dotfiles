@@ -1,0 +1,33 @@
+AddKeysToAgent yes
+ControlPersist 120
+ControlMaster auto
+ControlPath /tmp/.ssh-%u.%r@%h:%p
+ForwardX11 no
+Compression yes
+ServerAliveInterval 10
+
+Host github.com bitbucket.org
+	User git
+
+
+################################
+# Templates
+
+Host ssh-bastion
+	HostName example.com
+	Compression no
+	User myid
+	Port 10022
+
+Host internal-server
+	HostName foo.local
+	ProxyJump ssh-bastion
+
+Host develop-machine
+	# gpg agent forwarding
+	RemoteForward /home/yuuki/.gnupg/S.gpg-agent /home/yuuki/.gnupg/S.gpg-agent.extra
+
+Host vnc-server
+	# vnc port forwarding
+	LocalForward localhost:5900 localhost:5900
+
