@@ -1,5 +1,9 @@
 
 if [ "$(tty)" = /dev/tty1 ]; then
+	if [ "$(hostname)" = tagoken-desktop1 ]; then
+		start-vncserver
+		sleep 1
+	fi
 	exec startx
 fi
 
