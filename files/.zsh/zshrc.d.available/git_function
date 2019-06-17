@@ -75,4 +75,8 @@ function git-autoclone(){
 	) && cd ~/repo/"$repopath"
 }
 
+function gitroot() {
+	git rev-parse --show-toplevel
+}
+
 # vim: ft=zsh
