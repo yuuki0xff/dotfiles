@@ -9,6 +9,18 @@ setxkbmap -option ctrl:nocaps
 xrdb -merge $HOME/.Xdefault
 xset -b
 
+# GPG: Graphical pinentryが動作しない問題を修正
+#
+# gpg-agentがsystemdの配下で稼働しているとき、適切な環境変数が設定されていないので
+# graphicalなpinentryが動作しない。
+# この問題を修正するためのコード。
+(
+	export $(dbus-launch)
+	systemctl --user set-environment DISPLAY=:0
+	systemctl --user set-environment DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS
+	systemctl --user restart gpg-agent
+)
+
 # モニタの設定
 case `hostname` in
 	desktop1)
