@@ -28,6 +28,10 @@ case `hostname` in
 		;;
 	laptop2)
 		xrandr --output eDP1 --primary
+		# VNC clientしか使ってない。
+		# SSH接続のためにターミナル起動する以外、何もしない。
+		xterm &
+		exec i3
 		;;
 	tagoken-desktop1)
 		if is_vnc; then
