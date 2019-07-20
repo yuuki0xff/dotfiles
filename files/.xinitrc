@@ -29,9 +29,6 @@ case `hostname` in
 	laptop2)
 		xrandr --output eDP1 --primary
 		;;
-	tagoken-vm1)
-		xrandr --output VNC-0 --primary
-		;;
 	tagoken-desktop1)
 		if is_vnc; then
 			xrandr --output VNC-0 --primary
