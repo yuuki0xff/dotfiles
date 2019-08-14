@@ -1,4 +1,8 @@
 #!/bin/bash
+# remove ssh session env
+unset SSH_CLIENT
+unset SSH_CONNECTION
+unset SSH_TTY
 # remove tmux session env
 unset TMUX
 unset TMUX_PANE
