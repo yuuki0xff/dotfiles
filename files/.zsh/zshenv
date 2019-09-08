@@ -13,6 +13,9 @@ export GOPATH=~/go
 export GOBIN=~/go/bin
 export GOROOT=~/.local/lib/go
 
+# Enable docker build-kit
+export DOCKER_BUILDKIT=1
+
 (){
 	setopt localoptions nullglob
 	path=(
