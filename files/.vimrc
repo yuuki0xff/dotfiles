@@ -197,6 +197,7 @@ augroup END
 "{{{ 折りたたみ
 set foldmethod=marker	"マーカを元に行の折り畳みをする"
 set foldcolumn=0
+set foldlevel=99  "デフォルトでは全てのfoldを開いておく"
 "}}}
 
 "{{{ view
