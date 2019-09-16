@@ -1,0 +1,83 @@
+#!/bin/bash
+# Usage:
+#    git-fetch-all-repo
+#
+# ~/repo/ ディレクトリ以下にある全てのgitリポジトリで、git fetch --allコマンドを実行する。
+
+set -eu
+
+save_position() {
+	tput sc
+}
+erase_line() {
+	tput rc
+	tput el
+}
+
+log_progress() {
+	save_position
+	echo "$@"
+}
+log_ok() {
+	erase_line
+	# Set foreground to green.
+	tput setaf 10
+	echo "$@"
+	# Reset color.
+	tput sgr0
+}
+log_error() {
+	erase_line
+	# Set foreground to red.
+	tput setaf 9
+	echo "$@"
+	# Reset color.
+	tput sgr0
+}
+
+list_repo_locations() {
+	find ~/repo/ -name .git |
+		sed 's/\.git$//'
+}
+
+fetch_all() {
+	local err=$1
+	local out=$(tempfile)
+	trap 'rm -f "$out"' EXIT
+
+	while read repo; do
+		log_progress -n "$repo" ...
+		# NOTE: Ctrl-Cを押すとスクリプトは停止するが、git fetchコマンドは停止せずにバックグラウンドで動き続ける。
+		if (cd "$repo" && setsid --wait --fork git fetch --all) &>"$out"; then
+			log_ok "$repo" ... OK
+		else
+			# Command failed.
+			log_error "$repo" ... FAILED
+
+			# Write to log file.
+			echo "$repo" >>"$err"
+			cat "$out" >>"$err"
+			echo >>"$err"
+			# Show error log to terminal.
+			cat "$out"
+			echo
+		fi
+	done
+}
+
+main() {
+	local err=$(tempfile)
+	trap 'rm -f "$err"' EXIT
+
+	list_repo_locations |sort | fetch_all "$err"
+
+	if [ -s "$err" ]; then
+		echo
+		echo 'ERROR: Some repositories are failed to fetch from remote.'
+		# The err file is not empty.
+		# Show error messages.
+		cat "$err"
+	fi >&2
+}
+
+main
