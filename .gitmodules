@@ -69,7 +69,7 @@
 	url = https://github.com/mattn/emmet-vim
 [submodule "files/.vim/pack/diff/start/diffchar.vim"]
 	path = files/.vim/pack/diff/start/diffchar.vim
-	url = https://github.com/vim-scripts/diffchar.vim
+	url = https://github.com/rickhowe/diffchar.vim.git
 [submodule "files/.vim/pack/indent/start/vim-python-pep8-indent"]
 	path = files/.vim/pack/indent/start/vim-python-pep8-indent
 	url = https://github.com/hynek/vim-python-pep8-indent
