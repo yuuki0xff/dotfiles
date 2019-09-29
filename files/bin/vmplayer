@@ -1,4 +1,0 @@
-#!/bin/sh
-export GTK_IM_MODULE='none'
-exec /usr/bin/vmplayer "$@"
-

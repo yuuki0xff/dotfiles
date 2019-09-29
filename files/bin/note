@@ -1,2 +1,0 @@
-#!/bin/sh
-exec x-www-browser https://app.simplenote.com

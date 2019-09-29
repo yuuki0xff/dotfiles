@@ -1,5 +1,0 @@
-#!/bin/sh
-which mikutter && exec mikutter
-which x-www-browser && exec x-www-browser "http://tweetdeck.twitter.com"
-exit 1
-
