@@ -7,6 +7,7 @@ Configuration files and utilities for my development PC.
 	- zsh
 	- tmux
 	- xclip
+	- xinput
 	- x11-xserver-utils
 	- tig
 	- ctags
