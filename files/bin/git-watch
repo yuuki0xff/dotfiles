@@ -19,5 +19,6 @@ if [ "$#" -eq 0 ]; then
 fi
 
 while sleep 1; do
-	git ls-files |entr -d -- "$@"
+	git ls-files |entr -d -- "$@" ||
+		echo "ERROR: entr failed with exit code $?" >&2
 done
