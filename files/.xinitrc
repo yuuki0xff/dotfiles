@@ -1,9 +1,4 @@
 
-is_vnc() {
-	xrandr 2>/dev/null |fgrep -q VNC-0
-}
-
-
 . ~/.xprofile
 . ~/.xinputrc
 
