@@ -67,7 +67,7 @@ fetch_all() {
 
 main() {
 	local err=$(tempfile)
-	trap 'rm -f "$err"' EXIT
+	trap "rm -f '$err'" EXIT
 
 	list_repo_locations |sort | fetch_all "$err"
 
