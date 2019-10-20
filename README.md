@@ -22,5 +22,7 @@ chsh -s $(which zsh)
 
 sudo apt install python3-pip
 pip3 install --user -r .i3/rerequirements.txt
+
+rsync -a ~/.dotfiles/user-config/ ~/.config/
 ```
 
