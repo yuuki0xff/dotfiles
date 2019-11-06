@@ -25,5 +25,6 @@ type lowlow >/dev/null || alias lowlow='nice -n19'
 alias df='df -h'
 alias du='du -h'
 alias free='free -h'
+alias unsafe_ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 
 # vim: ft=zsh
