@@ -1,0 +1,9 @@
+set clipboard
+set hlsearch
+set smartcase
+set incsearch
+set ideajoin
+
+nnoremap <C-o> :action Back<CR>
+nnoremap <C-i> :action Forward<CR>
+
