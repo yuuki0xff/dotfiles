@@ -71,5 +71,8 @@
 	cd3 = !git d3 --word-diff-regex="."
 	cs  = !git ds --word-diff-regex="."
 
+	# お掃除
+	delete-merged-branches = !git branch --merged | grep -v \\* | xargs -r git branch -d
+
 [rebase]
 	autosquash = true
