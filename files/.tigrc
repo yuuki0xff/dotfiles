@@ -41,9 +41,8 @@ bind refs p @git push -u origin %(ref)
 # Status view
 ########
 
-# git commit --ammend の代わり
+bind status a !git amend
 bind status A !git fixup HEAD
-
 bind status F !git fixup %(commit)
 
 
