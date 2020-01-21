@@ -25,3 +25,8 @@ __pycache__
 .mypy_cache/
 
 .envrc
+
+# Windows system files
+System Volume Information
+Thumbs.db
+Thumbs.db:encryptable
