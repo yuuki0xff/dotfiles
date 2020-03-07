@@ -1,3 +1,18 @@
+export EDITOR=vim
+export TERMINAL=term
+export PAGER=less
+
+
+_xsessionrc_add_path() {
+	[ -d "$1" ] && PATH=$PATH:$1
+}
+_xsessionrc_add_path ~/bin
+_xsessionrc_add_path ~/.local/bin
+_xsessionrc_add_path ~/.local/sbin
+_xsessionrc_add_path "$GOBIN"
+_xsessionrc_add_path ~/.cargo/bin
+
+
 setxkbmap -option ctrl:nocaps
 xrdb -merge ~/.Xdefault
 xset -b
