@@ -1,0 +1,4 @@
+. ~/.xinputrc
+. ~/.xprofile
+
+# vim:filetype=sh
