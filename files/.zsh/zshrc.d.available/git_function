@@ -37,6 +37,12 @@ function git-autoclone(){
 						;;
 				esac
 				;;
+			git://*/*)
+				# Git protocol
+				# Ex: git://github.com:9418/cli/cli.git
+				# Ex: git://github.com/cli/cli.git
+				repopath=${1#git://}
+				;;
 			*:*/*)
 				# SSH protocol
 				# Ex: git@github.com:cli/cli.git
