@@ -37,12 +37,19 @@ function git-autoclone(){
 						;;
 				esac
 				;;
-			*@*:*)
-				repopath=${1#*@}
+			*:*/*)
+				# SSH protocol
+				# Ex: git@github.com:cli/cli.git
+				# Ex: github.com:cli/cli.git
+				repopath=$1
+				case "$repopath" in
+					*@*:*/*)
+						# ユーザ名部分を除去
+						repopath=${repopath#*@}
+						;;
+				esac
 				repopath=${repopath/:/\/}
 				;;
-			*:*)
-				repopath=${1/:/\/}
 		esac
 		shift
 	done
