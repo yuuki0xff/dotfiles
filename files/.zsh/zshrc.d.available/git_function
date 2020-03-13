@@ -77,9 +77,9 @@ function git-autoclone(){
 	()(
 		_nohook=1
 		cd ~/repo
-		if [[ -d "$repopath" ]]; then
-			echo "$repopath is already cloned." >&2
-			echo >&2
+		if [[ -d "$repopath" && -e "$repopath/.git" ]]; then
+			cd "$repopath"
+			git fetch -a
 		else
 			mkdir -p "$repopath"
 			cd "$repopath"
