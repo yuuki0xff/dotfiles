@@ -2,5 +2,6 @@
 # スクリーンショットを取り、撮影結果をクリップボードにコピーする。
 set -e
 f=/tmp/screenshot.png
+rm -f "$f"
 scrot -s "$f"
 xclip -se c -t image/png -i <"$f"
