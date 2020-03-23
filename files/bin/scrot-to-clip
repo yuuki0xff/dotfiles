@@ -1,5 +1,6 @@
 #!/bin/sh
 # スクリーンショットを取り、撮影結果をクリップボードにコピーする。
 set -e
-scrot -s /tmp/screenshot.png
-xclip -se c -t image/png -i </tmp/screenshot.png
+f=/tmp/screenshot.png
+scrot -s "$f"
+xclip -se c -t image/png -i <"$f"
