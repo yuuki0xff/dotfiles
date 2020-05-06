@@ -2,6 +2,5 @@
 exec aria2c -j 100 \
 	--bt-require-crypto=true \
 	--lowest-speed-limit=1K \
-	--disable-ipv6=true \
 	--seed-ratio=0.0 \
 	--enable-rpc=false "$@"
