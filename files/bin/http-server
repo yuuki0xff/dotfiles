@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+# The simple HTTP server like "python3 -m http.server". but it has a better performance than the original
+# implementation. If you can install the gevent library, it will be more faster.
+
+try:
+    import gevent.monkey
+
+    gevent.monkey.patch_all()
+    # Succeed to apply monkey patches of the gevent. the threading and socket library replaced to event-based
+    # functions/classes.
+except ImportError:
+    # Failed to import the gevent library. Don't worry! The gevent is optional. This server should work without patches.
+    pass
+
+try:
+    from http.server import ThreadingHTTPServer
+except ImportError:
+    # For old python before v3.7.0.
+    from http.server import HTTPServer
+    from socketserver import ThreadingMixIn
+
+
+    class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
+        pass
+
+import argparse
+import sys
+from http.server import SimpleHTTPRequestHandler, CGIHTTPRequestHandler
+
+
+def main(args):
+    p = argparse.ArgumentParser()
+    p.add_argument('--cgi', action='store_true', help='Run as CGI Server')
+    p.add_argument('--bind', '-b', default='0.0.0.0', help='Specify alternate bind address')
+    p.add_argument('port', type=int, default=8000, help='Specify alternate port')
+
+    ns = p.parse_args(args)
+    if ns.cgi:
+        handler = CGIHTTPRequestHandler
+    else:
+        handler = SimpleHTTPRequestHandler
+
+    print('Serving HTTP server on {}:{}'.format(ns.bind, ns.port))
+    srv = ThreadingHTTPServer((ns.bind, ns.port), handler)
+    try:
+        srv.serve_forever()
+    except KeyboardInterrupt:
+        print('Keyboard interrupted. stopping...')
+        srv.server_close()
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
