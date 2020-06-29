@@ -1,0 +1,111 @@
+#!/bin/bash
+# remote-make - execute "make" command on the remote server.
+#
+# USAGE:
+#   remote-make [OPTIONS] [--] [MAKE_ARGS]
+#
+# OPTIONS:
+#   -h, --host
+#       Specify remote host name and login user name (ex. user@example.com).
+#   -d, --dir
+#       Specify remote working directory.
+#   --force-clean
+#       Remove all untracked files with git.
+#
+# ENVIRONMENT VALUES:
+#   REMOTE_MAKE_HOST: remote host name and login user name (ex. user@example.com)
+#   REMOTE_MAKE_DIR: remote working directory.
+#   REMOTE_MAKE_FORCE_CLEAN: remove all untracked files with git.
+#
+# EXAMPLE:
+#   export REMOTE_MAKE_HOST=user@build-server
+#   remote-make build
+set -eu
+
+gitroot() {
+	git rev-parse --show-toplevel
+}
+gitfiles() {
+	git ls-files
+}
+
+
+this=remote-make
+host=${REMOTE_MAKE_HOST:-}
+local_dir=$(gitroot)
+
+if [ -n "${REMOTE_MAKE_DIR:-}" ]; then
+	remote_dir=$REMOTE_MAKE_DIR
+else
+	project=$(git remote get-url origin |sed 's@.*/@@; s/\.git$//')
+	feature=$(basename "$(gitroot)")
+	remote_dir="remote-make/$project-$feature"
+fi
+
+if [ -n "${REMOTE_MAKE_FORCE_CLEAN:-}" ]; then
+	clean_cmd="git clean -fdx"
+else
+	clean_cmd="git clean -fd"
+fi
+
+# Consume options.
+while (( $# >= 1 )); do
+	case "$1" in
+		--)
+			shift
+			break
+			;;
+		--host=*)
+			host=$(echo "$1" |tail -c +8)
+			shift
+			;;
+		--host|-h)
+			shift
+			host=$1
+			shift
+			;;
+		--dir=*)
+			remote_dir=$(echo "$1" |tail -c +7)
+			shift
+			;;
+		--dir|-d)
+			shift
+			remote_dir=$1
+			shift
+			;;
+		--force-clean)
+			clean_cmd="git clean -fdx"
+			shift
+			;;
+		-*)
+			echo "ERROR: unknown option: $1" >&2
+			exit 1
+			;;
+		*)
+			break
+			;;
+	esac
+done
+
+if [ -z "$host" ]; then
+	echo "ERROR: no remote host specified. Please specify the --host argument." >&2
+	exit 1
+fi
+
+
+cd "$local_dir"
+echo "$this: Syncing from '$local_dir' to '$remote_dir' ..." >&2
+ssh "$host" mkdir -p "$remote_dir"
+rsync -av --files-from=<(gitfiles) "./" "$host:$remote_dir/"
+rsync -av --del "./.git" "$host:$remote_dir/"
+
+echo "$this: Making on '$host' ..." >&2
+ssh "$host" "
+	set -eux &&
+	pwd &&
+	cd '$remote_dir' &&
+	$clean_cmd &&
+	make $*
+"
+
+echo "$this: Done" >&2
