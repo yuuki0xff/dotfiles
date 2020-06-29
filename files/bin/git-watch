@@ -1,24 +1,64 @@
-#!/bin/sh
+#!/bin/bash
 # git-watch - execute a program when files change.
 #
 # USAGE:
-#   git-watch [CMD] [ARGS]
+#   git-watch [OPTIONS] [--] [CMD] [ARGS]
 #
 #   CMD: command name.  default command is "make".
 #   ARGS: arguments of the command.
 #
+#   OPTIONS:
+#     -f, --filter=<REGEXP>
+#         Filter target files by regular expression.
+#
 # EXAMPLE:
 #   git watch
 #   git watch make test
-
 set -eu
+filter=
+
+# Consume options.
+while (( $# >= 1 )); do
+	case "$1" in
+		--)
+			shift
+			break
+			;;
+		--filter=*)
+			filter=$(echo "$1" |tail -c +10)
+			shift
+			;;
+		--filter|-f)
+			shift
+			filter=$1
+			shift
+			;;
+		-*)
+			echo "ERROR: unknown option: $1" >&2
+			exit 1
+			;;
+		*)
+			break
+			;;
+	esac
+done
 
 if [ "$#" -eq 0 ]; then
 	# Set default args
 	set make
 fi
 
+filter_files() {
+	if [ -n "$filter" ]; then
+		grep "$filter"
+	else
+		cat
+	fi
+}
+
 while sleep 1; do
-	git ls-files |entr -d -- "$@" ||
+	git ls-files |
+		filter_files |
+		entr -d -- "$@" ||
 		echo "ERROR: entr failed with exit code $?" >&2
 done
