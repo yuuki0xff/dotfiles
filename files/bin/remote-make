@@ -13,6 +13,8 @@
 #       Regard MAKE_ARGS as shell commands.
 #   --force-clean
 #       Remove all untracked files with git.
+#   --help
+#       Show this message.
 #
 # ENVIRONMENT VALUES:
 #   REMOTE_MAKE_HOST: remote host name and login user name (ex. user@example.com)
@@ -84,6 +86,9 @@ while (( $# >= 1 )); do
 		--force-clean)
 			clean_cmd="git clean -fdx"
 			shift
+			;;
+		--help)
+			exec sed '1d; /^[^#]/Q; s/^# \?//' "$0"
 			;;
 		-*)
 			echo "ERROR: unknown option: $1" >&2
