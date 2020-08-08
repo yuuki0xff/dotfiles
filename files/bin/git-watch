@@ -7,13 +7,17 @@
 #   CMD: command name.  default command is "make".
 #   ARGS: arguments of the command.
 #
-#   OPTIONS:
-#     -f, --filter=<REGEXP>
-#         Filter target files by regular expression.
+# OPTIONS:
+#   -f, --filter=<REGEXP>
+#       Filter target files by regular expression.
+#   --help
+#       Show this message.
 #
 # EXAMPLE:
 #   git watch
 #   git watch make test
+#   git watch -- make -j64 build
+#   git watch -- remote-make --force-clean -- -j64
 set -eu
 filter=
 
@@ -32,6 +36,9 @@ while (( $# >= 1 )); do
 			shift
 			filter=$1
 			shift
+			;;
+		--help)
+			exec sed '1d; /^[^#]/Q; s/^# \?//' "$0"
 			;;
 		-*)
 			echo "ERROR: unknown option: $1" >&2
