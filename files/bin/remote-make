@@ -9,6 +9,8 @@
 #       Specify remote host name and login user name (ex. user@example.com).
 #   -d, --dir
 #       Specify remote working directory.
+#   -s, --shell
+#       Regard MAKE_ARGS as shell commands.
 #   --force-clean
 #       Remove all untracked files with git.
 #
@@ -48,6 +50,8 @@ else
 	clean_cmd="git clean -fd"
 fi
 
+make_cmd=make
+
 # Consume options.
 while (( $# >= 1 )); do
 	case "$1" in
@@ -71,6 +75,10 @@ while (( $# >= 1 )); do
 		--dir|-d)
 			shift
 			remote_dir=$1
+			shift
+			;;
+		--shell|-s)
+			make_cmd=
 			shift
 			;;
 		--force-clean)
@@ -105,7 +113,7 @@ ssh "$host" "
 	pwd &&
 	cd '$remote_dir' &&
 	$clean_cmd &&
-	make $*
+	($make_cmd $*)
 "
 
 echo "$this: Done" >&2
