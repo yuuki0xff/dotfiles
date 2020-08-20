@@ -11,7 +11,9 @@ export TERMINAL=term
 export PAGER=less
 export GOPATH=~/go
 export GOBIN=~/go/bin
-export GOROOT=~/.local/lib/go
+if [ -d ~/.local/lib/go ]; then
+	export GOROOT=~/.local/lib/go
+fi
 
 # Enable docker build-kit
 export DOCKER_BUILDKIT=1
