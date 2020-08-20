@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+name=$1
+mount_dir=$HOME/mnt/$name
+cd /
+[ -e "$mount_dir" ] || mkdir -p "$mount_dir"
+if mountpoint "$mount_dir"; then
+	umount "$mount_dir" || umount -f "$mount_dir"
+fi
+sshfs -C -o reconnect "$name:" "$mount_dir"
