@@ -83,6 +83,10 @@ while (( $# >= 1 )); do
 			make_cmd=
 			shift
 			;;
+		--no-clean)
+			clean_cmd=true
+			shift
+			;;
 		--force-clean)
 			clean_cmd="git clean -fdx"
 			shift
