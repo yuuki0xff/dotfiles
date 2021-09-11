@@ -7,8 +7,11 @@ DOT_FILES_DIR ?= ~/.dotfiles
 # BIN_FILES := $(filter-out $(BIN_TMPLS),$(wildcard files/bin/*))
 ROOT_FILES := $(filter-out files/. files/..,$(wildcard files/* files/.*))
 ABS_ROOT_FILES := $(foreach i,$(ROOT_FILES),$(DOT_FILES_DIR)/$(i))
+OLD_LINKS := .vimperatorrc
+ABS_OLD_LINKS := $(foreach i,$(OLD_LINKS),$(PREFIX)/$(i))
 
 install:
+	rm -f $(ABS_OLD_LINKS)
 	install -d $(PREFIX)
 	ln -si $(ABS_ROOT_FILES) $(PREFIX)/
 ifeq ($(KERNEL),Linux)
