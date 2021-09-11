@@ -54,4 +54,8 @@ typeset -U path fpath cdpath modepath
 
 ZSHRC_D_DIR=(~/.zsh/zshrc.d)
 
+DEBEMAIL="yuuki0xff@gmail.com"
+DEBFULLNAME="yuuki0xff"
+export DEBEMAIL DEBFULLNAME
+
 # vim: filetype=zsh
