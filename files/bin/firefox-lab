@@ -1,3 +1,0 @@
-#!/bin/sh
-exec ~/.local/lib/firefox/firefox --no-remote -P tagoken-inside "$@"
-

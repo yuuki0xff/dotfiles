@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+import configparser
+import pathlib
+import os
+
+
+def load_config():
+    config_file_path = pathlib.Path('~/.mozilla/firefox/profiles.ini').expanduser()
+    cfg = configparser.ConfigParser()
+    cfg.read(config_file_path)
+    return cfg
+
+
+def get_profile_names(cfg):
+    # Get all name options from cfg. It works like cfg.get_all('*', 'Name').
+    return list(filter(bool, (section.get('Name') for section in dict(cfg).values())))
+
+
+def get_default_profile_name(cfg):
+    for section in cfg.values():
+        if section.getint('StartWithLastProfile', 0):
+            return section.get('Name')
+
+
+def generate_helper_script(profile_name, is_default):
+    shebang = '#!/bin/sh'
+    if is_default:
+        cmd = f'exec ~/.local/lib/firefox/firefox -P "{profile_name}" "$@"'
+    else:
+        cmd = f'exec ~/.local/lib/firefox/firefox --no-remote -P "{profile_name}" "$@"'
+    return f'{shebang}\n{cmd}\n'
+
+
+def write_helper_files(profile_names, default_profile_name):
+    prefix = os.getenv('PREFIX') or str(pathlib.Path.home())
+
+    for n in profile_names:
+        data = generate_helper_script(n, n == default_profile_name)
+        fname = pathlib.Path(prefix, 'bin', f'firefox-{n}')
+        tmp = pathlib.Path(prefix, 'bin', f'.firefox-{n}.tmp')
+        tmp.unlink(missing_ok=True)
+        tmp.write_text(data)
+        tmp.chmod(0o755)
+        tmp.rename(fname)
+
+
+def main():
+    cfg = load_config()
+    write_helper_files(
+        get_profile_names(cfg),
+        get_default_profile_name(cfg),
+    )
+
+
+if __name__ == '__main__':
+    main()
