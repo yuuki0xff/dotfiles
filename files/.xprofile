@@ -26,7 +26,10 @@ is_vnc() {
 # モニタの設定
 case `hostname` in
 	desktop1)
-		xrandr --output HDMI-1 --right-of HDMI-2 --output HDMI-1 --primary
+		xrandr \
+			--output HDMI-2 --auto --rotate left --pos 0x0 \
+			--output VGA-1 --auto --rotate right --primary --pos 1080x0 \
+			--output HDMI-1 --auto --pos 2160x840
 		;;
 	laptop2)
 		xrandr --output eDP1 --primary
