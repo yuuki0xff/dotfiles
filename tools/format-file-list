@@ -1,0 +1,15 @@
+#!/bin/bash
+# Format a target list.
+#
+# Usage:
+#   ./tools/format-file-list FILE
+
+set -eu
+out=$1
+tmp=$1.tmp
+(sort -u |sed -E '
+    /^\s+$/d;
+    s/^\s+//;
+    s/\s+$//
+') <"$out" >"$tmp"
+mv "$tmp" "$out"

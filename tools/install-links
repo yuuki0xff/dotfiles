@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+# Python version: >=3.7
+import argparse
+import pathlib
+import sys
+import os
+
+
+class Arguments:
+    __slots__ = (
+        'target_list',
+        'src',
+        'dest',
+        'dry_run',
+    )
+
+    def __init__(self, args=None):
+        p = argparse.ArgumentParser()
+        p.add_argument('target_list')
+        p.add_argument('src')
+        p.add_argument('dest')
+        p.add_argument('--dry-run', action='store_true')
+        obj = p.parse_args(args)
+        self.target_list = pathlib.Path(obj.target_list)
+        self.src = pathlib.Path(obj.src)
+        self.dest = pathlib.Path(obj.dest)
+        self.dry_run = obj.dry_run
+
+
+def main():
+    args = Arguments()
+    with args.target_list.open() as file:
+        for line in file:
+            p = pathlib.Path(line.strip())
+            src_path = pathlib.Path(args.src, p)
+            if p.parts[0] != "files":
+                print(f'invalid path: {p}', file=sys.stderr)
+                return 1
+            # Strip "files/" prefix from p, and concat with args.dest.
+            link_path = pathlib.Path(args.dest, *p.parts[1:])
+
+            if not src_path.exists():
+                print(f'not found {src_path}', file=sys.stderr)
+                return 1
+            if link_path.is_symlink() and os.readlink(link_path) == src_path:
+                # File type and link destination is same. No need to any action.
+                continue
+
+            print(repr(str(src_path)), '->', repr(str(link_path)))
+            if not args.dry_run:
+                try:
+                    link_path.unlink()
+                except FileNotFoundError:
+                    pass
+                link_path.symlink_to(src_path)
+
+    return 0
+
+
+if __name__ == '__main__':
+    exit(main())
