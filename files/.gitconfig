@@ -42,6 +42,10 @@
 	ll = log --pretty=format:'%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]' --decorate --numstat
 	today = log --oneline --since='12 hour ago'
 
+	# push関連
+	p = !echo DRY_RUN && set -x && git push origin --dry-run && git push origin --tags --dry-run
+	pp = !set -x && git push origin && git push origin --tags
+
 	# commit関連
 	a = add
 	aa = !git add .  && git add -u && git status
