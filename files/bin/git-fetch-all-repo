@@ -42,7 +42,7 @@ list_repo_locations() {
 
 fetch_all() {
 	local err=$1
-	local out=$(tempfile)
+	local out=$(mktemp)
 	trap 'rm -f "$out"' EXIT
 
 	while read repo; do
@@ -66,7 +66,7 @@ fetch_all() {
 }
 
 main() {
-	local err=$(tempfile)
+	local err=$(mktemp)
 	trap "rm -f '$err'" EXIT
 
 	list_repo_locations |sort | fetch_all "$err"
