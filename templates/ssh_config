@@ -19,6 +19,15 @@ Host ssh-bastion
 	User myid
 	Port 10022
 
+Host ssh-bastion-proxy
+	# ...
+	# vnc port forwarding
+	LocalForward localhost:5900 localhost:5900
+	# SOCKS4 and SOCKS5
+	DynamicForward localhost:1080
+	ExitOnForwardFailure yes
+	RequestTTY no
+
 Host internal-server
 	HostName foo.local
 	ProxyJump ssh-bastion
