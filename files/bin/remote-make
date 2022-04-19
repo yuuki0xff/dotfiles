@@ -20,6 +20,7 @@
 #   REMOTE_MAKE_HOST: remote host name and login user name (ex. user@example.com)
 #   REMOTE_MAKE_DIR: remote working directory.
 #   REMOTE_MAKE_FORCE_CLEAN: remove all untracked files with git.
+#   REMOTE_MAKE_SKIP_CLEAN: skip working directory cleaning.
 #
 # EXAMPLE:
 #   export REMOTE_MAKE_HOST=user@build-server
@@ -30,7 +31,11 @@ gitroot() {
 	git rev-parse --show-toplevel
 }
 gitfiles() {
-	git ls-files
+	if git submodule status |grep -q .; then
+		git ls-files --recurse-submodules
+	else
+		git ls-files
+	fi
 }
 
 
@@ -48,11 +53,13 @@ fi
 
 if [ -n "${REMOTE_MAKE_FORCE_CLEAN:-}" ]; then
 	clean_cmd="git clean -fdx"
+elif [ -n "${REMOTE_MAKE_SKIP_CLEAN:-}" ]; then
+	clean_cmd=":"
 else
 	clean_cmd="git clean -fd"
 fi
 
-make_cmd=make
+make_cmd='make -j$(nproc)'
 
 # Consume options.
 while (( $# >= 1 )); do
@@ -91,6 +98,10 @@ while (( $# >= 1 )); do
 			clean_cmd="git clean -fdx"
 			shift
 			;;
+		--skip-clean)
+			clean_cmd=":"
+			shift
+			;;
 		--help)
 			exec sed '1d; /^[^#]/Q; s/^# \?//' "$0"
 			;;
@@ -113,15 +124,33 @@ fi
 cd "$local_dir"
 echo "$this: Syncing from '$local_dir' to '$remote_dir' ..." >&2
 ssh "$host" mkdir -p "$remote_dir"
-rsync -av --files-from=<(gitfiles) "./" "$host:$remote_dir/"
-rsync -av --del "./.git" "$host:$remote_dir/"
+rsync -aP --files-from=<(gitfiles) "./" "$host:$remote_dir/"
+if [ -d ./.git ]; then
+	# .git is directory.
+	rsync -aP --del "./.git" "$host:$remote_dir/"
+else
+	# .git is file. This working tree related to other local git repository.
+	git_dir=$(sed -n '/^gitdir: / { s/gitdir: //; p }' .git)
+	git_common_dir=$(git -C "$git_dir" rev-parse --git-common-dir)
+	git_subdir_name=$(realpath --relative-to="$git_common_dir" "$git_dir")
+	git_commit_id=$(git rev-parse HEAD)
+	rsync -aP --del "$git_common_dir/" "$host:$remote_dir/.git/"
+	ssh "$host" "
+		set -eux &&
+		ln -snf \"\$(readlink -f $remote_dir.git/)\" \"$remote_dir/.git\" &&
+		cd \"$remote_dir\" &&
+		git reset $git_commit_id
+	"
+fi
 
 echo "$this: Making on '$host' ..." >&2
 ssh "$host" "
+	. ~/.profile &&
 	set -eux &&
 	pwd &&
 	cd '$remote_dir' &&
 	$clean_cmd &&
+	renice 19 -p \$\$ &&
 	($make_cmd $*)
 "
 
