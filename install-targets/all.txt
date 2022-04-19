@@ -5,6 +5,7 @@ files/.dockerignore
 files/.gitattributes
 files/.gitconfig
 files/.gitignore
+files/.hammerspoon
 files/.i3
 files/.ideavimrc
 files/.profile
@@ -16,6 +17,7 @@ files/.xinitrc
 files/.xinputrc
 files/.xprofile
 files/.xsessionrc
+files/.yabairc
 files/.zlogin
 files/.zlogout
 files/.zprofile

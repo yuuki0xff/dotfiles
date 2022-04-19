@@ -4,12 +4,14 @@ files/.dockerignore
 files/.gitattributes
 files/.gitconfig
 files/.gitignore
+files/.hammerspoon
 files/.ideavimrc
 files/.profile
 files/.tigrc
 files/.tmux.conf
 files/.vim
 files/.vimrc
+files/.yabairc
 files/.zlogin
 files/.zlogout
 files/.zprofile
