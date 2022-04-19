@@ -9,7 +9,7 @@
 [core]
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
-	pager = less -x 4
+	pager = less -FXx 4
 [color]
 	ui = auto
 	status = auto
