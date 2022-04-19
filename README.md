@@ -17,12 +17,15 @@ Configuration files and utilities for my development PC.
 ## Installation
 ```
 git clone --recurse-submodules github.com:yuuki0xff/dotfiles ~/.dotfiles
-ln -si ~/.dotfiles/files/{.,}* ~
+make install
 chsh -s $(which zsh)
 
+
+# For linux desktop.
 sudo apt install python3-pip
 pip3 install --user -r .i3/rerequirements.txt
 
+# For linux.
 rsync -a ~/.dotfiles/user-config/ ~/.config/
 ```
 
