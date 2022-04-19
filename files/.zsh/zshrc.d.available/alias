@@ -29,4 +29,10 @@ alias unsafe_ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=n
 alias unsafe_scp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias unsafe_rsync='rsync --rsh "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"'
 
+if [[ "$(uname -s)" = "Darwin" ]]; then
+	alias clion="open -a 'CLion'"
+	alias pycharm="open -a 'PyCharm'"
+	alias idea="open -a 'IntelliJ IDEA'"
+fi
+
 # vim: ft=zsh
