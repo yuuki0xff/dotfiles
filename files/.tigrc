@@ -11,7 +11,8 @@ bind generic G move-last-line
 bind generic o @bash -c 'xdg-open $(git remote get-url origin | awk \'/^https?:\\/\\// { sub("://.*@", "://"); } /^(https?|git):\\/\\// { sub("^(https?|git)://", "https://"); print $0; } /^[^/]+:[^/]{2}/ { sub(":", "/"); sub("^(.+@)?", "https://"); print $0 }\')/commits/%(commit)'
 
 bind generic <Ctrl-R> !git pull
-bind generic <Ctrl-P> !git push
+bind generic <Ctrl-P> !bash -c "git p; echo; echo 'Press Shift+P to push all branches and tags.'"
+bind generic P !git pp
 
 bind generic V @?git revert %(commit)
 bind generic C @?git checkout %(commit)
