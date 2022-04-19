@@ -10,9 +10,6 @@ bind generic G move-last-line
 # github/bitbucketで動作確認。
 bind generic o @bash -c 'xdg-open $(git remote get-url origin | awk \'/^https?:\\/\\// { sub("://.*@", "://"); } /^(https?|git):\\/\\// { sub("^(https?|git)://", "https://"); print $0; } /^[^/]+:[^/]{2}/ { sub(":", "/"); sub("^(.+@)?", "https://"); print $0 }\')/commits/%(commit)'
 
-# カーソル行のブランチを親にして入力した名前のブランチを作成
-bind generic n @git checkout -b %(prompt) %(commit)
-
 bind generic <Ctrl-R> !git pull
 bind generic <Ctrl-P> !git push
 
