@@ -48,7 +48,7 @@ fetch_all() {
 	while read repo; do
 		log_progress -n "$repo" ...
 		# NOTE: Ctrl-Cを押すとスクリプトは停止するが、git fetchコマンドは停止せずにバックグラウンドで動き続ける。
-		if (cd "$repo" && setsid --wait --fork git fetch --all) &>"$out"; then
+		if (cd "$repo" && setsid --wait --fork git fetch --all --recurse-submodules=yes) &>"$out"; then
 			log_ok "$repo" ... OK
 		else
 			# Command failed.
