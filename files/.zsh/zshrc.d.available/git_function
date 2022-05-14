@@ -92,4 +92,11 @@ function gitroot() {
 	git rev-parse --show-toplevel
 }
 
+function cdg() {
+	local d
+	if d=$(gitroot); then
+		cd "$(gitroot)"
+	fi
+}
+
 # vim: ft=zsh
