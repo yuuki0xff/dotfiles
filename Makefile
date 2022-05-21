@@ -36,6 +36,20 @@ ifeq ($(KERNEL),Darwin)
 	# TODO: macでは複数のプロファイルを使用していないため、firefox helperは使わない。。
 endif
 
+test:
+ifeq ($(KERNEL),Linux)
+	if update-alternatives --get-selections |grep -q '^x-terminal-emulator '; then \
+		update-alternatives --get-selections |grep '^x-terminal-emulator ' |grep ' /usr/bin/xterm$$'; \
+	fi
+
+	# homeにインストールしたやつを使っているので、当面はこの設定は無視。
+	# update-alternatives --get-selections |grep '^x-www-browser '
+	# update-alternatives --get-selections |grep '^x-www-browser ' |grep firefox
+
+	update-alternatives --get-selections |grep -q '^awk '
+	update-alternatives --get-selections |grep '^awk ' |grep ' /usr/bin/gawk$$'
+endif
+
 checkout-submodules:
 	git submodule update --recursive --checkout
 
