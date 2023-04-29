@@ -48,6 +48,15 @@ __chpwd_msg()(
 		fi
 		echo -n $reset_color
 	fi
+
+	# show git status
+	if [ -d .git ]; then
+		echo $bg[blue]---------- GIT STATUS ----------$reset_color
+		echo -n $reset_color
+		echo -n $fg[green]
+		git status -s |headmore -t '...' -n "$CHPWD_MAX_LINE"
+		echo -n $reset_color
+	fi
 	return $ret
 )
 add-zsh-hook chpwd __chpwd_msg
