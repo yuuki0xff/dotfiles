@@ -17,6 +17,7 @@ Configuration files and utilities for my development PC.
 ## Installation
 ```bash
 git clone --recurse-submodules github.com:yuuki0xff/dotfiles ~/.dotfiles
+cd ~/.dotfiles
 make install
 chsh -s $(which zsh)
 
