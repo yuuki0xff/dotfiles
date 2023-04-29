@@ -60,7 +60,7 @@ headmore()(
 		shift
 	done
 	if [ "${#files}" = 0 ]; then
-		files='/dev/stdin'
+		files=( '/dev/stdin' )
 	fi
 	for f in $files; do
 		# show header

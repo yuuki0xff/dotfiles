@@ -29,7 +29,7 @@ __chpwd_msg()(
 
 	# show File LIST
 	echo $bg[blue]---------- FILES ----------$reset_color
-	headmore -t '...' -n "$CHPWD_MAX_LINE" <(LS -C)
+	LS -C |headmore -t '...' -n "$CHPWD_MAX_LINE"
 
 	# show TODO
 	matchfile=()
