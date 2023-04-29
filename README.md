@@ -24,7 +24,7 @@ chsh -s $(which zsh)
 
 # For linux desktop.
 sudo apt install python3-pip
-pip3 install --user -r .i3/rerequirements.txt
+pipx install ~/.i3/helper
 
 # For linux.
 rsync -a ~/.dotfiles/user-config/ ~/.config/
