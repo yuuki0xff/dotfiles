@@ -9,7 +9,7 @@ __chpwd_msg()(
 		return $ret
 	fi
 
-	# shiw README
+	# show README
 	matchfile=()
 	f="$(search_file -g -i -c 'readme\(\..\+\)\?')"
 	if [ -n "$f" ]; then
