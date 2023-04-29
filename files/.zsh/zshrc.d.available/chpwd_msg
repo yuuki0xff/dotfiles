@@ -54,7 +54,7 @@ __chpwd_msg()(
 		echo $bg[blue]---------- GIT STATUS ----------$reset_color
 		echo -n $reset_color
 		echo -n $fg[green]
-		git status -s |headmore -t '...' -n "$CHPWD_MAX_LINE"
+		git -c color.status=always status -s |headmore -t '...' -n "$CHPWD_MAX_LINE"
 		echo -n $reset_color
 	fi
 	return $ret
