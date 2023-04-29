@@ -29,11 +29,26 @@ restorebackup(){
 	done
 }
 swap()(
-	[ "$#" = 2 ] || { echo "引数は2つ指定して"; return 1 }
-	local tmp="$(mktemp --dry-run --tmpdir="$(dirname "$1")")"
-	mv "$1" "$tmp"
-	mv "$2" "$1"
-	mv "$tmp" "$2"
+	case "$#" in
+	2)
+		# command: swap LEFT RIGHT
+		local tmp
+		tmp="$(mktemp --dry-run --tmpdir="$(dirname "$1")")" &&
+		mv "$1" "$tmp" &&
+		mv "$2" "$1" &&
+		mv "$tmp" "$2"
+		;;
+	3)
+		# command: swap NEW CURRENT OLD
+		mv "$2" "$3" &&
+		mv "$1" "$2"
+		;;
+	*)
+		echo "Usage: swap LEFT RIGHT"
+		echo "       swap NEW CURRENT OLD"
+		return 1
+		;;
+	esac
 )
 unlink(){
 	while [ "$#" -ne 0 ]; do
