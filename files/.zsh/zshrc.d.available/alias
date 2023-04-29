@@ -17,9 +17,13 @@ which perl-rename >/dev/null && alias rename='perl-rename'
 alias grep='grep --color=auto'
 type pigz >/dev/null && alias pigz='pigz -b 1024'
 
-# nice
-type low >/dev/null || alias low='nice -n10'
-type lowlow >/dev/null || alias lowlow='nice -n19'
+# process scheduling
+if [[ "$(uname -s)" = "Darwin" ]]; then
+	type nproc >/dev/null || nproc() { getconf _NPROCESSORS_ONLN; }
+fi
+alias @low='nice -n19'
+type make nproc >/dev/null && alias make="@low make -j$(nproc)"
+type git-watch >/dev/null && alias git-watch='@low git-watch'
 
 # system management
 alias df='df -h'
