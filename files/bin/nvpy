@@ -1,0 +1,9 @@
+#!/bin/sh
+# Wrapper script to apply custom theme for nvpy.
+export TCLLIBPATH=$HOME/repo/github.com/thindil/tkBreeze
+if [ ! -d "$TCLLIBPATH" ]; then
+    echo "nvpy: not found $TCLLIBPATH directory" >&2
+    exit 1
+fi
+
+exec python3 -m nvpy
