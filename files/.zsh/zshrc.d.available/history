@@ -1,5 +1,5 @@
 
-HISTFILE="$HOME/.zsh/history"
+HISTFILE="$HOME/.zsh_history"
 HISTSIZE=100000000
 SAVEHIST=$HISTSIZE
 
