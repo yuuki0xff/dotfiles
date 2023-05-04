@@ -1,4 +1,0 @@
-
-if [ "$SHLVL" = 1 ]; then
-	which tput >/dev/null && tput clear
-fi
