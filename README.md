@@ -25,6 +25,7 @@ chsh -s $(which zsh)
 # For linux desktop.
 sudo apt install python3-pip
 pipx install ~/.i3/helper
+make -C ~/.i3 build
 
 # For linux.
 rsync -a ~/.dotfiles/user-config/ ~/.config/
