@@ -24,7 +24,7 @@ chsh -s $(which zsh)
 
 # For linux desktop.
 sudo apt install python3-pip
-pipx install ~/.i3/helper
+pipx install ~/.i3/helper  # or pipx upgrade-all
 make -C ~/.i3 build
 
 # For linux.
