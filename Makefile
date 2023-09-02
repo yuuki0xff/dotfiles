@@ -51,7 +51,7 @@ ifeq ($(KERNEL),Linux)
 endif
 
 checkout-submodules:
-	git submodule update --recursive --checkout
+	git submodule update --recursive --checkout --jobs 16
 
 update-submodules:
-	git submodule update --recursive --remote --checkout
+	git submodule update --recursive --remote --checkout --jobs 16
