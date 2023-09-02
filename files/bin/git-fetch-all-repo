@@ -6,20 +6,7 @@
 
 set -eu
 
-save_position() {
-	tput sc
-}
-erase_line() {
-	tput rc
-	tput el
-}
-
-log_progress() {
-	save_position
-	echo "$@"
-}
 log_ok() {
-	erase_line
 	# Set foreground to green.
 	tput setaf 10
 	echo "$@"
@@ -27,7 +14,6 @@ log_ok() {
 	tput sgr0
 }
 log_error() {
-	erase_line
 	# Set foreground to red.
 	tput setaf 9
 	echo "$@"
@@ -36,47 +22,64 @@ log_error() {
 }
 
 list_repo_locations() {
-	find ~/repo/ -name .git |
-		sed 's/\.git$//'
+	if which fdfind &>/dev/null; then
+		fdfind -HI -g .git ~/repo/
+	else
+		find ~/repo/ -name .git
+	fi |sed 's/\.git$//'
 }
 
-fetch_all() {
-	local err=$1
-	local out=$(mktemp)
-	trap 'rm -f "$out"' EXIT
+fetch_repo() {
+	local repo=$1
 
-	while read repo; do
-		log_progress -n "$repo" ...
-		# NOTE: Ctrl-Cを押すとスクリプトは停止するが、git fetchコマンドは停止せずにバックグラウンドで動き続ける。
-		if (cd "$repo" && setsid --wait --fork git fetch --all --recurse-submodules=yes) &>"$out"; then
-			log_ok "$repo" ... OK
-		else
-			# Command failed.
-			log_error "$repo" ... FAILED
+	local tmp tmp_out tmp_in1 tmp_in2
+	tmp=$(mktemp)
+	exec {tmp_out}>>"$tmp"
+	exec {tmp_in1}<"$tmp"
+	exec {tmp_in2}<"$tmp"
+	rm -f "$tmp"
 
-			# Write to log file.
-			echo "$repo" >>"$err"
-			cat "$out" >>"$err"
-			echo >>"$err"
-			# Show error log to terminal.
-			cat "$out"
+	# NOTE: Ctrl-Cを押すとスクリプトは停止するが、git fetchコマンドは停止せずにバックグラウンドで動き続ける。
+	if (cd "$repo" && setsid --wait --fork git fetch --all --recurse-submodules=yes --jobs 1) </dev/null >&"$tmp_out" 2>&1; then
+		flock 1
+		log_ok "$repo" ... OK
+	else
+		# Command failed.
+
+		# Write to error log.
+		flock 2
+		{
+			echo "$repo"
+			cat <&"$tmp_in1"
 			echo
-		fi
-	done
+		} >&2
+
+		# Show error log to terminal.
+		flock 1
+		log_error "$repo" ... FAILED
+		cat <&"$tmp_in2"
+		echo
+	fi
 }
 
 main() {
-	local err=$(mktemp)
-	trap "rm -f '$err'" EXIT
+	local err
+	err=$(mktemp)
+	exec {err_out}>"$err"
+	exec {err_in}<"$err"
+	rm -f "$err"
 
-	list_repo_locations |sort | fetch_all "$err"
+	export -f fetch_repo
+	export -f log_ok
+	export -f log_error
+	list_repo_locations |xargs -P8 -n1 -- bash -euc 'fetch_repo "$@"' _ 2>&"$err_out"
 
 	if [ -s "$err" ]; then
 		echo
 		echo 'ERROR: Some repositories are failed to fetch from remote.'
 		# The err file is not empty.
 		# Show error messages.
-		cat "$err"
+		cat <&"$err_in"
 	fi >&2
 }
 
