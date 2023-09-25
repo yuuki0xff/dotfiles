@@ -33,6 +33,15 @@
 	rebase = false
 [push]
 	default = matching
+[checkout]
+	workers = 0
+[fetch]
+	parallel = 0
+	writeCommitGraph = true
+[pack]
+	threads = 0
+[repack]
+	repack = 0
 [alias]
 	alias = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | sort
 
