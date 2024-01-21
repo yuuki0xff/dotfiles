@@ -24,8 +24,12 @@ export DOCKER_BUILDKIT=1
 
 	mac_path=()
 	if [[ "$(uname)" == 'Darwin' ]]; then
-		# Use GNU commands instead of BSD commands.
-		mac_path=(/usr/local/opt/*/libexec/gnubin)
+		mac_path=(
+			/opt/homebrew/*bin
+			# Use GNU commands instead of BSD commands.
+			/usr/local/opt/*/libexec/gnubin
+			/opt/homebrew/opt/*/libexec/gnubin
+		)
 	fi
 	path=(
 		~/bin
