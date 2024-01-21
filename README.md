@@ -119,18 +119,17 @@ brew install \
 # Install casks.
 # NOTE: some casks requires manual operation.
 brew install \
-	clion \
 	forticlient-vpn \
 	gimp \
 	google-chrome \
 	google-cloud-sdk \
-	intellij-idea \
+	jetbrains-toolbox \
 	libreoffice \
 	mysqlworkbench \
-	pycharm \
 	wireshark \
 	zoom
 
 # ターミナルを開き直す
+# JetBrains Toolboxで必要なIDEをインストール
 # 主要サーバにSSH公開鍵を配っておく
 ```
