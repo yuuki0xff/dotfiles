@@ -70,7 +70,7 @@ brew tap jakehilborn/jakehilborn && brew install displayplacer
 brew install grep gawk gzip gnu-tar gnu-sed gnu-time gnu-getopt binutils findutils diffutils coreutils moreutils
 
 brew install zsh
-which zsh |sudo tee -a /etc/shells
+echo /opt/homebrew/bin/zsh |sudo tee -a /etc/shells
 # dotfilesをインストール
 # ターミナルを開き直す
 
