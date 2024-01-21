@@ -74,8 +74,9 @@ echo /opt/homebrew/bin/zsh |sudo tee -a /etc/shells
 # dotfilesをインストール
 # ターミナルを開き直す
 
-brew install hammerspoon yabai
+brew install hammerspoon
 # Install yabai. See official wiki.
+# https://github.com/koekeishiya/yabai/wiki
 
 brew install \
 	autossh \
