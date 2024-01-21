@@ -87,6 +87,7 @@ brew install \
 	ctags \
 	ctemplate \
 	entr \
+	flock \
 	go \
 	graphviz \
 	htop \
@@ -94,14 +95,17 @@ brew install \
 	jq \
 	llvm \
 	lnav \
+	mosh \
 	mycli \
 	mysql \
 	nkf \
 	nmap \
+	pipx \
 	pwgen \
 	python-tabulate \
 	ranger \
 	rename \
+	ripgrep \
 	rsync \
 	the_silver_searcher \
 	tig \
