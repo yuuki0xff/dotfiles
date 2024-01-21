@@ -52,6 +52,7 @@ rsync -a ~/.dotfiles/user-config/ ~/.config/
 #   Audio bell: off
 #   Visual bell: always
 #   シェルの終了時: 正常終了した場合は閉じる
+#   再開→ウィンドウを再度開くときにテキストを復元: off
 #
 # Finder設定:
 #   全部チェック入れる
