@@ -125,6 +125,7 @@ brew install \
 	google-cloud-sdk \
 	jetbrains-toolbox \
 	libreoffice \
+	microsoft-remote-desktop \
 	mysqlworkbench \
 	wireshark \
 	zoom
