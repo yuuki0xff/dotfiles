@@ -60,7 +60,7 @@ rsync -a ~/.dotfiles/user-config/ ~/.config/
 brew install slack firefox
 # googleとslackにログイン
 
-ssh-keygen
+ssh-keygen -t ed25519
 # gitlab/githubに公開鍵を登録
 
 brew tap jakehilborn/jakehilborn && brew install displayplacer
