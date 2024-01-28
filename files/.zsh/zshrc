@@ -12,4 +12,5 @@ done
 
 [ -f ~/.zshrc_secret ] && source ~/.zshrc_secret
 
+alias make="make -j$(nproc)"
 # vim: ft=zsh
