@@ -13,6 +13,8 @@
 #       Regard MAKE_ARGS as shell commands.
 #   --force-clean
 #       Remove all untracked files with git.
+#   --no-clean
+#       Skip git clean.
 #   --help
 #       Show this message.
 #
