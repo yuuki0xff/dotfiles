@@ -32,12 +32,6 @@ alias unsafe_ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=n
 alias unsafe_scp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias unsafe_rsync='rsync --rsh "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"'
 
-if [[ "$(uname -s)" = "Darwin" ]]; then
-	alias clion="open -a 'CLion'"
-	alias pycharm="open -a 'PyCharm'"
-	alias idea="open -a 'IntelliJ IDEA'"
-fi
-
 # Popular user-agents.
 alias -g @@chrome_pc='"User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"'
 alias -g @@chrome_android='"User-Agent: Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Mobile Safari/537.36"'
