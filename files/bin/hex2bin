@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+import sys
+
+def hex2bin(inp, out):
+	def to_bin():
+		for s in inp:
+			yield bytes.fromhex(s)
+
+	out.writelines(to_bin())
+
+hex2bin(sys.stdin, sys.stdout.buffer)

@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+import sys
+import json
+
+all_keys = set()
+all_data = []
+for line in sys.stdin:
+	data = json.loads(line)
+	all_keys.add(data.keys())
+	all_data.append(data)
+
+sorted_keys = sorted(all_keys())
+for data in all_data:
+	line = '\t'.join(str(data.get(key, '')) for key in sorted_keys)
+	sys.stdout.write(line)
+	sys.stdout.write('\n')
