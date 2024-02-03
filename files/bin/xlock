@@ -1,9 +1,14 @@
 #!/bin/bash
 set -eu
 
+list_mouse_device_ids() {
+    xinput list |
+        grep 'pointer' |grep -v 'Virtual' |
+        sed 's@.*[ \t]id=\([0-9]\+\)[ \t].*@\1@'
+}
+
 mouse() {
-    ids=$( xinput list|grep 'pointer'|grep -v 'Virtual'|sed 's@.*[ \t]id=\([0-9]\+\)[ \t].*@\1@' )
-    for id in $ids; do
+    for id in "${target_ids[@]}"; do
         case "$1" in
             disable)
                 xinput --disable $id
@@ -24,6 +29,7 @@ revert() {
     mouse enable
 }
 
+mapfile target_ids < <(list_mouse_device_ids)
 trap revert HUP INT TERM
 mouse disable
 sleep 1
