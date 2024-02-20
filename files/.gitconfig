@@ -44,6 +44,7 @@
 	repack = 0
 [pretty]
 	oneline-short = %C(yellow)%h%C(cyan)%d%C(reset) %s %C(green)- %an, %cr%C(reset)
+	fixes = Fixes: %h (\"%s\")
 [alias]
 	alias = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | sort
 
