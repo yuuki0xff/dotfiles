@@ -28,6 +28,7 @@ chsh -s $(which zsh)
 sudo apt install python3-pip
 pipx install ~/.i3/helper  # or pipx upgrade-all
 make -C ~/.i3 build
+i3-msg reload
 
 # For linux.
 rsync -a ~/.dotfiles/user-config/ ~/.config/
