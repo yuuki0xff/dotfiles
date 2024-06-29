@@ -16,13 +16,11 @@ Configuration files and utilities for my development PC.
 
 ## Installation
 ```bash
-git clone https://github.com/yuuki0xff/dotfiles ~/repo/github.com/yuuki0xff/dotfiles
-cd ~/repo/github.com/yuuki0xff/dotfiles
-git worktree add ~/.dotfiles.$(date -Idate) origin/master -b work-$(date -Idate)
-ln -s ~/.dotfiles.$(date -Idate) ~/.dotfiles
-cd ~/.dotfiles
+git clone https://github.com/yuuki0xff/dotfiles ~/.dotfiles.$REVISION
+cd ~/.dotfiles.$REVISION
 make checkout-submodules
 make install
+ln -snf ~/.dotfiles.$REVISION ~/.dotfiles
 chsh -s $(which zsh)
 
 
