@@ -30,10 +30,10 @@ install:
 	rm -f $(ABS_OLD_LINKS)
 	install -d $(PREFIX)
 	./tools/install-links install-targets/$(OS).txt $(DOT_FILES_DIR) $(PREFIX)/
-ifeq ($(KERNEL),Linux)
+ifeq ($(OS),linux)
 	PREFIX=./files/ ./tools/generate-firefox-helper
 endif
-ifeq ($(KERNEL),Darwin)
+ifeq ($(OS),mac)
 	# TODO: macでは複数のプロファイルを使用していないため、firefox helperは使わない。。
 endif
 
