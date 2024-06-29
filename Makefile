@@ -3,11 +3,12 @@ SHELL = bash
 PREFIX ?= $(HOME)
 # Expected value: Linux or Darwin
 KERNEL ?= $(shell uname)
+# Expected value: linux or mac
 ifeq ($(KERNEL),Linux)
-	OS = linux
+	OS ?= linux
 endif
 ifeq ($(KERNEL),Darwin)
-	OS = mac
+	OS ?= mac
 endif
 DOT_FILES_DIR ?= ~/.dotfiles
 
