@@ -26,7 +26,8 @@ chsh -s $(which zsh)
 
 # For linux desktop.
 sudo apt install python3-pip
-pipx install ~/.i3/helper  # or pipx upgrade-all
+pipx uninstall i3-wm-config || :  # This process may fail. Ignore it.
+pipx install ~/.i3/helper
 make -C ~/.i3 build
 i3-msg reload
 
