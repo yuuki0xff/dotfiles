@@ -13,26 +13,14 @@ Configuration files and utilities for my development PC.
 	- ctags
 	- gawk
 	- i3
+	- pip
+	- pipx
 
 ## Installation
 ```bash
 git clone https://github.com/yuuki0xff/dotfiles ~/.dotfiles.$REVISION
-cd ~/.dotfiles.$REVISION
-make checkout-submodules
-make install
-ln -snf ~/.dotfiles.$REVISION ~/.dotfiles
+make -C ~/.dotfiles.$REVISION install
 chsh -s $(which zsh)
-
-
-# For linux desktop.
-sudo apt install python3-pip
-pipx uninstall i3-wm-config || :  # This process may fail. Ignore it.
-pipx install ~/.i3/helper
-make -C ~/.i3 build
-i3-msg reload
-
-# For linux.
-rsync -a ~/.dotfiles/user-config/ ~/.config/
 ```
 
 ## Setup Mac

@@ -11,6 +11,14 @@ ifeq ($(KERNEL),Darwin)
 	OS ?= mac
 endif
 DOT_FILES_DIR ?= ~/.dotfiles
+# Expected value: non-zero or zero
+ifeq ($(OS),linux)
+ifneq ($(DISPLAY),)
+	# Detected the linux desktop environment.
+	LINUX_DESKTOP ?= 1
+endif
+endif
+LINUX_DESKTOP ?= 0
 
 # BIN_TMPLS := $(wildcard files/bin/*.tmpl)
 # BIN_FILES := $(filter-out $(BIN_TMPLS),$(wildcard files/bin/*))
@@ -27,6 +35,7 @@ format:
 	diff -u install-targets/all.txt <(sort -u install-targets/linux.txt install-targets/mac.txt)
 
 install:
+	$(MAKE) checkout-submodules
 	rm -f $(ABS_OLD_LINKS)
 	install -d $(PREFIX)
 	./tools/install-links install-targets/$(OS).txt $(DOT_FILES_DIR) $(PREFIX)/
@@ -36,6 +45,29 @@ endif
 ifeq ($(OS),mac)
 	# TODO: macでは複数のプロファイルを使用していないため、firefox helperは使わない。。
 endif
+ifneq ($(LINUX_DESKTOP),0)
+	# For linux desktop.
+	pipx uninstall i3-wm-config || :  # This process may fail. Ignore it.
+	pipx install files/.i3/helper/
+	make -C files/.i3/ build
+endif
+ifeq ($(OS),linux)
+	# For linux.
+	rsync -a ~/.dotfiles/user-config/ ~/.config/
+endif
+	# Replace the ~/.dotfiles symlink.
+	ls -lhd ~/.dotfiles || :
+	ln -snf $(shell pwd) ~/.dotfiles
+ifneq ($(LINUX_DESKTOP),0)
+	# Reload desktop environment.
+	i3-msg reload
+endif
+	# Installation completed. You should restart the terminal or the desktop environment.
+	#
+	# If you want to rollback, please execute the following command.
+	#
+	#   cd ~/.dotfiles.$OLD_REVISION
+	#   make install
 
 test:
 ifeq ($(KERNEL),Linux)
