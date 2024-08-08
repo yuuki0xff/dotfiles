@@ -5,6 +5,7 @@ Configuration files and utilities for my development PC.
 * Required:
 	- vim
 	- zsh
+	- rsync
 	- tmux
 	- xclip
 	- xinput
