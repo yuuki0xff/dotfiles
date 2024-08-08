@@ -76,13 +76,13 @@ function git-autoclone(){
 
 	()(
 		_nohook=1
-		cd ~/repo
+		cd ~/repo || return $?
 		if [[ -d "$repopath" && -e "$repopath/.git" ]]; then
-			cd "$repopath"
+			cd "$repopath" || return $?
 			git fetch -a
 		else
-			mkdir -p "$repopath"
-			cd "$repopath"
+			mkdir -p "$repopath" || return $?
+			cd "$repopath" || return $?
 			git clone "${args[@]}" .
 		fi
 	) && cd ~/repo/"$repopath"
