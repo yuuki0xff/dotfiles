@@ -11,7 +11,7 @@ Configuration files and utilities for my development PC.
 	- xinput
 	- x11-xserver-utils
 	- tig
-	- ctags
+	- ctags (universal-ctags)
 	- gawk
 	- i3
 	- pip
