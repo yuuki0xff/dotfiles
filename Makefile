@@ -66,7 +66,7 @@ endif
 	#
 	# If you want to rollback, please execute the following command.
 	#
-	#   cd ~/.dotfiles.$OLD_REVISION
+	#   cd ~/.dotfiles.$$OLD_REVISION
 	#   make install
 
 test:
