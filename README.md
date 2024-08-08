@@ -19,9 +19,15 @@ Configuration files and utilities for my development PC.
 
 ## Installation
 ```bash
-git clone https://github.com/yuuki0xff/dotfiles ~/.dotfiles.$REVISION
-make -C ~/.dotfiles.$REVISION install
+(
+set -v &&
+REVISION=$(date -Isec) &&
+git clone https://github.com/yuuki0xff/dotfiles ~/.dotfiles.$REVISION \
+	--recurse-submodules --shallow-submodules --jobs 16 &&
+ln -snf ~/.dotfiles.$REVISION ~/.dotfiles &&
+make -C ~/.dotfiles install &&
 chsh -s $(which zsh)
+)
 ```
 
 ## Setup Mac
