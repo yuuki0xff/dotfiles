@@ -52,7 +52,6 @@ export DOCKER_BUILDKIT=1
 		~/work
 		~/repo
 		~/archive
-		~/Dropbox
 		"${cdpath[@]}"
 		)
 	modepath=(
