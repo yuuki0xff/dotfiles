@@ -38,6 +38,7 @@ export DOCKER_BUILDKIT=1
 		~/.local/lib/node_modules/.bin
 		~/.gem/ruby/*.*/bin
 		~/.cargo/bin
+		~/.krew/bin
 		"$GOBIN"
 		"${mac_path[@]}"
 		"${path[@]}"
