@@ -26,6 +26,15 @@ bash install-dotfiles.sh
 # Restart terminal.
 ```
 
+## Setup Debian and Ubuntu
+
+```bash
+sudo apt update
+sudo apt satisfy 'vim, zsh, tmux, tig, exuberant-ctags, gawk, python3-pip'
+# dotfilesをインストール
+# ターミナルを開き直す
+```
+
 ## Setup Mac
 ```bash
 # OS設定:
