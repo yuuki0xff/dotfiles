@@ -41,7 +41,7 @@ attach_tmux(){
 							exit
 						fi
 						;;
-					*)
+					[0-9]*)
 						#アタッチ
 						[ -z "$no_message" ] && echo "Attach to \"$sname\"."
 						if tmux a -t "$sname"; then
@@ -53,6 +53,16 @@ attach_tmux(){
 							echo
 							attach_tmux
 						fi
+						;;
+					*)
+						# macOSにて、外部アプリからTerminal.appで任意コマンドを実行する際の問題を回避するための処置。
+						# Terminal.appはcommand line optionから実行するコマンドを指定できないらしい。interactive shellを立ち上げて
+						# から実行したいshell commandをstdin経由でshellに入力する。Tmux Session Chooserは意図せずそれを受け取って
+						# しまう。誤って受け取ってしまったコマンドをevalで実行しておく。
+						#
+						# NOTE: 複数行に渡るコマンドは正しく処理できない。
+						eval "$sname"
+						exit $?
 						;;
 				esac
 			fi
