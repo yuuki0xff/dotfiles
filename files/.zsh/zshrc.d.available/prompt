@@ -18,7 +18,7 @@ __prompt_time()(
 		esac
 	fi
 	echo -n "[ "
-	date "+%02m/%02d %02H:%02M:%02S" |tr -d "\n\r"
+	date -Isec |tr -d "\n\r"
 	echo -n " ]"
 	[ 2 -le $h -a $h -le 6 ] && echo -n '%k' || :
 )
@@ -66,9 +66,9 @@ __prompt_mode(){
 	fi
 }
 
-PROMPT='%n%F{cyan}@%f%B%M%b%F{cyan}:%f%~$(__prompt_zgit)$(__prompt_openstack)$(__prompt_app)
+PROMPT='%n%F{cyan}@%f%B%M%b%F{cyan}:%f%~$(__prompt_zgit)$(__prompt_openstack)$(__prompt_app) $(__prompt_time)
 $(__prompt_mode)%B%(?,,%K{red})%# %(?,,%k)%b'
-RPROMPT='  $(__prompt_time)'
+unset RPROMPT
 SPROMPT="Correct: %B%R %F{red}-%f%F{yellow}-%f%F{green}->%f %r%b (y/N) "
 PROMPT2="%_ %(!,#,)> "
 
