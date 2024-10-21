@@ -19,15 +19,11 @@ Configuration files and utilities for my development PC.
 
 ## Installation
 ```bash
-(
-set -v &&
-REVISION=$(date -Isec) &&
-git clone https://github.com/yuuki0xff/dotfiles ~/.dotfiles.$REVISION \
-	--recurse-submodules --shallow-submodules --jobs 16 &&
-ln -snf ~/.dotfiles.$REVISION ~/.dotfiles &&
-make -C ~/.dotfiles install &&
-chsh -s $(which zsh)
-)
+# export REVISION=master
+# export REPOSITORY=...  # If you want to use your own repository.
+bash install-dotfiles.sh
+
+# Restart terminal.
 ```
 
 ## Setup Mac
