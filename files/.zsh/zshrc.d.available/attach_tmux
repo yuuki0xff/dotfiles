@@ -22,6 +22,14 @@ attach_tmux(){
 			[ -z "$no_message" ] && echo "ERROR: Terminal type ($TERM) is not supported."
 			return
 	esac
+	if [ "$TERMINAL_EMULATOR" = "JetBrains-JediTerm" ]; then
+		# JetBrains IDEのterminal emulator
+		return
+	fi
+	if [ "$TERM_PROGRAM" = "vscode" ]; then
+		# Visual Studio Codeのterminal emulator
+		return
+	fi
 
 	# tmuxのセッション数を確認
 	local slist=$(tmux ls 2>/dev/null)
