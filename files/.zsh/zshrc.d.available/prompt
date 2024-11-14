@@ -1,9 +1,28 @@
+# Initialize global variables
+if [ -z "$MOSH_SESSION" ]; then
+	local parent_process
+	parent_process=$(ps -o comm= -p $(ps -o ppid= -p "$$"))
+
+	export MOSH_SESSION=0
+	if [ "$parent_process" = "mosh" ]; then
+		export MOSH_SESSION=1
+	fi
+fi
 
 __prompt_app(){
 	local APP
 	APP=()
-	[ -n "$SSH_CONNECTION" ] && APP+=("SSH")
-	[ -n "$VIMRUNTIME" ] && APP+=("VIM")
+
+	if (( MOSH_SESSION )); then
+		APP+=("MOSH")
+	fi
+	if [ -n "$SSH_CONNECTION" ] && (( $MOSH_SESSION == 0 )); then
+		APP+=("SSH")
+	fi
+	if [ -n "$VIMRUNTIME" ]; then
+		APP+=("VIM")
+	fi
+
 	if [ "$APP" ]; then
 		echo " %B%F{yellow}[$APP]%f%b"
 	fi
