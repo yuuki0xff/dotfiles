@@ -45,13 +45,13 @@ __prompt_zgit()(
 		msg=''
 		case "$(git status|sed -ne '3{/  (use "git/p}')" in
 			'  (use "git push" to '*)
-				msg="%K{022}push%k"
+				msg=" %K{022}push%k"
 				;;
 			'  (use "git pull" to '*)
-				msg="%K{022}pull%k"
+				msg=" %K{022}pull%k"
 				;;
 		esac
-		echo " git:%B${branch_color_s}${branch}${branch_color_e}%b ${msg}"
+		echo " git:%B${branch_color_s}${branch}${branch_color_e}%b${msg}"
 	fi
 )
 __prompt_openstack(){
