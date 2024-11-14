@@ -1,73 +1,82 @@
 
 attach_tmux(){
 	[ $# -gt 0 ] && no_message=1
-	if which tmux >/dev/null 2>&1; then
-		# tmuxを使用するか未指定だったときのデフォルト値
-		if [ -z "$isUseTmux" ]; then
-			case "$TERM";in
-				linux*|vt100*|xterm*|rxvt*)
-					isUseTmux=1
-					;;
-			esac
-		fi
 
-		if [ -z "$TMUX" -a "${isUseTmux:-0}" != 0 ];then
-			# tmuxのセッション数を確認
-			local slist=$(tmux ls 2>/dev/null)
-			local slistcount=$(tmux ls 2>/dev/null |wc -l)
-
-			if [ "$slistcount" -eq 0 ]; then
-				tmux
-			else
-				#セッションがあるとき
-				echo '================================'
-				echo '     Tmux Session Chooser'
-				echo '================================'
-				echo "$slist"
-				echo '-: Do nothing.'
-				echo '(empty): Create new session.'
-				echo
-				echo -n 'session name : '
-				read sname && case "$sname" in
-					"-")
-						#何もしない
-						[ -z "$no_message" ] && echo "Do nothing."
-						;;
-					"")
-						#新規
-						[ -z "$no_message" ] && echo "Create new session."
-						if tmux; then
-							# セッションが正常終了したため、zshも止める。
-							exit
-						fi
-						;;
-					[0-9]*)
-						#アタッチ
-						[ -z "$no_message" ] && echo "Attach to \"$sname\"."
-						if tmux a -t "$sname"; then
-							# セッションが正常終了したため、zshも止める。
-							exit
-						else
-							# アタッチに失敗した。
-							# もう一度選択画面を表示する。
-							echo
-							attach_tmux
-						fi
-						;;
-					*)
-						# macOSにて、外部アプリからTerminal.appで任意コマンドを実行する際の問題を回避するための処置。
-						# Terminal.appはcommand line optionから実行するコマンドを指定できないらしい。interactive shellを立ち上げて
-						# から実行したいshell commandをstdin経由でshellに入力する。Tmux Session Chooserは意図せずそれを受け取って
-						# しまう。誤って受け取ってしまったコマンドをevalで実行しておく。
-						#
-						# NOTE: 複数行に渡るコマンドは正しく処理できない。
-						eval "$sname"
-						exit $?
-						;;
-				esac
-			fi
-		fi
+	if ! which tmux >/dev/null 2>&1; then
+		[ -z "$no_message" ] && echo "ERROR: tmux is not installed."
+		return
 	fi
+
+	# tmuxを使用するか未指定だったときのデフォルト値
+	if [ -z "$isUseTmux" ]; then
+		case "$TERM";in
+			linux*|vt100*|xterm*|rxvt*)
+				isUseTmux=1
+				;;
+		esac
+	fi
+
+	if ! [ -z "$TMUX" -a "${isUseTmux:-0}" != 0 ]; then
+		# tmuxを利用しないパターンに該当。
+		return
+	fi
+
+	# tmuxのセッション数を確認
+	local slist=$(tmux ls 2>/dev/null)
+	local slistcount=$(tmux ls 2>/dev/null |wc -l)
+
+	if [ "$slistcount" -eq 0 ]; then
+		# セッションが無いときは新規セッションを作成
+		tmux
+		return
+	fi
+
+	#セッションがあるとき
+	echo '================================'
+	echo '     Tmux Session Chooser'
+	echo '================================'
+	echo "$slist"
+	echo '-: Do nothing.'
+	echo '(empty): Create new session.'
+	echo
+	echo -n 'session name : '
+	read sname && case "$sname" in
+		"-")
+			#何もしない
+			[ -z "$no_message" ] && echo "Do nothing."
+			;;
+		"")
+			#新規
+			[ -z "$no_message" ] && echo "Create new session."
+			if tmux; then
+				# セッションが正常終了したため、zshも止める。
+				exit
+			fi
+			;;
+		[0-9]*)
+			#アタッチ
+			[ -z "$no_message" ] && echo "Attach to \"$sname\"."
+			if tmux a -t "$sname"; then
+				# セッションが正常終了したため、zshも止める。
+				exit
+			else
+				# アタッチに失敗した。
+				# もう一度選択画面を表示する。
+				echo
+				attach_tmux
+			fi
+			;;
+		*)
+			# macOSにて、外部アプリからTerminal.appで任意コマンドを実行する際の問題を回避するための処置。
+			# Terminal.appはcommand line optionから実行するコマンドを指定できないらしい。interactive shellを立ち上げて
+			# から実行したいshell commandをstdin経由でshellに入力する。Tmux Session Chooserは意図せずそれを受け取って
+			# しまう。誤って受け取ってしまったコマンドをevalで実行しておく。
+			#
+			# NOTE: 複数行に渡るコマンドは正しく処理できない。
+			eval "$sname"
+			exit $?
+			;;
+	esac
 }
 
 # vim: ft=zsh
