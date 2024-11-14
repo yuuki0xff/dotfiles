@@ -4,7 +4,7 @@ if [ -z "$MOSH_SESSION" ]; then
 	parent_process=$(ps -o comm= -p $(ps -o ppid= -p "$$"))
 
 	export MOSH_SESSION=0
-	if [ "$parent_process" = "mosh" ]; then
+	if [ "$parent_process" = "mosh-server" ]; then
 		export MOSH_SESSION=1
 	fi
 fi
