@@ -95,19 +95,21 @@ function git-nw() {
 	fi
 	git fetch || return 1
 	local branch_name=$1
-	local commit=${2:-origin/master}
+	local commit_ish=${2:-origin/master}
+	local commit_hash
+	commit_hash=$(git rev-parse "$commit_ish") || return 1
 	local project_name
 	project_name=$(git remote get-url origin |sed 's@.*/@@; s/\.git$//') || return 1
 	local dir_path
 	dir_path="$HOME/work/${project_name}-$(sed 's@.*/@@' <<<"$branch_name")" || return 1
-	git worktree add -b "$branch_name" "$dir_path" "$commit" || return 1
+	git worktree add -b "$branch_name" "$dir_path" "$commit_hash" || return 1
 	echo
 	echo '################################'
 	echo
-	echo "Created new worktree based on $commit"
+	echo "Created new worktree based on $commit_ish"
 	echo
 	echo 'Latest commit:'
-	git show --color "$commit" |cat
+	git show --color "$commit_ish" |cat
 	echo
 	echo '################################'
 	echo
