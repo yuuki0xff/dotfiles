@@ -8,11 +8,11 @@ attach_tmux(){
 	fi
 
 	# tmuxを利用しないケースに該当するか確認
-	if [ -z "$TMUX" ]; then
+	if [ -n "$TMUX" ]; then
 		# tmux上でzshが起動された
 		return
 	fi
-	if (( ${isUseTmux:-0} == 0)); then
+	if (( ${isUseTmux:-1} == 0)); then
 		return
 	fi
 	case "$TERM";in
