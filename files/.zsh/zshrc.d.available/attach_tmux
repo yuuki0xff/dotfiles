@@ -7,19 +7,21 @@ attach_tmux(){
 		return
 	fi
 
-	# tmuxを使用するか未指定だったときのデフォルト値
-	if [ -z "$isUseTmux" ]; then
-		case "$TERM";in
-			linux*|vt100*|xterm*|rxvt*)
-				isUseTmux=1
-				;;
-		esac
-	fi
-
-	if ! [ -z "$TMUX" -a "${isUseTmux:-0}" != 0 ]; then
-		# tmuxを利用しないパターンに該当。
+	# tmuxを利用しないケースに該当するか確認
+	if [ -z "$TMUX" ]; then
+		# tmux上でzshが起動された
 		return
 	fi
+	if (( ${isUseTmux:-0} == 0)); then
+		return
+	fi
+	case "$TERM";in
+		linux*|vt100*|xterm*|rxvt*)
+			;;
+		*)
+			[ -z "$no_message" ] && echo "ERROR: Terminal type ($TERM) is not supported."
+			return
+	esac
 
 	# tmuxのセッション数を確認
 	local slist=$(tmux ls 2>/dev/null)
