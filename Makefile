@@ -1,8 +1,13 @@
 SHELL = bash
 
 PREFIX ?= $(HOME)
+DOT_FILES_DIR ?= ~/.dotfiles
+
+# Variable: KERNEL
 # Expected value: Linux or Darwin
 KERNEL ?= $(shell uname)
+
+# Variable: OS
 # Expected value: linux or mac
 ifeq ($(KERNEL),Linux)
 	OS ?= linux
@@ -10,7 +15,8 @@ endif
 ifeq ($(KERNEL),Darwin)
 	OS ?= mac
 endif
-DOT_FILES_DIR ?= ~/.dotfiles
+
+# Variable: LINUX_DESKTOP
 # Expected value: non-zero or zero
 ifeq ($(OS),linux)
 ifneq ($(DISPLAY),)
