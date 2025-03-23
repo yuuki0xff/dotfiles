@@ -79,6 +79,20 @@ endif
 
 .PHONY: test
 test:
+	$(info ===== Variables =====)
+	$(info SHELL=$(SHELL))
+	$(info PREFIX=$(PREFIX))
+	$(info DOT_FILES_DIR=$(DOT_FILES_DIR))
+	$(info KERNEL=$(KERNEL))
+	$(info OS=$(OS))
+	$(info DISPLAY=$(DISPLAY))
+	$(info LINUX_DESKTOP=$(LINUX_DESKTOP))
+	$(info ROOT_FILES=$(ROOT_FILES))
+	$(info ABS_ROOT_FILES=$(ABS_ROOT_FILES))
+	$(info OLD_LINKS=$(OLD_LINKS))
+	$(info ABS_OLD_LINKS=$(ABS_OLD_LINKS))
+	$(info =====================)
+
 ifeq ($(KERNEL),Linux)
 	if update-alternatives --get-selections |grep -q '^x-terminal-emulator '; then \
 		update-alternatives --get-selections |grep '^x-terminal-emulator ' |grep ' /usr/bin/xterm$$'; \
