@@ -16,15 +16,17 @@ ifeq ($(KERNEL),Darwin)
 	OS ?= mac
 endif
 
-# Variable: LINUX_DESKTOP
+# Variable: I3_DESKTOP
 # Expected value: non-zero or zero
 ifeq ($(OS),linux)
 ifneq ($(DISPLAY),)
+ifneq ($(shell which i3),)
 	# Detected the linux desktop environment.
-	LINUX_DESKTOP ?= 1
+	I3_DESKTOP ?= 1
 endif
 endif
-LINUX_DESKTOP ?= 0
+endif
+I3_DESKTOP ?= 0
 
 # BIN_TMPLS := $(wildcard files/bin/*.tmpl)
 # BIN_FILES := $(filter-out $(BIN_TMPLS),$(wildcard files/bin/*))
@@ -53,8 +55,8 @@ endif
 ifeq ($(OS),mac)
 	# TODO: macでは複数のプロファイルを使用していないため、firefox helperは使わない。。
 endif
-ifneq ($(LINUX_DESKTOP),0)
-	# For linux desktop.
+ifneq ($(I3_DESKTOP),0)
+	# For linux i3 desktop environment.
 	pipx uninstall i3-wm-config || :  # This process may fail. Ignore it.
 	pipx install files/.i3/helper/
 	make -C files/.i3/ build
@@ -66,8 +68,8 @@ endif
 	# Replace the ~/.dotfiles symlink.
 	ls -lhd ~/.dotfiles || :
 	ln -snf $(shell pwd) ~/.dotfiles
-ifneq ($(LINUX_DESKTOP),0)
-	# Reload desktop environment.
+ifneq ($(I3_DESKTOP),0)
+	# Reload i3 desktop environment.
 	i3-msg reload
 endif
 	# Installation completed. You should restart the terminal or the desktop environment.
@@ -86,7 +88,7 @@ test:
 	$(info KERNEL=$(KERNEL))
 	$(info OS=$(OS))
 	$(info DISPLAY=$(DISPLAY))
-	$(info LINUX_DESKTOP=$(LINUX_DESKTOP))
+	$(info I3_DESKTOP=$(I3_DESKTOP))
 	$(info ROOT_FILES=$(ROOT_FILES))
 	$(info ABS_ROOT_FILES=$(ABS_ROOT_FILES))
 	$(info OLD_LINKS=$(OLD_LINKS))
