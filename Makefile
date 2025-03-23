@@ -33,6 +33,7 @@ ABS_ROOT_FILES := $(foreach i,$(ROOT_FILES),$(DOT_FILES_DIR)/$(i))
 OLD_LINKS := .vimperatorrc
 ABS_OLD_LINKS := $(foreach i,$(OLD_LINKS),$(PREFIX)/$(i))
 
+.PHONY: format
 format:
 	echo files/.* files/* |xargs -n1 |grep -ve '/\.$$' -e '/\.\.$$' >install-targets/all.txt
 	./tools/format-file-list install-targets/all.txt
@@ -40,6 +41,7 @@ format:
 	./tools/format-file-list install-targets/mac.txt
 	diff -u install-targets/all.txt <(sort -u install-targets/linux.txt install-targets/mac.txt)
 
+.PHONY: install
 install:
 	$(MAKE) checkout-submodules
 	rm -f $(ABS_OLD_LINKS)
@@ -75,6 +77,7 @@ endif
 	#   cd ~/.dotfiles.$$OLD_REVISION
 	#   make install
 
+.PHONY: test
 test:
 ifeq ($(KERNEL),Linux)
 	if update-alternatives --get-selections |grep -q '^x-terminal-emulator '; then \
@@ -89,10 +92,12 @@ ifeq ($(KERNEL),Linux)
 	update-alternatives --get-selections |grep '^awk ' |grep ' /usr/bin/gawk$$'
 endif
 
+.PHONY: checkout-submodules
 checkout-submodules:
 	git submodule init
 	git submodule update --recursive --checkout --jobs 16
 
+.PHONY: update-submodules
 update-submodules:
 	git submodule init
 	git submodule update --recursive --remote --checkout --jobs 16
