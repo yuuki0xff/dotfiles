@@ -1,21 +1,10 @@
 # dotfiles
 Configuration files and utilities for my development PC.
 
-* OS: debian sid, or ubuntu (latest release)
-* Required:
-	- vim
-	- zsh
-	- rsync
-	- tmux
-	- xclip
-	- xinput
-	- x11-xserver-utils
-	- tig
-	- ctags (universal-ctags)
-	- gawk
-	- i3
-	- pip
-	- pipx
+## Supported platforms
+- Debian latest release, Debian sid
+- Ubuntu latest release
+- Mac OS X
 
 ## Installation
 ```bash
@@ -30,7 +19,27 @@ bash install-dotfiles.sh
 
 ```bash
 sudo apt update
-sudo apt satisfy 'vim, zsh, tmux, tig, exuberant-ctags, gawk, python3-pip'
+sudo apt satisfy '
+  gawk,
+  make,
+  pipx,
+  python3-pip,
+  rsync,
+  tig,
+  tmux,
+  universal-ctags,
+  vim,
+  zsh,
+'
+
+# For desktop environment
+sudo apt satisfy '
+  i3,
+  x11-xserver-utils,
+  xclip,
+  xinput,
+'
+
 # dotfilesをインストール
 # ターミナルを開き直す
 ```
@@ -71,12 +80,6 @@ brew install grep gawk gzip gnu-tar gnu-sed gnu-time gnu-getopt binutils finduti
 
 brew install zsh
 echo /opt/homebrew/bin/zsh |sudo tee -a /etc/shells
-# dotfilesをインストール
-# ターミナルを開き直す
-
-brew install hammerspoon
-# Install yabai. See official wiki.
-# https://github.com/koekeishiya/yabai/wiki
 
 brew install \
 	autossh \
@@ -115,6 +118,13 @@ brew install \
 	wget \
 	yapf \
 	zstd
+	
+# dotfilesをインストール
+# ターミナルを開き直す
+
+brew install hammerspoon
+# Install yabai. See official wiki.
+# https://github.com/koekeishiya/yabai/wiki
 
 # Install casks.
 # NOTE: some casks requires manual operation.
