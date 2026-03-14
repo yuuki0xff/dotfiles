@@ -25,7 +25,7 @@ is_vnc() {
 
 # モニタの設定
 case `hostname` in
-	desktop1)
+	desktop3)
 		xrandr \
 			--output DP-2-1 --off \
 			--output DP-2 --auto --rotate left --pos 0x0 \
