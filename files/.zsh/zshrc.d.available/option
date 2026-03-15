@@ -29,6 +29,12 @@ zstyle ':completion:*:default' menu select=2
 if [ -d ~/.local/lib/google-cloud-sdk/ ]; then
 	. ~/.local/lib/google-cloud-sdk/completion.zsh.inc
 fi
+if command -v pipx &>/dev/null; then
+	eval "$(register-python-argcomplete pipx)"
+fi
+if command -v pipenv &>/dev/null; then
+	eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"
+fi
 
 setopt interactive_comments
 

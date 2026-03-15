@@ -60,12 +60,6 @@ fi
 if [ -d ~/.local/lib/google-cloud-sdk/ ]; then
 	. ~/.local/lib/google-cloud-sdk/path.zsh.inc
 fi
-if command -v pipx &>/dev/null; then
-	eval "$(register-python-argcomplete pipx)"
-fi
-if command -v pipenv &>/dev/null; then
-	eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"
-fi
 typeset -U path fpath cdpath modepath
 
 ZSHRC_D_DIR=(~/.zsh/zshrc.d)
