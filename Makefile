@@ -54,6 +54,9 @@ format:
 	./tools/format-file-list install-targets/linux.txt
 	./tools/format-file-list install-targets/mac.txt
 	diff -u install-targets/all.txt <(sort -u install-targets/linux.txt install-targets/mac.txt)
+	# Dedup key entries in ime/mozc-keymap.txt.
+	(head -n 1 ime/mozc-keymap.txt && tail -n +2 ime/mozc-keymap.txt | sort -u) > ime/mozc-keymap.txt.tmp
+	mv ime/mozc-keymap.txt.tmp ime/mozc-keymap.txt
 
 .PHONY: install
 install:

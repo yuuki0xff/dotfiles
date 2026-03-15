@@ -1,114 +1,114 @@
 status	key	command
-Conversion	Up	ConvertPrev
-Prediction	Up	ConvertPrev
-Composition	Tab	PredictAndConvert
-Conversion	Tab	PredictAndConvert
-Composition	Space	Convert
-Conversion	Space	ConvertNext
-Precomposition	Space	InsertSpace
-Conversion	Shift Tab	ConvertPrev
-Composition	Shift Space	Convert
-Conversion	Shift Space	ConvertNext
-Precomposition	Shift Space	InsertAlternateSpace
-Conversion	Shift Right	SegmentFocusRight
-Composition	Shift Muhenkan	ToggleAlphanumericMode
-Precomposition	Shift Muhenkan	ToggleAlphanumericMode
-Conversion	Shift Left	SegmentFocusLeft
-Composition	Shift Henkan	Convert
-Conversion	Shift Henkan	ConvertPrevPage
-DirectInput	Shift Henkan	Reconvert
-Precomposition	Shift Henkan	Reconvert
-Suggestion	Shift Enter	CommitFirstSuggestion
-Composition	Right	MoveCursorRight
-Conversion	Right	SegmentWidthExpand
-Composition	Muhenkan	ToggleAlphanumericMode
-DirectInput	Muhenkan	IMEOn
-Precomposition	Muhenkan	CancelAndIMEOff
-Composition	Left	MoveCursorLeft
-Conversion	Left	SegmentWidthShrink
-Composition	Kana	ToggleAlphanumericMode
-Precomposition	Kana	ToggleAlphanumericMode
-Conversion	Insert	Cancel
-Composition	Hiragana	ToggleAlphanumericMode
-Conversion	Hiragana	ToggleAlphanumericMode
-Composition	Henkan	Convert
-Conversion	Henkan	ConvertNextPage
-DirectInput	Henkan	IMEOn
-Precomposition	Henkan	CancelAndIMEOff
-Composition	Hankaku/Zenkaku	CancelAndIMEOff
-Conversion	Hankaku/Zenkaku	CancelAndIMEOff
-DirectInput	Hankaku/Zenkaku	IMEOn
-Precomposition	Hankaku/Zenkaku	CancelAndIMEOff
-Composition	F9	ConvertToFullAlphanumeric
-Conversion	F9	ConvertToFullAlphanumeric
-Composition	F8	ConvertToHalfWidth
-Conversion	F8	ConvertToHalfWidth
-Composition	F7	ConvertToFullKatakana
-Conversion	F7	ConvertToFullKatakana
-Composition	F6	ConvertToHiragana
-Conversion	F6	ConvertToHiragana
-Composition	F2	ConvertWithoutHistory
-Composition	F10	ConvertToHalfAlphanumeric
-Conversion	F10	ConvertToHalfAlphanumeric
-Precomposition	F10	ToggleAlphanumericMode
-Composition	ESC	Cancel
-Conversion	ESC	Cancel
-Composition	Enter	Commit
-Conversion	Enter	Commit
-Composition	Eisu	ToggleAlphanumericMode
-Conversion	Eisu	ToggleAlphanumericMode
-Precomposition	Eisu	ToggleAlphanumericMode
-Composition	Down	Commit
-Conversion	Down	CommitOnlyFirstSegment
-Prediction	Down	ConvertNext
-Suggestion	Down	PredictAndConvert
-Composition	Delete	Delete
-Prediction	Ctrl Up	ConvertPrev
-Composition	Ctrl u	ConvertToHiragana
-Conversion	Ctrl u	ConvertToHiragana
-Composition	Ctrl Space	Convert
-Conversion	Ctrl Space	ConvertNext
-Conversion	Ctrl Shift Right	SegmentWidthExpand
-Conversion	Ctrl Shift Left	SegmentWidthShrink
-Composition	Ctrl Right	MoveCursorToEnd
-Conversion	Ctrl Right	SegmentFocusLast
-Composition	Ctrl p	ConvertToFullAlphanumeric
-Conversion	Ctrl p	ConvertToFullAlphanumeric
-Composition	Ctrl o	ConvertToHalfWidth
-Conversion	Ctrl o	ConvertToHalfWidth
-Composition	Ctrl n	Commit
-Conversion	Ctrl n	CommitOnlyFirstSegment
-Composition	Ctrl m	Commit
-Conversion	Ctrl m	Commit
-Composition	Ctrl Left	MoveCursorToBeginning
-Conversion	Ctrl Left	SegmentFocusFirst
-Composition	Ctrl l	MoveCursorRight
-Conversion	Ctrl l	SegmentWidthExpand
-Composition	Ctrl k	MoveCursorLeft
-Conversion	Ctrl k	SegmentWidthShrink
-Composition	Ctrl i	ConvertToFullKatakana
-Conversion	Ctrl i	ConvertToFullKatakana
-Composition	Ctrl h	Backspace
-Conversion	Ctrl h	Cancel
-Composition	Ctrl g	Delete
-Precomposition	Ctrl F7	LaunchWordRegisterDialog
-Precomposition	Ctrl F12	LaunchConfigDialog
-Suggestion	Ctrl Enter	CommitFirstSuggestion
-Prediction	Ctrl Down	ConvertNext
-Suggestion	Ctrl Down	PredictAndConvert
-Prediction	Ctrl Delete	DeleteSelectedCandidate
-Precomposition	Ctrl Backspace	Undo
 Composition	Backspace	Backspace
-Conversion	Backspace	Cancel
-Precomposition	Backspace	Revert
+Composition	Ctrl Left	MoveCursorToBeginning
+Composition	Ctrl Right	MoveCursorToEnd
+Composition	Ctrl Space	Convert
+Composition	Ctrl g	Delete
+Composition	Ctrl h	Backspace
+Composition	Ctrl i	ConvertToFullKatakana
+Composition	Ctrl k	MoveCursorLeft
+Composition	Ctrl l	MoveCursorRight
+Composition	Ctrl m	Commit
+Composition	Ctrl n	Commit
+Composition	Ctrl o	ConvertToHalfWidth
+Composition	Ctrl p	ConvertToFullAlphanumeric
+Composition	Ctrl u	ConvertToHiragana
+Composition	Delete	Delete
+Composition	Down	Commit
+Composition	ESC	Cancel
+Composition	Eisu	ToggleAlphanumericMode
+Composition	Enter	Commit
+Composition	F10	ConvertToHalfAlphanumeric
+Composition	F2	ConvertWithoutHistory
+Composition	F6	ConvertToHiragana
+Composition	F7	ConvertToFullKatakana
+Composition	F8	ConvertToHalfWidth
+Composition	F9	ConvertToFullAlphanumeric
+Composition	Hankaku/Zenkaku	CancelAndIMEOff
+Composition	Henkan	Convert
+Composition	Hiragana	ToggleAlphanumericMode
+Composition	Kana	ToggleAlphanumericMode
 Composition	Kanji	CancelAndIMEOff
+Composition	Left	MoveCursorLeft
+Composition	Muhenkan	ToggleAlphanumericMode
 Composition	OFF	CancelAndIMEOff
 Composition	ON	IMEOn
+Composition	Right	MoveCursorRight
+Composition	Shift Henkan	Convert
+Composition	Shift Muhenkan	ToggleAlphanumericMode
+Composition	Shift Space	Convert
+Composition	Space	Convert
+Composition	Tab	PredictAndConvert
+Conversion	Backspace	Cancel
+Conversion	Ctrl Left	SegmentFocusFirst
+Conversion	Ctrl Right	SegmentFocusLast
+Conversion	Ctrl Shift Left	SegmentWidthShrink
+Conversion	Ctrl Shift Right	SegmentWidthExpand
+Conversion	Ctrl Space	ConvertNext
+Conversion	Ctrl h	Cancel
+Conversion	Ctrl i	ConvertToFullKatakana
+Conversion	Ctrl k	SegmentWidthShrink
+Conversion	Ctrl l	SegmentWidthExpand
+Conversion	Ctrl m	Commit
+Conversion	Ctrl n	CommitOnlyFirstSegment
+Conversion	Ctrl o	ConvertToHalfWidth
+Conversion	Ctrl p	ConvertToFullAlphanumeric
+Conversion	Ctrl u	ConvertToHiragana
+Conversion	Down	CommitOnlyFirstSegment
+Conversion	ESC	Cancel
+Conversion	Eisu	ToggleAlphanumericMode
+Conversion	Enter	Commit
+Conversion	F10	ConvertToHalfAlphanumeric
+Conversion	F6	ConvertToHiragana
+Conversion	F7	ConvertToFullKatakana
+Conversion	F8	ConvertToHalfWidth
+Conversion	F9	ConvertToFullAlphanumeric
+Conversion	Hankaku/Zenkaku	CancelAndIMEOff
+Conversion	Henkan	ConvertNextPage
+Conversion	Hiragana	ToggleAlphanumericMode
+Conversion	Insert	Cancel
 Conversion	Kanji	CancelAndIMEOff
+Conversion	Left	SegmentWidthShrink
 Conversion	OFF	CancelAndIMEOff
 Conversion	ON	IMEOn
+Conversion	Right	SegmentWidthExpand
+Conversion	Shift Henkan	ConvertPrevPage
+Conversion	Shift Left	SegmentFocusLeft
+Conversion	Shift Right	SegmentFocusRight
+Conversion	Shift Space	ConvertNext
+Conversion	Shift Tab	ConvertPrev
+Conversion	Space	ConvertNext
+Conversion	Tab	PredictAndConvert
+Conversion	Up	ConvertPrev
+DirectInput	Hankaku/Zenkaku	IMEOn
+DirectInput	Henkan	IMEOn
 DirectInput	Kanji	IMEOn
+DirectInput	Muhenkan	IMEOn
 DirectInput	ON	IMEOn
+DirectInput	Shift Henkan	Reconvert
+Precomposition	Backspace	Revert
+Precomposition	Ctrl Backspace	Undo
+Precomposition	Ctrl F12	LaunchConfigDialog
+Precomposition	Ctrl F7	LaunchWordRegisterDialog
+Precomposition	Eisu	ToggleAlphanumericMode
+Precomposition	F10	ToggleAlphanumericMode
+Precomposition	Hankaku/Zenkaku	CancelAndIMEOff
+Precomposition	Henkan	CancelAndIMEOff
+Precomposition	Kana	ToggleAlphanumericMode
 Precomposition	Kanji	CancelAndIMEOff
+Precomposition	Muhenkan	CancelAndIMEOff
 Precomposition	OFF	CancelAndIMEOff
 Precomposition	ON	IMEOn
+Precomposition	Shift Henkan	Reconvert
+Precomposition	Shift Muhenkan	ToggleAlphanumericMode
+Precomposition	Shift Space	InsertAlternateSpace
+Precomposition	Space	InsertSpace
+Prediction	Ctrl Delete	DeleteSelectedCandidate
+Prediction	Ctrl Down	ConvertNext
+Prediction	Ctrl Up	ConvertPrev
+Prediction	Down	ConvertNext
+Prediction	Up	ConvertPrev
+Suggestion	Ctrl Down	PredictAndConvert
+Suggestion	Ctrl Enter	CommitFirstSuggestion
+Suggestion	Down	PredictAndConvert
+Suggestion	Shift Enter	CommitFirstSuggestion
