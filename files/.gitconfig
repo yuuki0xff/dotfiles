@@ -58,8 +58,8 @@
 	today = log --oneline --since='12 hour ago'
 
 	# push関連
-	p = !echo DRY_RUN && set -x && git push origin --dry-run && git push origin --tags --dry-run
-	pp = !set -x && git push origin && git push origin --tags
+	p = !echo DRY_RUN && set -x && git push origin : --tags --dry-run
+	pp = !               set -x && git push origin : --tags
 
 	# commit関連
 	a = add
