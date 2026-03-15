@@ -65,7 +65,7 @@ ifeq ($(OS),linux)
 	PREFIX=./files/ ./tools/generate-firefox-helper
 endif
 ifeq ($(OS),mac)
-	# TODO: macでは複数のプロファイルを使用していないため、firefox helperは使わない。。
+	# NOTE: macでは複数のプロファイルを使用していないため、firefox helperは使わない。
 endif
 ifneq ($(I3_DESKTOP)$(SWAY_DESKTOP),00)
 	# For linux i3 desktop environment.
