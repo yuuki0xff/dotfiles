@@ -1,9 +1,8 @@
 
 # vim:filetype=sh
 
-export GTK_IM_MODULE='fcitx'
-export QT_IM_MODULE='fcitx'
-export XMODIFIERS='@im=fcitx'
-
-fcitx -rd
-
+# Setting *_IM_MODULE environment variables is no longer necessary in recent Linux distributions.
+# https://discuss.kde.org/t/kde-plasma-wayland/9014
+#
+# For better organization and maintainability, environment variables should be configured
+# in ~/.config/environment.d/. This file is no longer used.
