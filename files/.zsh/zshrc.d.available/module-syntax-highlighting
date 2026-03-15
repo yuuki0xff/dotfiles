@@ -1,7 +1,7 @@
+. ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+
 # Override comment color to light blue.
 #
 # https://github.com/zsh-users/zsh-syntax-highlighting/issues/510
 # https://github.com/zsh-users/zsh-syntax-highlighting/issues/956
 ZSH_HIGHLIGHT_STYLES[comment]=fg=81
-
-. ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
