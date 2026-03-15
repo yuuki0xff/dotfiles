@@ -15,9 +15,6 @@ if [ -d ~/.local/lib/go ]; then
 	export GOROOT=~/.local/lib/go
 fi
 
-# Enable docker build-kit
-export DOCKER_BUILDKIT=1
-
 (){
 	setopt localoptions nullglob
 
