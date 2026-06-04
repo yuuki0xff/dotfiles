@@ -39,6 +39,7 @@ __pycache__
 .venv/
 
 .idea/
+.junie/memory/
 .vscode/
 .mypy_cache/
 
