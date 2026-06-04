@@ -18,6 +18,8 @@ case "$SHELL" in
     */zsh)
         ;;
     *)
-        chsh -s "$(which zsh)"
+        # If this user has not password, `chsh -s ...` will be fail.
+        # Fallback to `sudo chsh -s ...` if it is failed.
+        chsh -s "$(which zsh)" || sudo chsh -s "$(which zsh)"
         ;;
 esac
