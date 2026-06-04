@@ -26,6 +26,10 @@ attach_tmux(){
 		# JetBrains IDEのterminal emulator
 		return
 	fi
+	if [ "$TERM_PROGRAM" = "Jetbrains.Fleet" ]; then
+		# JetBrains Fleet/JetBrains Airのterminal emulator
+		return
+	fi
 	if [ "$TERM_PROGRAM" = "vscode" ]; then
 		# Visual Studio Codeのterminal emulator
 		return
