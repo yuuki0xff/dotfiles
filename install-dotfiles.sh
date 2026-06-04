@@ -7,6 +7,9 @@ set -eux
 : "${REVISION:=master}"
 : "${REPOSITORY:=https://github.com/yuuki0xff/dotfiles}"
 
+# Check required commands.
+which git make rsync zsh tmux
+
 # Install dotfiles.
 git clone "$REPOSITORY" ~/".dotfiles.$SUFFIX" \
     --single-branch --branch "$REVISION" --no-tags --depth 10 --recurse-submodules --shallow-submodules --jobs 16
