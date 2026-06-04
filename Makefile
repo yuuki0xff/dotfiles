@@ -76,13 +76,13 @@ ifneq ($(I3_DESKTOP)$(SWAY_DESKTOP),00)
 	pipx install files/.i3/helper/
 	make -C files/.i3/ build
 endif
+	# Replace the ~/.dotfiles symlink.
+	ls -lhd ~/.dotfiles || :
+	ln -snf $(shell pwd) ~/.dotfiles
 ifeq ($(OS),linux)
 	# For linux.
 	rsync -a ~/.dotfiles/user-config/ ~/.config/
 endif
-	# Replace the ~/.dotfiles symlink.
-	ls -lhd ~/.dotfiles || :
-	ln -snf $(shell pwd) ~/.dotfiles
 ifneq ($(I3_DESKTOP),0)
 	# Reload i3 desktop environment.
 	i3-msg reload
