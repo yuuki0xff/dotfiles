@@ -64,12 +64,6 @@ install:
 	rm -f $(ABS_OLD_LINKS)
 	install -d $(PREFIX)
 	./tools/install-links install-targets/$(OS).txt $(DOT_FILES_DIR) $(PREFIX)/
-ifeq ($(OS),linux)
-	PREFIX=./files/ ./tools/generate-firefox-helper
-endif
-ifeq ($(OS),mac)
-	# NOTE: macでは複数のプロファイルを使用していないため、firefox helperは使わない。
-endif
 ifneq ($(I3_DESKTOP)$(SWAY_DESKTOP),00)
 	# For linux i3 desktop environment.
 	pipx uninstall i3-wm-config || :  # This process may fail. Ignore it.
@@ -120,10 +114,6 @@ ifeq ($(KERNEL),Linux)
 	if update-alternatives --get-selections |grep -q '^x-terminal-emulator '; then \
 		update-alternatives --get-selections |grep '^x-terminal-emulator ' |grep ' /usr/bin/xterm$$'; \
 	fi
-
-	# homeにインストールしたやつを使っているので、当面はこの設定は無視。
-	# update-alternatives --get-selections |grep '^x-www-browser '
-	# update-alternatives --get-selections |grep '^x-www-browser ' |grep firefox
 
 	update-alternatives --get-selections |grep -q '^awk '
 	update-alternatives --get-selections |grep '^awk ' |grep ' /usr/bin/gawk$$'
