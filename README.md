@@ -126,13 +126,12 @@ brew install hammerspoon
 # Install yabai. See official wiki.
 # https://github.com/koekeishiya/yabai/wiki
 
-# Install casks.
+# Install casks and formulae.
 # NOTE: some casks requires manual operation.
 brew install \
-	forticlient-vpn \
+	gcloud-cli \
 	gimp \
 	google-chrome \
-	google-cloud-sdk \
 	jetbrains-toolbox \
 	libreoffice \
 	microsoft-remote-desktop \
