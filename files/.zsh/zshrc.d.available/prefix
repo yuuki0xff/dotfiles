@@ -1,0 +1,29 @@
+
+# prefix 機能
+# @prefix <command-prefix> と入力すると、次のコマンド入力時に prefix + ' ' が自動で入力される。
+# 引数なしで @prefix を実行すると、設定済みの prefix をクリアする。
+
+typeset -g _PREFIX_NEXT=""
+
+__prefix_zle_line_init() {
+	if [[ -n "$_PREFIX_NEXT" && -z "$BUFFER" ]]; then
+		BUFFER="$_PREFIX_NEXT "
+		zle end-of-line
+	fi
+}
+
+autoload -Uz add-zle-hook-widget
+add-zle-hook-widget line-init __prefix_zle_line_init
+
+function __set_prefix() {
+	if (($# == 0)); then
+		_PREFIX_NEXT=""
+		echo "prefix cleared"
+		return 0
+	fi
+	_PREFIX_NEXT="$*"
+}
+
+alias @prefix='__set_prefix '
+
+# vim: ft=zsh
