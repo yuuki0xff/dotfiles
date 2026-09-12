@@ -4,6 +4,8 @@ setopt auto_pushd
 
 autoload -U compinit
 compinit
+autoload -U bashcompinit
+bashcompinit
 setopt correct
 setopt list_packed          # 補完候補を詰めて表示
 setopt no_list_beep         # ビープ音を鳴らさない
@@ -33,7 +35,7 @@ if command -v pipx &>/dev/null; then
 	eval "$(register-python-argcomplete pipx)"
 fi
 if command -v pipenv &>/dev/null; then
-	eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"
+	eval "$(register-python-argcomplete pipenv)"
 fi
 
 setopt interactive_comments
