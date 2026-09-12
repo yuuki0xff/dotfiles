@@ -73,6 +73,10 @@ __prompt_zgit()(
 		echo " git:%B${branch_color_s}${branch}${branch_color_e}%b${msg}"
 	fi
 )
+__prompt_tmux(){
+	[ -z "$TMUX" ] && return
+	echo " tmux:%B%F{cyan}${TMUX_PANE//\%/%%}%f%b"
+}
 __prompt_openstack(){
 	[ -z "$OS_PROJECT_NAME" ] && return
 	local at='%F{cyan}@%f'
@@ -84,7 +88,7 @@ __prompt_mode(){
 	fi
 }
 
-PROMPT='%n%F{cyan}@%f%B%M%b%F{cyan}:%f%~$(__prompt_zgit)$(__prompt_openstack)$(__prompt_app) $(__prompt_time)
+PROMPT='%n%F{cyan}@%f%B%M%b%F{cyan}:%f%~$(__prompt_zgit)$(__prompt_tmux)$(__prompt_openstack)$(__prompt_app) $(__prompt_time)
 $(__prompt_mode)%B%(?,,%K{red})%# %(?,,%k)%b'
 unset RPROMPT
 SPROMPT="Correct: %B%R %F{red}-%f%F{yellow}-%f%F{green}->%f %r%b (y/N) "
