@@ -5,43 +5,6 @@ scriptencoding utf8
 set fencs=utf8,eucjp,sjis
 "}}}
 
-"{{{ plugins
-filetype off
-" vim-scripts/Pydiction
-let g:pydiction_location = $HOME + '.cache/vim-pydiction-dict'
-
-" haya14busa/incsearch.vim
-"{{{
-"検索パターン入力中に、マッチした領域のハイライトを更新やカーソルの移動をする
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-
-" let g:incsearch#auto_nohlsearch = 1
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
-"}}}
-
-" scrooloose/syntastic
-let g:syntastic_python_checkers = ['pyflakes']
-let g:syntastic_typescript_checkers = ['tslint']
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = '-std=c++11'
-
-" vim-scripts/diffchar.vim
-" 編集中にハイライトをアップデートする
-let g:DiffUpdate = 1
-
-" kannokanno/previm
-let g:previm_open_cmd = 'xdg-open'
-
-filetype on
-"}}}
-
 filetype indent on
 filetype plugin on
 
@@ -159,8 +122,7 @@ set lazyredraw	"スクリプト実行中は画面の描画を停止する"
 "}}}
 
 "{{{ keybind
-"vim-tags"{{{
-"nnoremap <C-j><C-j> :TagsGenerate<cr>
+"tag jump"{{{
 nnoremap <C-]> g<C-]>
 "}}}
 "	gnu global"{{{
