@@ -112,7 +112,7 @@ test:
 ifeq ($(KERNEL),Linux)
 	# Check alternatives.
 	if update-alternatives --get-selections |grep -q '^x-terminal-emulator '; then \
-		update-alternatives --get-selections |grep '^x-terminal-emulator ' |grep ' /usr/bin/xterm$$'; \
+		update-alternatives --get-selections |grep '^x-terminal-emulator ' |grep -E ' /usr/bin/(gnome-terminal\.wrapper|xterm)$$'; \
 	fi
 
 	update-alternatives --get-selections |grep -q '^awk '
